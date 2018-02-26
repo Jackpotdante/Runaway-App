@@ -3,14 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="css/users.css" rel="stylesheet" type="text/css" />
     <title>Runaway</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="script/users.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
 
-    <div class="containerLogin"></div>
+    <div id="containerLoginDesk">
+          <header id="headerUsers">Header</header>
+
+        <section id="heroUsers">
+
+          <h1 id="welcomeLogin">Runaway</h1>
+
+        </section>
+      
+    </div><!--containerLoginDesk-->
+
+    <div id="containerLoginMob">
+
+        <h1>Runaway</h1>
+
+        <div id="wrapBtnLogin">
+          <button id="btnLoginFace" class="btnLogin"><i class="fab fa-facebook-f"></i>Log in via facebook</button>
+          <button id="btnLoginGoogle" class="btnLogin"><i class="fab fa-google-plus-g"></i>Log in via google</button>
+        </div> <!--wrapBtnLogin-->
+      
+    </div><!--containerLoginMob-->
 
     <div class="containerTimer"></div>
 
@@ -20,7 +45,9 @@
 
     <div class="containerCommunity"></div>
 
-    <div class="containerProfil"></div>
+    <div id="containerProfil">
+      <button id="btnLogOut">Log out</button>
+    </div><!--containerProfil-->
 
 
 
