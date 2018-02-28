@@ -1,0 +1,118 @@
+* {
+	box-sizing: border-box;
+}
+
+/*Login page*/
+.containerLogin {
+	height: 100%;
+	width: 100%;
+}
+
+/*Login page - Desktop mode*/
+#containerLoginDesk {
+	font-family: 'Open Sans', Arial, sans-serif;
+	word-wrap: break-word;
+	line-height: 30px;
+	position: relative;
+	font-size: 16px;
+	background-color: #FF6C00;
+	width: 100%;
+	height: 100%;
+}
+
+		/*headerUsers  - desktop mode*/
+		#headerUsers {
+			width: 100%;
+			height: 35px;
+		}
+
+/*wrapUsers Mobile*/
+#containerLoginMob {
+	font-family: 'Open Sans', Arial, sans-serif;
+	word-wrap: break-word;
+	line-height: 30px;
+	position: relative;
+	font-size: 16px;
+	background-color: #FF6C00;
+	width: 100%;
+	height: 100%;
+	min-width: 250px;
+	display: none;
+	color: white;
+}
+	#containerLoginMob h1 {
+		font-size: 2.7rem;
+		text-align: center;
+		font-weight: bold;
+		margin-top: 30%;
+		margin: 0 auto;
+		padding-top: 200px;
+		letter-spacing: 1px;
+	}
+	#wrapBtnLogin {
+		margin: 50px auto;
+		width: 240px;
+		display: flex;
+		flex-flow: column wrap;
+		justify-content: center;
+	}
+	#wrapBtnLogin .btnLogin {
+		width: 230px;
+		border: 2px solid white;
+		border-radius: 13px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-right: 5px;
+		padding-left: 5px;
+		background-color: white;
+		color: #23103A;
+		font-size: 1.1rem;
+		animation-name: fadeIn;
+		animation-delay: 2s;
+		margin-bottom: 5px;
+		margin-top: 10px;
+		text-align: center;
+		font-weight: bold;
+	}
+	#wrapBtnLogin .btnLogin i {
+		padding-right: 15px;
+		padding-left: 10px;
+	}
+	
+
+	/*Profile page styles*/
+	#containerProfil {
+		font-family: 'Open Sans', Arial, sans-serif;
+		word-wrap: break-word;
+		line-height: 30px;
+		position: relative;
+		font-size: 16px;
+		width: 100%;
+		height: 100%;
+		min-width: 250px;
+		display: none;
+		color: white;
+	}
+
+/*Media queries*/
+@media (max-width: 700px) {
+	
+}
+@media (max-width: 500px) {
+	
+}
+
+@media (max-width: 400px) {
+	#containerLoginDesk {
+		display: none;
+	}
+	#containerLoginMob {
+		display: block;
+	}
+	
+}
+@media (max-width: 300px) {
+	
+
+}
+
