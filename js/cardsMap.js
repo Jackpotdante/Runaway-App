@@ -1,6 +1,4 @@
 
-
-
 // Hämtar hem alla sträckor från databas.
 let runningTracks="";
 db.ref("/statrundor").once("value").then(function(snapshot){
@@ -10,8 +8,20 @@ db.ref("/statrundor").once("value").then(function(snapshot){
 
 
 window.addEventListener("load", function(){
+  let btnToggleTracks = document.getElementById('btnToggleTracks')
+  let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
+  btnToggleTracks.addEventListener('click',function(){
+    if(btnToggleTracks.innerHTML=="Hide Tracks"){
+      wrapperTracks.style.display="none";
+      console.log("hide");
 
-
+      btnToggleTracks.innerHTML="Show Tracks"
+    }else{
+      wrapperTracks.style.display="flex";
+      btnToggleTracks.innerHTML="Hide Tracks"
+      console.log("show");
+    }
+  })
 })
 
 
@@ -28,10 +38,10 @@ let getTracks = (location)=>{
 
 
 let makeCards = (tracks,location)=>{
-  let containerRoute = document.getElementsByClassName('containerRoute')[0];
+  let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
   let cardHeader = document.createElement('h2');
   cardHeader.innerText = location;
-  containerRoute.appendChild(cardHeader);
+  wrapperTracks.appendChild(cardHeader);
   let cardUl = document.createElement('ul');
   cardUl.className="cardHolder";
 
@@ -53,7 +63,7 @@ let makeCards = (tracks,location)=>{
     cardUl.appendChild(cardLi)
   })
 
-  containerRoute.appendChild(cardUl);
+  wrapperTracks.appendChild(cardUl);
 
 }
 
