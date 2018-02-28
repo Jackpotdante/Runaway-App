@@ -1,13 +1,4 @@
-var config = {
-  apiKey: "AIzaSyB_jUOkuZqQulxnav7DWKndDXSilpTc-1s",
-  authDomain: "runaway-project.firebaseapp.com",
-  databaseURL: "https://runaway-project.firebaseio.com",
-  projectId: "runaway-project",
-  storageBucket: "runaway-project.appspot.com",
-  messagingSenderId: "223527826161"
-};
-firebase.initializeApp(config);
-const db = firebase.database();
+
 
 
 // Hämtar hem alla sträckor från databas.
