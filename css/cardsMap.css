@@ -2,6 +2,13 @@
   margin:0;
   padding: 0;
 }
+.innerContainer-Tracks{
+  position: absolute;
+}
+.wrapper-Tracks{
+  display: flex;
+  margin: 0 auto;
+}
 .cardHolder ul{
   display: flex;
   margin: 5px auto;
@@ -16,7 +23,8 @@
   margin: 0px 10px;
   list-style: none;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(252, 197, 115, 0.44)
+
 }
 .cardHolder .cardMain{
   min-height: 50px;
@@ -26,7 +34,6 @@
 }
 
 .cardHolder .cardMenu{
-  background-color: rgba(255, 168, 52, 0.31);
   min-height: 30px;
   width: 100%;
   display: flex;
@@ -35,9 +42,7 @@
   border-bottom-left-radius: 5px;
 }
 .cardHolder .cardMenu div{
-  color: rgba(194, 111, 0, 0.95);
   line-height: 35px;
-
 }
 
 .cardHolder .cardMain button{
