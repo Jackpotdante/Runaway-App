@@ -5,6 +5,22 @@ body{
   padding: 0;
 }
 
+.containerTimer {
+  display: none;
+}
+
+.containerPrestation {
+  display: none;
+}
+
+.containerRoute {
+  display: none;
+}
+
+.containerCommunity {
+  display: none;
+}
+
 #map {
         height: 100%;
       }
