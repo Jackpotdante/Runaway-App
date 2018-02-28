@@ -5,16 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <script src="./js/prest.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./css/prest.css">
     <title>Runaway</title>
     <script src="./js/script.js"></script>
-  </head>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyB_jUOkuZqQulxnav7DWKndDXSilpTc-1s",
+        authDomain: "runaway-project.firebaseapp.com",
+        databaseURL: "https://runaway-project.firebaseio.com",
+        projectId: "runaway-project",
+        storageBucket: "runaway-project.appspot.com",
+        messagingSenderId: "223527826161"
+      };
+     firebase.initializeApp(config);
+    </script>
+    </head>
   <body>
 
     <div class="containerLogin"></div>
 
     <div class="containerTimer"></div>
 
-    <div class="containerPrestation"></div>
+    <div class="containerPrestation">
+      <div id="totalStat">
+      <span id="spanTotalLength"></span><span id="spanLongestDist"></span>
+      </div>
+    </div>
 
     <div class="containerRoute"></div>
 
