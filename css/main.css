@@ -5,12 +5,31 @@ body{
   padding: 0;
 }
 
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+.containerTimer {
+  display: none;
 }
+
+.containerPrestation {
+  display: none;
+}
+
+.containerRoute {
+  display: none;
+}
+
+.containerCommunity {
+  display: none;
+}
+
+#map {
+        height: 100%;
+      }
+
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
 @media screen and (max-width: 1000px) and (min-width: 320px){
   .navContainer{
@@ -23,6 +42,7 @@ html, body {
   }
 
   .navContainer ul{
+
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -36,40 +56,9 @@ html, body {
     margin-top:auto;
     outline: 0;
     cursor: pointer;
-    padding: 12px 27px;
+    padding: 12px 20px;
     border-radius: 1px;
     border: 0px solid transparent;
     background: transparent;
   }
-}
-
-/****** container track test****/
-
-
-
-
-/** TEST COLORS FOR ROUTING ***/
-.containerTimer{
-  background-color: blue;
-  width: 100%;
-  height: 100%;
-}
-.containerPrestation{
-  background-color: red;
-  width: 100%;
-  height: 100%;
-}
-.containerRoute{'
-height: 100%;
-width: 100%;
-}
-.containerCommunity{
-  background-color: ;
-  width: 100%;
-  height: 100%;
-}
-.containerProfile{
-  background-color: black;
-  width: 100%;
-  height: 100%;
 }
