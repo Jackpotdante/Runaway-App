@@ -78,7 +78,7 @@
 		padding-right: 15px;
 		padding-left: 10px;
 	}
-	
+
 
 	/*Profile page styles*/
 	#containerProfil {
@@ -96,10 +96,10 @@
 
 /*Media queries*/
 @media (max-width: 700px) {
-	
+
 }
 @media (max-width: 500px) {
-	
+
 }
 
 @media (max-width: 400px) {
@@ -109,10 +109,9 @@
 	#containerLoginMob {
 		display: block;
 	}
-	
+
 }
 @media (max-width: 300px) {
-	
+
 
 }
-

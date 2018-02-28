@@ -3,6 +3,7 @@ var currentUser = {};
 
 
 // Initialize Firebase
+/*
 var config = {
     apiKey: "AIzaSyB_jUOkuZqQulxnav7DWKndDXSilpTc-1s",
     authDomain: "runaway-project.firebaseapp.com",
@@ -14,13 +15,13 @@ var config = {
 firebase.initializeApp(config);
 
 const db = firebase.database();
-
+*/
 //facebook provider object
 var provider = new firebase.auth.FacebookAuthProvider();
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      
+
         console.log('onAuthStateChanged: user is signed in', user);
 
         //gotoAccountPage(user);
@@ -42,7 +43,7 @@ window.addEventListener('load', function(event) {
 		var wrapUsersMob = document.getElementById('containerLoginMob');
 		var wrapUsersDesk = document.getElementById('containerLoginDesk');
 		var wrapProfile = document.getElementById('containerProfil');
-	  
+
 
 	  //console.log('windows is loaded');
 	  //var screenH = document.documentElement.clientHeight;
@@ -50,7 +51,7 @@ window.addEventListener('load', function(event) {
 	  //wrapUsersMob.style.height = screenH;
 	  //wrapUsersDesk.style.height = screenH;
 	  //console.log('Current screen heigth: ' + screenH);
-	  
+
 	  //facebok login functionality
 	  btnLoginFace.addEventListener('click', function(event){
 
@@ -61,12 +62,12 @@ window.addEventListener('load', function(event) {
 		        console.log('Token: ' + token);
 		        // The signed-in user info.
 		        var user = result.user;
-		        //console.log('User info: ' + user) 
+		        //console.log('User info: ' + user)
 
 		        console.log('User is logged in inside load');
 		        gotoAccountPage(user);
 		        pushUserIntoFirebase(user);
-		        
+
 
 
 		      }).catch(function(error) {
@@ -79,15 +80,15 @@ window.addEventListener('load', function(event) {
 		        var credential = error.credential;
 		        console.log('sign in is uncessful: ' + errorMessage);
 		      });//end of signInWithPopup function
-	  		
-	      
+
+
 	  })//end of btnLoginFace eventListener
 
 
 	  //Log out button functionality
 	 var btnLogOut = document.getElementById('btnLogOut');
 	 btnLogOut.addEventListener('click', function(event) {
-	 	
+
 	 		firebase.auth().signOut().then(function() {
 			  // Sign-out successful.
 			  	var wrapProfile = document.getElementById('containerProfil');
@@ -100,10 +101,10 @@ window.addEventListener('load', function(event) {
 
 				console.log('Current screen width: ' + screenWidth);
 				if (screenWidth <= 400) {
-					
+
 					wrapUsersMob.style.display = 'block';
 				} else {
-					
+
 					wrapUsersDesk.style.display = 'block';
 				}
 
@@ -167,7 +168,7 @@ function pushUserIntoFirebase(userO){
 			//console.log('Child: ' + r.msgDate);
 			console.log('r.uid: ' + r.uid);
 			console.log('userO.uid: ' + userO.uid);
-			
+
 			if(r.uid == userO.uid){
 				console.log("User is already registered");
 				userExist = true;
@@ -183,7 +184,7 @@ function pushUserIntoFirebase(userO){
 		if (userExist != true){
 
 			console.log('User exist is set to false');
-		
+
 			//Creating user object
 		      const newUser = {
 		        name: displayName,
@@ -204,4 +205,3 @@ function pushUserIntoFirebase(userO){
 
     console.log('Current user: ' + currentUser);
 }
-
