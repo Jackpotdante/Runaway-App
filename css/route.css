@@ -1,3 +1,10 @@
 #map {
   height: 100%;
+  width: 100%;
+}
+
+.containerRoute{
+height: 100%;
+width: 100%;
+
 }

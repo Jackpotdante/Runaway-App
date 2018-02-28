@@ -33,7 +33,7 @@ let profileBtn = document.getElementById("profileBtn");
 let conLogin = document.getElementsByClassName("containerLogin")[0];
 let conTimer = document.getElementsByClassName("containerTimer")[0];
 let conPres = document.getElementsByClassName("containerPrestation")[0];
-let conRoute= document.getElementsByClassName("containerRoute")[0];
+let conRoute = document.getElementsByClassName("containerRoute")[0];
 let conCom = document.getElementsByClassName("containerCommunity")[0];
 let conProfile = document.getElementsByClassName("containerProfile")[0];
 
@@ -41,7 +41,7 @@ timerBtn.addEventListener('click', function(event){
   conLogin.style.display = "none";
   conTimer.style.display = "flex";
   conPres.style.display = "none"
-  map.style.display = "none";
+  conRoute.style.display = "none";
   conCom.style.display = "none";
   conProfile.style.display = "none";
 });
@@ -50,7 +50,7 @@ presBtn.addEventListener('click', function(event){
   conLogin.style.display = "none";
   conTimer.style.display = "none";
   conPres.style.display = "flex"
-  map.style.display = "none";
+  conRoute.style.display = "none";
   conCom.style.display = "none";
   conProfile.style.display = "none";
 });
@@ -59,7 +59,7 @@ routeBtn.addEventListener('click', function(event){
   conLogin.style.display = "none";
   conTimer.style.display = "none";
   conPres.style.display = "none"
-  map.style.display = "flex";
+  conRoute.style.display = "flex";
   conCom.style.display = "none";
   conProfile.style.display = "none";
 });
@@ -68,7 +68,7 @@ comBtn.addEventListener('click', function(event){
   conLogin.style.display = "none";
   conTimer.style.display = "none";
   conPres.style.display = "none"
-  map.style.display = "none";
+  conRoute.style.display = "none";
   conCom.style.display = "flex";
   conProfile.style.display = "none";
 });
@@ -77,7 +77,7 @@ profileBtn.addEventListener('click', function(event){
   conLogin.style.display = "none";
   conTimer.style.display = "none";
   conPres.style.display = "none"
-  map.style.display = "none";
+  conRoute.style.display = "none";
   conCom.style.display = "none";
   conProfile.style.display = "flex";
 });

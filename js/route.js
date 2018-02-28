@@ -33,7 +33,7 @@ function initMap(){
             map.setCenter(marker.getPosition());
             map.setZoom(14);
 
-            cardRoute();
+
           }
         })(marker, i));
       }
