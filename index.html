@@ -3,27 +3,54 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="./css/main.css">
-    <link rel="stylesheet" type="text/css" href="./css/cardsMap.css">
     <title>Runaway</title>
+    
+    
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/community.css">
+    <link rel="stylesheet" type="text/css" href="./css/route.css">
+    <link rel="stylesheet" type="text/css" href="./css/cardsMap.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/community.js"></script>
+    <script src="./js/route.js"></script>
     <script src="./js/cardsMap.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0cooAANtGVdiLnD0SZrZZ_1cN00Z2vpg&callback=initMap"
+    async defer></script><!--
+     <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+
+
   </head>
   <body>
+  <div class="containerLogin"></div>
 
-    <div class="containerLogin"></div>
+  <div class="containerTimer"></div>
 
-    <div class="containerTimer"></div>
+  <div class="containerPrestation"></div>
 
-    <div class="containerPrestation"></div>
 
-    <div class="containerRoute"></div>
+  <div id="map">
 
-    <div class="containerCommunity"></div>
+  </div>
 
-    <div class="containerProfil"></div>
+
+
+  <div class="containerCommunity">
+    <div class="kategoriVal"></div>
+     <div id="containerChatt">
+        <div class="messageContainer">
+          <div class="profileImage"></div>
+          <p class="username">Per Karlsson</p>
+          <p class="date">2018-02-24</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="containerProfile"></div>
+
 
 
 
@@ -31,30 +58,31 @@
     <div class="navContainer">
       <ul>
         <li>
-          <button>
+          <button id="timerBtn">
           <i class="fas fa-stopwatch" style="font-size: 25px; color: white;"></i>
           </button>
         </li>
         <li>
-          <button>
+          <button id="presBtn">
           <i class="fas fa-child" style="font-size: 25px; color: white;"></i>
           </button>
         </li>
         <li>
-          <button>
+          <button id="routeBtn">
           <i class="fas fa-map-marker-alt" style="font-size: 25px; color: white;"></i>
           </button>
         </li>
         <li>
-          <button>
+          <button id="comBtn">
           <i class="fas fa-clipboard"style="font-size: 25px; color: white;"></i>
           </button>
         </li>
         <li>
-          <button>
+          <button id="profileBtn">
           <i class="fas fa-user" style="font-size: 25px; color: white;"></i>
           </button>
         </li>
+      </ul>
     </div>
   </body>
 </html>
