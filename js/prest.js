@@ -42,6 +42,7 @@ window.addEventListener("load", function (){
 		newSwitchBox.classList.add("switchBox");
 		newSwitch.classList.add("switch");
 		newSwitchCircle.classList.add("switchCircle");
+		newSwitchBox.innerText = "Dela: ";
 
 
 		prestList[0].appendChild(newDiv);

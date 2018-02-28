@@ -10,7 +10,7 @@
 .containerPrestation > div{
 	margin: 5px;
 	padding: 5px;
-	flex: 1 90%;
+	flex: 0 10%;
 	flex-basis: auto;
 	text-align: center;
 	border-radius: 3px;
@@ -22,7 +22,7 @@
 }
 
 .switchBox {
-	
+	text-align: left;
 	flex: 1 auto;
 	cursor: pointer;
 
@@ -62,7 +62,7 @@
 	border-radius: 0;
 	height: 20px;
 	margin: 0;
-
+	flex: 0;
 	position: fixed;
 	bottom: 50px;
 	width: 100%;
