@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         //gotoAccountPage(user);
         console.log('User is logged in outside load');
-        gotoAccountPage(user);
+        gotoTimerPage();
 
 
     } else {
@@ -55,8 +55,9 @@ window.addEventListener('load', function(event) {
 	  //facebok login functionality
 	  btnLoginFace.addEventListener('click', function(event){
 
-	  	 //To sign in with a pop-up window, call signInWithPopup
-		      firebase.auth().signInWithPopup(provider).then(function(result) {
+	  	 //To sign in with a pop-up window, call redirect
+	  	 	  firebase.auth().signInWithRedirect(provider);
+		      firebase.auth().getRedirectResult().then(function(result) {
 		        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
 		        var token = result.credential.accessToken;
 		        console.log('Token: ' + token);
@@ -65,8 +66,9 @@ window.addEventListener('load', function(event) {
 		        //console.log('User info: ' + user)
 
 		        console.log('User is logged in inside load');
-		        gotoAccountPage(user);
+		        //gotoAccountPage(user);
 		        pushUserIntoFirebase(user);
+		        gotoTimerPage();
 
 
 
@@ -94,19 +96,13 @@ window.addEventListener('load', function(event) {
 			  	var wrapProfile = document.getElementById('containerProfil');
 				wrapProfile.style.display = 'none';
 
-				var wrapUsersMob = document.getElementById('containerLoginMob');
-				var wrapUsersDesk = document.getElementById('containerLoginDesk');
+				var timerPage = document.getElementsByClassName("containerTimer")[0];
+				timerPage.style.display = "none";
 
-				var screenWidth = document.documentElement.clientWidth;
+				var containerLogin = document.getElementsByClassName("containerLogin")[0];
 
-				console.log('Current screen width: ' + screenWidth);
-				if (screenWidth <= 400) {
-
-					wrapUsersMob.style.display = 'block';
-				} else {
-
-					wrapUsersDesk.style.display = 'block';
-				}
+				containerLogin.style.display = 'block';
+				
 
 				currentUser = {};
 
@@ -125,16 +121,13 @@ window.addEventListener('load', function(event) {
 //changing into profile page page
 function gotoAccountPage(userObj){
 
-	var wrapUsersMob = document.getElementById('containerLoginMob');
-	var wrapUsersDesk = document.getElementById('containerLoginDesk');
+	
 	var wrapProfile = document.getElementById('containerProfil');
 
 	wrapProfile.style.display = 'block';
     //console.log(userObj);
 
-	wrapUsersMob.style.display = 'none';
-
-	wrapUsersDesk.style.display = 'none';
+	
 
 
 }//end of gotoAccountPage
@@ -204,4 +197,14 @@ function pushUserIntoFirebase(userO){
 	}
 
     console.log('Current user: ' + currentUser);
+}
+
+function gotoTimerPage(){
+	var timerPage = document.getElementsByClassName("containerTimer")[0];
+	var containerLogin = document.getElementsByClassName("containerLogin")[0];
+
+	containerLogin.style.display = 'none';
+	timerPage.style.display = "flex";
+
+	console.log('Here is timer page');
 }
