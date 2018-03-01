@@ -1,12 +1,38 @@
 
-// Hämtar hem alla sträckor från databas.
+// Hämtar hem alla användare från databas.
+let allUsers = ""
+db.ref("/users").once("value").then(function(snapshot){
+  allUsers = snapshot.val();
+  console.log(allUsers);
+
+});
+//----------------------------END --------------------------------------------//
+
+// Hämtar hem alla sträckor från databas. ------------------------------------>>
 let runningTracks="";
 db.ref("/statrundor").once("value").then(function(snapshot){
   runningTracks = snapshot.val();
-  getTracks("Skatås");
+
 });
+//----------------------------END --------------------------------------------//
 
 
+
+// Hämtar hem alla resultat från databas. ------------------------------------>>
+let allResults=""
+db.ref("/rundor").once("value").then(function(snapshot){
+  allResults = snapshot.val();
+  console.log("rundor laddade");
+  //let a = findCommentsOfTrack("-L6LjozHiLIrEG3Yr3pC");
+  //console.log(a);
+});
+//----------------------------END --------------------------------------------//
+
+
+
+
+
+//------------------------------ Window LOAD --------------------------------->>
 window.addEventListener("load", function(){
   let btnToggleTracks = document.getElementById('btnToggleTracks')
   let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
@@ -22,10 +48,18 @@ window.addEventListener("load", function(){
       console.log("show");
     }
   })
-})
 
 
-// Filtrerar ut alla platser
+  let btnLoadTracks = document.getElementById('loadTracks');
+  btnLoadTracks.addEventListener('click',function(event){
+    getTracks("Skatås");
+
+  })
+  //saveRoundToDb();
+}) // --------------------------- window load End ---------------------------//
+
+
+// Filtrerar ut alla platser ------------------------------------------------->>
 let getTracks = (location)=>{
   let tracks = [];
   for(track in runningTracks){
@@ -40,26 +74,58 @@ let getTracks = (location)=>{
 let makeCards = (tracks,location)=>{
   let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
   let cardHeader = document.createElement('h2');
-  cardHeader.innerText = location;
-  wrapperTracks.appendChild(cardHeader);
   let cardUl = document.createElement('ul');
+
+  //cardHeader.innerHTML = `${location}<br/>`;
+  wrapperTracks.appendChild(cardHeader);
   cardUl.className="cardHolder";
 
   tracks.map(item => {
     let cardLi = document.createElement("li");
     cardLi.innerHTML = `<div class="cardMain">
-                          <p><h3>Längd: ${item.length}km </h3></p>
+                          <h3>${item.length}km <i class="far fa-star star"></i> 7.5 </h3>
+                          <div class="toggle"><img height="10%" width="100%" src="https://firebasestorage.googleapis.com/v0/b/runaway-project.appspot.com/o/skor.jpg?alt=media&token=fe1004a8-43b4-4ff2-9214-298ac7fd99f1" alt="skor"></div>
                           <p>Info: ${item.info}</p>
-                          <button>Resultat</button>
-                          <button>Start Run</button>
+                          <button class="btnShowInfoTrack">Visa Info</button>
+                          <button class="btnGoToTimer">Start Run</button>
+                        </div>
+                        <div class="result">
+
                         </div>
                         <div class="cardMenu">
                           <div>
-                            <i class="far fa-star star"></i>
-                            <i class="far fa-comment-alt comment"></i>
+
                           </div>
                         </div>
                        `;
+    let btnShowInfoTrack = cardLi.getElementsByClassName('btnShowInfoTrack')[0];
+    let btnGoToTimer = cardLi.getElementsByClassName('btnGoToTimer')[0];
+
+    btnShowInfoTrack.addEventListener('click',function(event){
+      console.log("visa info om track");
+      let disp ="";
+      if(event.target.innerHTML=="Visa Info"){
+        event.target.innerHTML="Dölj Info"
+        disp="block";
+      }else{
+        event.target.innerHTML="Visa Info"
+        disp="none";
+      }
+      let card = event.target.parentNode.parentNode;
+      let toggle = card.getElementsByClassName('toggle');
+
+      for(i=0; i<toggle.length;i++){
+        toggle[i].style.display= disp;
+      }
+
+    })
+
+    btnGoToTimer.addEventListener('click', function(event){
+      console.log("Gå till TimerSite");
+    })
+
+    let comments = findCommentsOfTrack(item.trackid)
+    cardLi.appendChild(comments)
     cardUl.appendChild(cardLi)
   })
 
@@ -67,14 +133,102 @@ let makeCards = (tracks,location)=>{
 
 }
 
+//----------------------- END ------------------------------------------------//
+
+
+// ------------------- SPARA BANA TILL DATABAS ------------------------------->>
 let saveTrackToDb =()=>{
+  let newPostKey = db.ref("statrundor").push().key;
   let track = {
-    length: 10,
+    id: newPostKey,
+    length: 15,
     place: "Skatås",
     type: "Terräng",
     info: "Med en höjdskillnad på 100m gör denna till en utmanande slinga"
-
   }
-  db.ref("/statrundor").push(track)
-
+  db.ref(`/statrundor/${newPostKey}/`).set(track)
 }
+//----------------------- END ------------------------------------------------//
+
+// ------------------- SPARA Runda TILL DATABAS ------------------------------->>
+let saveRoundToDb =()=>{
+  //let newPostKey = db.ref("rundor").push().key;
+  let track = {
+    comment: "En jäkligt jobbig bana",
+    date: 20180301,
+    length: "2km",
+    place: "Skatås",
+    rating: 5,
+    share: true,
+    time: 23.50,
+    trackid: "-L6LjaTNyYJcMyDp40cM",
+    user: "qQb6a9XJyhUPnpayyyh652Azc7j2"
+  }
+  db.ref(`/rundor/`).push(track)
+}
+//----------------------- END ------------------------------------------------//
+
+
+//----------------------- Filtrera ut alla resultat för en bana--------------->>
+let findCommentsOfTrack=(tracksid)=>{
+  let foundedTracks = [];
+  for(track in allResults){  // Pushar ner banor som matchar till listan
+    if(allResults[track].trackid == tracksid && allResults[track].share){
+      foundedTracks.push(allResults[track])
+    }
+  }
+
+  foundedTracks.sort(function(a,b){  //Sorterar allar rundor på tid
+    return a.time - b.time;
+  })
+
+  let ulComment = document.createElement("ul");
+  let ulResult = document.createElement('ul');
+  ulComment.className="trackComments toggle";
+  ulResult.className="trackResult toggle";
+  foundedTracks.map(track=>{
+    let liComment = document.createElement("li");
+    let liResults = document.createElement('li');
+    let user = findUser(track.user);
+
+    liResults.innerHTML=`<div>
+                          <img src=${user.photoUrl} height="30px" width="30px" size="auto" border-radius="10%">
+                          <span>${user.name}<br/>${track.time}min</span>
+                        </div>`
+    ulResult.appendChild(liResults);
+
+    liComment.innerHTML=`<div>
+                          <img src=${user.photoUrl}>
+                          <span>${user.name} Rating: ${track.rating} <br/>${track.comment} </span>
+
+                        </div>`
+
+    ulComment.appendChild(liComment);
+  })
+
+  let newDiv = document.createElement('div');
+  newDiv.className="toggle";
+  let newH3 = document.createElement('h3');
+  newH3.innerText="Resultat Tavla";
+  newDiv.appendChild(newH3);
+  newDiv.appendChild(ulResult);
+  let newH3Comment = document.createElement('h3');
+  newH3Comment.innerText="Tyck Till!";
+  newDiv.appendChild(newH3Comment);
+  newDiv.appendChild(ulComment);
+  return newDiv
+}
+//------------------------  END ----------------------------------------------//
+
+
+//---------------------- Leta rätt på användare i databasen ------------------>>
+let findUser=(userUId)=>{
+  let selectedUser ="";
+  for(user in allUsers){
+    if (allUsers[user].uid == userUId) {
+      selectedUser=user;
+    }
+  }
+  return allUsers[selectedUser]
+}
+//------------------------  END ----------------------------------------------//
