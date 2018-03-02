@@ -7,24 +7,32 @@
 }
 .wrapper-Tracks{
   display: flex;
-  
+}
+.cardHolder *{
+  color: rgb(35, 35, 35);
 }
 .cardHolder ul{
-  display: flex;
+  padding: 5px;
   margin: 5px auto;
   width: 98%;
   list-style: none;
-  color: white;
+  padding-bottom: 10px;
+
 }
 
-.cardHolder li{
+.cardHolder > li{
+  padding: 5px;
   flex: 1 1 auto;
   position: relative;
-  margin: 0px 10px;
+  margin: 8px 5px;
   list-style: none;
+  height: auto;
   border-radius: 5px;
-  background-color: rgba(252, 197, 115, 0.44)
-
+  background-color: rgba(255, 255, 255, 1);
+  
+}
+.cardHolder img{
+  border-radius: 5px;
 }
 .cardHolder .cardMain{
   min-height: 50px;
@@ -33,24 +41,61 @@
   width: 95%;
 }
 
-.cardHolder .cardMenu{
-  min-height: 30px;
-  width: 100%;
-  display: flex;
-  padding: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-.cardHolder .cardMenu div{
-  line-height: 35px;
-}
 
+.cardHolder .divForBtnInCard{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .cardHolder .cardMain button{
   background-color: rgba(255, 255, 255, 0);
   border-radius: 5px;
   border-color: #ffa834;
   height: 35px;
   width: 75px;
-  margin-top:20px;
+  margin: 20px 20px 10px 20px;
+}
 
+
+.cardHolder .trackComments img,
+.cardHolder .trackResult img{
+  float: left;
+  border-radius: 20%;
+  height: 30px;
+  width: 30px;
+  border-radius:10%;
+  margin-right: 10px;
+}
+
+.cardHolder .toggle{
+  display: none;
+  flex-direction: column;
+  transition: all 3s ease-in-out;
+}
+
+.cardHolder .trackResult p:nth-of-type(1){
+  font-weight: 600;
+}
+.cardHolder .trackComments p:nth-of-type(1){
+  font-weight: 600;
+}
+
+.cardHolder .trackResult,
+.cardHolder .trackComments{
+  width: 90%;
+  margin: 5px auto;
+  border-radius: 5px;
+  background-color: rgb(240, 240, 240);
+  margin-bottom: 20px;
+}
+.cardHolder .trackResult div,
+.cardHolder .trackComments div{
+  background-color:  rgb(240, 240, 240);
+  margin: 10px 0px 10px 0px;
+}
+.cardHolder .innerContainerResults h3,
+.cardHolder .innerContainerComments h3{
+  margin-left: 20px;
+  margin-top: 30px;
+  font-size: 1.1em
 }
