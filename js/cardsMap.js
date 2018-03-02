@@ -23,8 +23,7 @@ let allResults=""
 db.ref("/rundor").once("value").then(function(snapshot){
   allResults = snapshot.val();
   console.log("rundor laddade");
-  //let a = findCommentsOfTrack("-L6LjozHiLIrEG3Yr3pC");
-  //console.log(a);
+
 });
 //----------------------------END --------------------------------------------//
 
@@ -86,17 +85,18 @@ let makeCards = (tracks,location)=>{
                           <h3>${item.length}km <i class="far fa-star star"></i> 7.5 </h3>
                           <div class="toggle"><img height="10%" width="100%" src="https://firebasestorage.googleapis.com/v0/b/runaway-project.appspot.com/o/skor.jpg?alt=media&token=fe1004a8-43b4-4ff2-9214-298ac7fd99f1" alt="skor"></div>
                           <p>Info: ${item.info}</p>
-                          <button class="btnShowInfoTrack">Visa Info</button>
-                          <button class="btnGoToTimer">Start Run</button>
-                        </div>
-                        <div class="result">
-
-                        </div>
-                        <div class="cardMenu">
-                          <div>
-
+                          <div class="divForBtnInCard">
+                            <button class="btnShowInfoTrack">Visa Info</button>
+                            <button class="btnGoToTimer">Start Run</button>
                           </div>
                         </div>
+                        <div class="innerContainerResults toggle">
+                          <h3>Resultat</h3>
+                        </div>
+                        <div class="innerContainerComments toggle">
+                          <h3>Kommentarer</h3>
+                        </div>
+
                        `;
     let btnShowInfoTrack = cardLi.getElementsByClassName('btnShowInfoTrack')[0];
     let btnGoToTimer = cardLi.getElementsByClassName('btnGoToTimer')[0];
@@ -106,12 +106,12 @@ let makeCards = (tracks,location)=>{
       let disp ="";
       if(event.target.innerHTML=="Visa Info"){
         event.target.innerHTML="Dölj Info"
-        disp="block";
+        disp="flex";
       }else{
         event.target.innerHTML="Visa Info"
         disp="none";
       }
-      let card = event.target.parentNode.parentNode;
+      let card = event.target.parentNode.parentNode.parentNode;
       let toggle = card.getElementsByClassName('toggle');
 
       for(i=0; i<toggle.length;i++){
@@ -124,9 +124,13 @@ let makeCards = (tracks,location)=>{
       console.log("Gå till TimerSite");
     })
 
-    let comments = findCommentsOfTrack(item.trackid)
-    cardLi.appendChild(comments)
-    cardUl.appendChild(cardLi)
+    let comments = findCommentsOfTrack(item.trackid);
+    cardLi.getElementsByClassName('innerContainerComments')[0].appendChild(comments);
+
+    let result = findResultsOfTrack(item.trackid);
+    cardLi.getElementsByClassName('innerContainerResults')[0].appendChild(result);
+
+    cardUl.appendChild(cardLi);
   })
 
   wrapperTracks.appendChild(cardUl);
@@ -169,59 +173,76 @@ let saveRoundToDb =()=>{
 //----------------------- END ------------------------------------------------//
 
 
-//----------------------- Filtrera ut alla resultat för en bana--------------->>
-let findCommentsOfTrack=(tracksid)=>{
+//-----  FILTRERA UT KOMMENTARER PÅ INSKICKAD BANA OCH RETUNERAR UL LISTA ---->>
+
+let findCommentsOfTrack=(trackid)=>{
   let foundedTracks = [];
   for(track in allResults){  // Pushar ner banor som matchar till listan
-    if(allResults[track].trackid == tracksid && allResults[track].share){
+    if(allResults[track].trackid == trackid && allResults[track].share){
       foundedTracks.push(allResults[track])
     }
   }
 
+
   foundedTracks.sort(function(a,b){  //Sorterar allar rundor på tid
-    return a.time - b.time;
+    return a.date - b.date;
   })
 
   let ulComment = document.createElement("ul");
-  let ulResult = document.createElement('ul');
   ulComment.className="trackComments toggle";
-  ulResult.className="trackResult toggle";
   foundedTracks.map(track=>{
     let liComment = document.createElement("li");
-    let liResults = document.createElement('li');
     let user = findUser(track.user);
-
-    liResults.innerHTML=`<div>
-                          <img src=${user.photoUrl} height="30px" width="30px" size="auto" border-radius="10%">
-                          <span>${user.name}<br/>${track.time}min</span>
-                        </div>`
-    ulResult.appendChild(liResults);
-
     liComment.innerHTML=`<div>
                           <img src=${user.photoUrl}>
-                          <span>${user.name} Rating: ${track.rating} <br/>${track.comment} </span>
-
+                          <p>${user.name} #${track.rating}</p>
+                          <p>${track.comment}</p>
                         </div>`
-
     ulComment.appendChild(liComment);
   })
 
-  let newDiv = document.createElement('div');
-  newDiv.className="toggle";
-  let newH3 = document.createElement('h3');
-  newH3.innerText="Resultat Tavla";
-  newDiv.appendChild(newH3);
-  newDiv.appendChild(ulResult);
-  let newH3Comment = document.createElement('h3');
-  newH3Comment.innerText="Tyck Till!";
-  newDiv.appendChild(newH3Comment);
-  newDiv.appendChild(ulComment);
-  return newDiv
+  return ulComment
 }
 //------------------------  END ----------------------------------------------//
 
 
-//---------------------- Leta rätt på användare i databasen ------------------>>
+
+//---  FILTRERAR UT ALLA RESULTAT PÅ AKUTELL BANA OCH RETUNERAR UL LISTA  ---->>
+
+let findResultsOfTrack=(trackid)=>{
+  let foundedTracks = [];
+  for(track in allResults){  // Pushar ner banor som matchar till listan
+    if(allResults[track].trackid == trackid && allResults[track].share){
+      foundedTracks.push(allResults[track])
+    }
+  }
+
+  foundedTracks.sort(function(a,b){  //Sorterar allar rundor på datum för att kommentarer skall komma i ordning.
+    return a.time - b.time;
+  })
+
+  let ulResult = document.createElement('ul');
+  ulResult.className="trackResult toggle";
+
+  foundedTracks.map(track=>{
+    let user = findUser(track.user);
+    let liResults = document.createElement('li');
+
+    liResults.innerHTML=`<div>
+                          <img src=${user.photoUrl}>
+                          <p>${user.name}</p>
+                          <p>${track.time}min</p>
+                        </div>`
+    ulResult.appendChild(liResults);
+  })
+
+  return ulResult
+}
+//------------------------  END ----------------------------------------------//
+
+
+
+//-------------  LETAR RÄTT PÅ ANVÄNDARE I DATABASEN  ------------------------>>
 let findUser=(userUId)=>{
   let selectedUser ="";
   for(user in allUsers){
