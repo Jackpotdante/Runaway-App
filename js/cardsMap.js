@@ -69,7 +69,7 @@ let getTracks = (location)=>{
   makeCards(tracks,location);
 }
 
-
+//--------- SKAPAR KORT AV ALLA BANOR ---------------------------------------->>
 let makeCards = (tracks,location)=>{
   let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
   let cardHeader = document.createElement('h2');
@@ -103,19 +103,19 @@ let makeCards = (tracks,location)=>{
 
     btnShowInfoTrack.addEventListener('click',function(event){
       console.log("visa info om track");
-      let disp ="";
+      let range ="1000px";
       if(event.target.innerHTML=="Visa Info"){
         event.target.innerHTML="Dölj Info"
-        disp="flex";
+        let range = "1000px";
       }else{
         event.target.innerHTML="Visa Info"
-        disp="none";
+        range = "0px";
       }
       let card = event.target.parentNode.parentNode.parentNode;
       let toggle = card.getElementsByClassName('toggle');
 
       for(i=0; i<toggle.length;i++){
-        toggle[i].style.display= disp;
+        toggle[i].style.maxHeight = range;
       }
 
     })
