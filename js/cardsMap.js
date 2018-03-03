@@ -72,6 +72,7 @@ let getTracks = (location)=>{
 //--------- SKAPAR KORT AV ALLA BANOR ---------------------------------------->>
 let makeCards = (tracks,location)=>{
   let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
+  wrapperTracks.innerHTML="";
   let cardHeader = document.createElement('h2');
   let cardUl = document.createElement('ul');
 
@@ -101,20 +102,26 @@ let makeCards = (tracks,location)=>{
     let btnShowInfoTrack = cardLi.getElementsByClassName('btnShowInfoTrack')[0];
     let btnGoToTimer = cardLi.getElementsByClassName('btnGoToTimer')[0];
 
+    let showCard = true;
     btnShowInfoTrack.addEventListener('click',function(event){
-      console.log("visa info om track");
-      let range ="1000px";
-      if(event.target.innerHTML=="Visa Info"){
+      let range ="";
+      let slideSetup =""; //sätter upp hastighet på rezise av li elementen
+      if(showCard){
         event.target.innerHTML="Dölj Info"
-        let range = "1000px";
+        range = "1000px";
+        slideSetup = "max-height 1s cubic-bezier(0.76, 0.57, 1, 0.72)";
+        showCard = !showCard
       }else{
         event.target.innerHTML="Visa Info"
+        slideSetup = "max-height 1s cubic-bezier(0.34, 0.94, 0.89, 0.54)";
         range = "0px";
+        showCard = !showCard
       }
       let card = event.target.parentNode.parentNode.parentNode;
       let toggle = card.getElementsByClassName('toggle');
 
       for(i=0; i<toggle.length;i++){
+        toggle[i].style.transition = slideSetup;
         toggle[i].style.maxHeight = range;
       }
 

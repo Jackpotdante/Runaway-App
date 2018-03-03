@@ -17,10 +17,10 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./script/users.js"></script>
     <script src="./js/community.js"></script>
     <script src="./js/route.js"></script>
     <script src="./js/cardsMap.js"></script>
-    <script src="./script/users.js"></script>
     <script src="./js/prest.js" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0cooAANtGVdiLnD0SZrZZ_1cN00Z2vpg&callback=initMap"
     async defer></script><!--
@@ -30,7 +30,7 @@
   </head>
   <body>
    <div class="containerLogin">
-       
+
         <div id="containerLoginMob">
 
             <h1>Runaway</h1>
@@ -50,6 +50,7 @@
   <div class="containerTimer"></div>
 
   <div class="containerPrestation">
+    <button id="btnLoadTracks">Ladda banor</button>
     <div id="totalStat">
       <span id="spanTotalLength"></span><span id="spanLongestDist"></span>
     </div>
@@ -97,7 +98,7 @@
             <p id="length">Total löplängd: 10km</p>
             <p id="totalLength">Längst sträcka: 5km</p>
         </div>
-              
+
         <div id="btnProfil">
               <button id="btnEdit" class="btnsProfil">Redigera</button>
               <button id="btnLogOut" class="btnsProfil">Log out</button>

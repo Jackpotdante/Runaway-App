@@ -11,13 +11,8 @@
 .cardHolder *{
   color: rgb(35, 35, 35);
 }
-.cardHolder ul{
-  padding: 5px;
-  margin: 5px auto;
-  width: 98%;
-  list-style: none;
-  padding-bottom: 10px;
-
+.cardHolder{
+  margin-bottom: 400px;
 }
 
 .cardHolder > li{
@@ -71,7 +66,7 @@
   max-height: 0;
   overflow: hidden;
   flex-direction: column;
-  transition: max-height 1s cubic-bezier(0.55, 0.06, 0.46, 1.01);
+
 }
 
 .cardHolder .trackResult p:nth-of-type(1){
