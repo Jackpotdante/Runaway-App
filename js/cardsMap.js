@@ -69,22 +69,28 @@ let getTracks = (location)=>{
   makeCards(tracks,location);
 }
 
-
+//--------- SKAPAR KORT AV ALLA BANOR ---------------------------------------->>
 let makeCards = (tracks,location)=>{
   let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
-  let cardHeader = document.createElement('h2');
+  
   let cardUl = document.createElement('ul');
 
-  //cardHeader.innerHTML = `${location}<br/>`;
-  wrapperTracks.appendChild(cardHeader);
+  wrapperTracks.innerHTML="";
+
   cardUl.className="cardHolder";
+
 
   tracks.map(item => {
     let cardLi = document.createElement("li");
-    cardLi.innerHTML = `<div class="cardMain">
-                          <h3>${item.length}km <i class="far fa-star star"></i> 7.5 </h3>
+    cardLi.innerHTML = `<div class="cardHeader">
+                          <span> &#128095 ${item.length}km </span>
+                          <span> Name of track </span>
+                          <span> <i class="far fa-star star"></i> 7.5 </span>
+                        </div>
+
+                        <div class="cardMain">
                           <div class="toggle"><img height="10%" width="100%" src="https://firebasestorage.googleapis.com/v0/b/runaway-project.appspot.com/o/skor.jpg?alt=media&token=fe1004a8-43b4-4ff2-9214-298ac7fd99f1" alt="skor"></div>
-                          <p>Info: ${item.info}</p>
+                          <p>${item.info}</p>
                           <div class="divForBtnInCard">
                             <button class="btnShowInfoTrack">Visa Info</button>
                             <button class="btnGoToTimer">Start Run</button>
@@ -101,27 +107,35 @@ let makeCards = (tracks,location)=>{
     let btnShowInfoTrack = cardLi.getElementsByClassName('btnShowInfoTrack')[0];
     let btnGoToTimer = cardLi.getElementsByClassName('btnGoToTimer')[0];
 
+    let showCard = true;
     btnShowInfoTrack.addEventListener('click',function(event){
-      console.log("visa info om track");
-      let disp ="";
-      if(event.target.innerHTML=="Visa Info"){
+      let range ="";
+      let slideSetup =""; //sätter upp hastighet på rezise av li elementen
+
+      if(showCard){
         event.target.innerHTML="Dölj Info"
-        disp="flex";
+        range = "1000px";
+        slideSetup = "max-height 1s cubic-bezier(0.76, 0.57, 1, 0.72)";
       }else{
         event.target.innerHTML="Visa Info"
-        disp="none";
+        slideSetup = "max-height 1s cubic-bezier(0.34, 0.94, 0.89, 0.54)";
+        range = "0px";
       }
+      showCard = !showCard
+
       let card = event.target.parentNode.parentNode.parentNode;
       let toggle = card.getElementsByClassName('toggle');
 
       for(i=0; i<toggle.length;i++){
-        toggle[i].style.display= disp;
+        toggle[i].style.transition = slideSetup;
+        toggle[i].style.maxHeight = range;
       }
 
     })
 
     btnGoToTimer.addEventListener('click', function(event){
-      console.log("Gå till TimerSite");
+      document.getElementsByClassName('containerTimer')[0].style.display = "flex";
+      document.getElementsByClassName('containerRoute')[0].style.display= "none";
     })
 
     let comments = findCommentsOfTrack(item.trackid);
