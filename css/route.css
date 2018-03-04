@@ -1,10 +1,52 @@
-#map {
-  height: 100%;
+*{
+  margin: 0;
+  padding: 0;
+}
+/** GOOGLE MAPS **/
+#map{
+   height: 100%;
   width: 100%;
+
 }
 
 .containerRoute{
-height: 100%;
-width: 100%;
+  height: 100%;
+  width: 100%;
+  position: relative;
 
+
+}
+/** TOOGLE BUTTON **/
+.hej{
+  text-align: center;
+  color: white;
+  background-color: #00BFFF;
+  font-family: 'Montserrat';
+  width: 100%;
+  height: 30px;
+
+}
+
+.hej p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+}
+
+.overmap{
+  position: absolute;
+  top: 0;
+  height: 90%;
+  width: 100%;
+  left: 0;
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+
+}
+.wrapper-Tracks{
+  overflow: auto;
+  width: 95%;
+  height: 90%;
 }
