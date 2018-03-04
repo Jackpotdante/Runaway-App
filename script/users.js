@@ -324,8 +324,9 @@ function getRunInfo(){
 				console.log("Users run info available");
 				//removing km from string
 				var str = r.length;
-				str = str.substring(0, str.length - 2);
-				var number = parseInt(str);				
+				//str = str.substring(0, str.length - 2);
+				var number = parseInt(str);
+				//console.log(number);				
 				runArray.push(number);
 			} //end of if else
 
