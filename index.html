@@ -17,10 +17,10 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./script/users.js"></script>
     <script src="./js/community.js"></script>
     <script src="./js/route.js"></script>
     <script src="./js/cardsMap.js"></script>
-    <script src="./script/users.js"></script>
     <script src="./js/prest.js" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0cooAANtGVdiLnD0SZrZZ_1cN00Z2vpg&callback=initMap"
     async defer></script><!--
@@ -30,14 +30,14 @@
   </head>
   <body>
    <div class="containerLogin">
-       
+
         <div id="containerLoginMob">
 
             <h1>Runaway</h1>
 
             <div id="wrapBtnLogin">
-              <button id="btnLoginFace" class="btnLogin"><i class="fab fa-facebook-f"></i>Log in via facebook</button>
-              <button id="btnLoginGoogle" class="btnLogin"><i class="fab fa-google-plus-g"></i>Log in via google</button>
+              <button id="btnLoginFace" class="btnLogin"><i class="fab fa-facebook-f"></i>&nbsp;Log in via facebook</button>
+              <button id="btnLoginGoogle" class="btnLogin"><i class="fab fa-google-plus-g"></i>&nbsp;Log in via google</button>
             </div> <!--wrapBtnLogin-->
 
         </div><!--containerLoginMob-->
@@ -50,6 +50,7 @@
   <div class="containerTimer"></div>
 
   <div class="containerPrestation">
+    <button id="btnLoadTracks">Ladda banor</button>
     <div id="totalStat">
       <span id="spanTotalLength"></span><span id="spanLongestDist"></span>
     </div>
@@ -85,9 +86,9 @@
                   <img id="pic" src="img/run.jpg" alt="User">
                   <div id="text">
                     <p id="nameUser">Per Karlsson</p>
-                    <p id="genderUser">Kön: Man</p>
-                    <p id="ageUser">Ålder: 25</p>
-                    <p id="locationUser">Göteborg</p>
+                    <p id="genderUser">Kön:</p>
+                    <p id="ageUser">Ålder:</p>
+                    <p id="locationUser"><i class="fas fa-map-marker-alt"></i>&nbsp;</p>
                   </div>
               </div><!--end of profilContent-->
               <p id="medlemSedan">Medlem sedan 2018-02-09</p>
@@ -97,14 +98,13 @@
             <p id="length">Total löplängd: 10km</p>
             <p id="totalLength">Längst sträcka: 5km</p>
         </div>
-              
+
         <div id="btnProfil">
-              <button id="btnEdit" class="btnsProfil">Redigera</button>
-              <button id="btnLogOut" class="btnsProfil">Log out</button>
+            <button id="btnEdit" class="btnsProfil">Redigera</button>
+            <button id="btnLogOut" class="btnsProfil">Log out</button>
         </div><!--btnProfil-->
 
       </div><!--innerProfil1-->
-
 
   </div><!--containerProfil-->
 

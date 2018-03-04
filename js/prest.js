@@ -1,8 +1,11 @@
 window.addEventListener("load", function (){
-	let db = firebase.database();
-	let currentUser = "test";
 	let totalLength = 0;
 	let longestDistance = 0;
+
+	let btnLoadTracks = document.getElementById('btnLoadTracks');
+	btnLoadTracks.addEventListener('click', function(event){
+		getTracksFromUser();
+	});
 
 	function createPrest(place, length, time, date, routeId, share){
 		let prestList = document.getElementsByClassName("containerPrestation")
@@ -17,10 +20,9 @@ window.addEventListener("load", function (){
 		let image = document.createElement("img");
 		let spanTotalLength = document.getElementById("spanTotalLength");
 		let spanLongestDist = document.getElementById("spanLongestDist");
-		let thisDistance = Number(length.replace(/[^0-9]/g,''));
-		
+		let thisDistance = length;
 
-		console.log(longestDistance);
+
 
 		totalLength += thisDistance;
 		spanTotalLength.innerText = `Total längd: ${totalLength}km`;
@@ -32,10 +34,10 @@ window.addEventListener("load", function (){
 		}
 
 
-		console.log(totalLength);
+
 
 		newPlace.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${place}`
-		newLength.innerHTML = `&#128095 ${length}`;
+		newLength.innerHTML = `&#128095 ${length}km`;
 		newTime.innerHTML = `<i class="fas fa-stopwatch"></i> ${time}`;
 		newDate.innerHTML = `<i class="far fa-calendar"></i> ${date}`;
 		image.src = "#";
@@ -54,35 +56,39 @@ window.addEventListener("load", function (){
 		newDiv.appendChild(newSwitchBox);
 		newSwitchBox.appendChild(newSwitch);
 		newSwitch.appendChild(newSwitchCircle);
-		console.log(length);
+
 
 		if(share == true)newSwitch.classList.add("active");
-		
+
 
 		newSwitchBox.addEventListener("click", function(){
 			newSwitch.classList.toggle("active");
-			console.log(newSwitch.classList);
+
 			if(newSwitch.classList[1] == "active"){
 				db.ref("rundor/" + routeId).update({share: true})
-				console.log(routeId);
 			}
 			else{
 				db.ref("rundor/" + routeId).update({share: false})
-				console.log(routeId);
 			}
 		})
 
 
 	}
 
-	db.ref("rundor/").on("child_added", function(snapshot, prevChildKey){
-		let data = snapshot.val();
-		let route = snapshot.key;
+	let getTracksFromUser=()=>{
+		db.ref("rundor/").on("child_added", function(snapshot, prevChildKey){
+			let data = snapshot.val();
+			let route = snapshot.key;
 
-		if(data.user == currentUser){
+			//ta bort denna när vi fått ordning på inloggad användre.
 			createPrest(data.place, data.length, data.time, data.date, route, data.share);
-		}
-	})
 
-		
+			if(data.user == currentUser){ //används när vi väl fått ordning på inloggad användre
+				console.log("inside currne");
+				createPrest(data.place, data.length, data.time, data.date, route, data.share);
+			}
+		})
+	}
+
+
 })
