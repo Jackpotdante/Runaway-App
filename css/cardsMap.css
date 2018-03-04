@@ -2,18 +2,11 @@
   margin:0;
   padding: 0;
 }
-.innerContainer-Tracks{
-  position: absolute;
-}
-.wrapper-Tracks{
-  display: flex;
-}
+
 .cardHolder *{
   color: rgb(35, 35, 35);
 }
-.cardHolder{
-  margin-bottom: 400px;
-}
+
 .cardHolder .cardHeader{
   display: flex;
   position: absolute;

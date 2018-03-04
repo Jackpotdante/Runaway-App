@@ -51,7 +51,7 @@ window.addEventListener("load", function(){
 
   let btnLoadTracks = document.getElementById('loadTracks');
   btnLoadTracks.addEventListener('click',function(event){
-    getTracks("Skatås");
+
 
   })
   //saveRoundToDb();
@@ -72,7 +72,7 @@ let getTracks = (location)=>{
 //--------- SKAPAR KORT AV ALLA BANOR ---------------------------------------->>
 let makeCards = (tracks,location)=>{
   let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
-  
+
   let cardUl = document.createElement('ul');
 
   wrapperTracks.innerHTML="";
