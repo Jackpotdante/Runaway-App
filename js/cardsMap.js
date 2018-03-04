@@ -31,31 +31,6 @@ db.ref("/rundor").once("value").then(function(snapshot){
 
 
 
-//------------------------------ Window LOAD --------------------------------->>
-window.addEventListener("load", function(){
-  let btnToggleTracks = document.getElementById('btnToggleTracks')
-  let wrapperTracks = document.getElementsByClassName('wrapper-Tracks')[0];
-  btnToggleTracks.addEventListener('click',function(){
-    if(btnToggleTracks.innerHTML=="Hide Tracks"){
-      wrapperTracks.style.display="none";
-      console.log("hide");
-
-      btnToggleTracks.innerHTML="Show Tracks"
-    }else{
-      wrapperTracks.style.display="flex";
-      btnToggleTracks.innerHTML="Hide Tracks"
-      console.log("show");
-    }
-  })
-
-
-  let btnLoadTracks = document.getElementById('loadTracks');
-  btnLoadTracks.addEventListener('click',function(event){
-
-
-  })
-  //saveRoundToDb();
-}) // --------------------------- window load End ---------------------------//
 
 
 // Filtrerar ut alla platser ------------------------------------------------->>
