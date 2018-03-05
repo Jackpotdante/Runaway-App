@@ -114,6 +114,10 @@ window.addEventListener('load', function(event) {
 				var containerLogin = document.getElementsByClassName("containerLogin")[0];
 
 				containerLogin.style.display = 'block';
+
+				var navContainer = document.getElementsByClassName("navContainer")[0];
+
+				navContainer.style.display = 'none';
 				
 
 				currentUser = "";
@@ -218,9 +222,12 @@ function pushUserIntoFirebase(userO){
 function gotoTimerPage(){
 	var timerPage = document.getElementsByClassName("containerTimer")[0];
 	var containerLogin = document.getElementsByClassName("containerLogin")[0];
+	var navContainer = document.getElementsByClassName("navContainer")[0];
 
 	containerLogin.style.display = 'none';
 	timerPage.style.display = "flex";
+	navContainer.style.display = 'block';
+
 
 	console.log('Here is timer page');
 }
@@ -326,14 +333,20 @@ function getRunInfo(){
 				var str = r.length;
 				//str = str.substring(0, str.length - 2);
 				var number = parseInt(str);
+				var fullNumber = Math.round(number);
 				//console.log(number);				
-				runArray.push(number);
+				runArray.push(fullNumber);
 			} //end of if else
 
 		}//end of for
 		console.log("runArray: " + runArray);
 		totalRun = runArray.reduce((a, b) => a + b, 0);
-		longestRun = Math.max(runArray);
+		var longestRun = runArray.reduce(function(a, b) {
+    		return Math.max(a, b);
+		});
+		//longestRun = Math.max(runArray);
+
+		console.log("Longest run: " + longestRun);
 		console.log("Total run: " + totalRun);
 		console.log("Longest run: " + longestRun);
 
