@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/main.css">
+       <link rel="stylesheet" type="text/css" href="./css/timer.css">
     <title>Runaway</title>
-    <script src="./js/script.js"></script>
+    <script src="js/script.js"></script>
   </head>
   <body>
 
     <div class="containerLogin"></div>
 
-    <div class="containerTimer"></div>
+    <div class="containerTimer">
+      
+   <h1><time>00:00:00</time></h1>
+<button id="start">start</button>
+<button id="stop">stop</button>
+<button id="clear">clear</button>
+        <button id="spotify"></button>
+      </div>
 
     <div class="containerPrestation"></div>
 
@@ -54,4 +62,18 @@
         </li>
     </div>
   </body>
+      
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB_jUOkuZqQulxnav7DWKndDXSilpTc-1s",
+    authDomain: "runaway-project.firebaseapp.com",
+    databaseURL: "https://runaway-project.firebaseio.com",
+    projectId: "runaway-project",
+    storageBucket: "runaway-project.appspot.com",
+    messagingSenderId: "223527826161"
+  };
+  firebase.initializeApp(config);
+</script>
 </html>
