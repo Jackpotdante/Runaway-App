@@ -114,6 +114,10 @@ window.addEventListener('load', function(event) {
 				var containerLogin = document.getElementsByClassName("containerLogin")[0];
 
 				containerLogin.style.display = 'block';
+
+				var navContainer = document.getElementsByClassName("navContainer")[0];
+
+				navContainer.style.display = 'none';
 				
 
 				currentUser = "";
@@ -218,9 +222,12 @@ function pushUserIntoFirebase(userO){
 function gotoTimerPage(){
 	var timerPage = document.getElementsByClassName("containerTimer")[0];
 	var containerLogin = document.getElementsByClassName("containerLogin")[0];
+	var navContainer = document.getElementsByClassName("navContainer")[0];
 
 	containerLogin.style.display = 'none';
 	timerPage.style.display = "flex";
+	navContainer.style.display = 'block';
+
 
 	console.log('Here is timer page');
 }
