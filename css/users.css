@@ -198,6 +198,11 @@
 			display: none;
 		}
 
+/*Edit profile page styles*/
+#innerProfil2 {
+	display: none;
+}
+
 /*Media queries*/
 @media (max-width: 700px) {
 
