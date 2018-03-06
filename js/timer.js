@@ -30,17 +30,20 @@ function timer() {
 timer();
 
 
-/* Start button */
+/* Start  */
 start.onclick = timer;
 
-/* Stop button */
+/* Stop  */
 stop.onclick = function() {
     clearTimeout(t);
 }
 
-/* Clear button */
+/* Clear button 
 clear.onclick = function() {
     h1.textContent = "00:00:00";
     seconds = 0; minutes = 0; hours = 0;
-}
+} */
+
+
+    
 }
