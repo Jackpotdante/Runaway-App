@@ -3,9 +3,7 @@
   padding: 0;
 }
 
-.cardHolder *{
-  color: rgb(35, 35, 35);
-}
+
 
 .cardHolder .cardHeader{
   display: flex;
@@ -59,12 +57,13 @@
   justify-content: center;
 }
 .cardHolder .cardMain button{
-  background-color: #c1d045;
+  background-color: #00ceff;
   border-radius: 5px;
-  border-color: #c1d045;
+  border-color: #00ceff;
   height: 35px;
   width: 75px;
   margin: 20px 20px 10px 20px;
+  color: white;
 }
 
 
@@ -110,4 +109,10 @@
   margin-left: 20px;
   margin-top: 30px;
   font-size: 1.1em
+}
+
+
+.cardHolder .fas{
+  color: #FF2BE6;
+
 }

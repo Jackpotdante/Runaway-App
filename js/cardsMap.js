@@ -54,13 +54,12 @@ let makeCards = (tracks,location)=>{
 
   cardUl.className="cardHolder";
 
-
   tracks.map(item => {
     let cardLi = document.createElement("li");
     cardLi.innerHTML = `<div class="cardHeader">
                           <span> &#128095 ${item.length}km </span>
                           <span> Name of track </span>
-                          <span> <i class="far fa-star star"></i> 7.5 </span>
+
                         </div>
 
                         <div class="cardMain">
@@ -82,6 +81,11 @@ let makeCards = (tracks,location)=>{
     let btnShowInfoTrack = cardLi.getElementsByClassName('btnShowInfoTrack')[0];
     let btnGoToTimer = cardLi.getElementsByClassName('btnGoToTimer')[0];
 
+    let stars = countStars(countRatingOfTrack(item.trackid)); //Räknar fram medelvärde av rating samt returenera span med stjärnor.
+    cardLi.getElementsByClassName('cardHeader')[0].appendChild(stars);
+
+
+    // eventListener för kapp att visa track information.
     let showCard = true;
     btnShowInfoTrack.addEventListener('click',function(event){
       let range ="";
@@ -106,12 +110,16 @@ let makeCards = (tracks,location)=>{
         toggle[i].style.maxHeight = range;
       }
 
-    })
+    }) // end
 
+    // eventListener för knapp för att gå till timersidan
     btnGoToTimer.addEventListener('click', function(event){
+      console.log(item.trackid);
+      currentUser.trackid= item.trackid;
+      document.getElementsByClassName('infoTrack')[0].innerText = "Vald bana: "+ runningTracks[item.trackid].name + " Längd: "+ runningTracks[item.trackid].length+"km";
       document.getElementsByClassName('containerTimer')[0].style.display = "flex";
       document.getElementsByClassName('containerRoute')[0].style.display= "none";
-    })
+    }) // end
 
     let comments = findCommentsOfTrack(item.trackid);
     cardLi.getElementsByClassName('innerContainerComments')[0].appendChild(comments);
@@ -120,7 +128,7 @@ let makeCards = (tracks,location)=>{
     cardLi.getElementsByClassName('innerContainerResults')[0].appendChild(result);
 
     cardUl.appendChild(cardLi);
-  })
+  }) // end av map kort
 
   wrapperTracks.appendChild(cardUl);
 
@@ -179,7 +187,14 @@ let findCommentsOfTrack=(trackid)=>{
 
   let ulComment = document.createElement("ul");
   ulComment.className="trackComments toggle";
+
+  let totalRating = 1;
+  let numberOfTracks = 0;
+  let trackRating = 0;
+
   foundedTracks.map(track=>{
+
+
     let liComment = document.createElement("li");
     let user = findUser(track.user);
     liComment.innerHTML=`<div>
@@ -195,6 +210,29 @@ let findCommentsOfTrack=(trackid)=>{
 //------------------------  END ----------------------------------------------//
 
 
+
+//------------------------  Räknar fram rating på inskickad bana ------------->>
+let countRatingOfTrack=(trackid)=>{
+  let foundedTracks = [];
+  for(track in allResults){  // Pushar ner banor som matchar till listan
+    if(allResults[track].trackid == trackid && allResults[track].share){
+      foundedTracks.push(allResults[track])
+    }
+  }
+
+  let totalRating = 0;
+  let numberOfTracks = 0;
+  let trackRating = 0;
+  foundedTracks.map(track =>{
+    numberOfTracks++;
+    totalRating += track.rating;
+    trackRating = totalRating/numberOfTracks;
+
+  });
+
+  return trackRating;
+}
+// ------------------------- Retunerar ul lista ------------------------------//
 
 //---  FILTRERAR UT ALLA RESULTAT PÅ AKUTELL BANA OCH RETUNERAR UL LISTA  ---->>
 
@@ -247,14 +285,16 @@ let findUser=(userUId)=>{
 //------------------- Skicka in antal stjärnor som ska vara gula ------------->>
 let countStars=(numberOfStars)=>{
   let newSpan = document.createElement('span');
-
-  for(i=0;i<6){
+  numberOfStars = Math.round(numberOfStars);
+  for(i=1;i<=5; i++){
     if(i<=numberOfStars){
-
+      newSpan.innerHTML+=`<i style="color:#FF2BE6;" class="fas fa-star fa-xs"></i>`;
     }else {
-
+      newSpan.innerHTML+=`<i class="far fa-star fa-xs"></i>`;
     }
   }
+  newSpan.className ="rating";
+  return newSpan;
 }
 
 //------------------- END ---------------------------------------------------//
