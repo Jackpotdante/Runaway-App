@@ -8,7 +8,7 @@ db.ref("/users").once("value").then(function(snapshot){
 });
 //----------------------------END --------------------------------------------//
 
-// Hämtar hem alla sträckor från databas. ------------------------------------>>
+// Hämtar hem alla statiska sträckor från databas. --------------------------->>
 let runningTracks="";
 db.ref("/statrundor").once("value").then(function(snapshot){
   runningTracks = snapshot.val();
@@ -33,7 +33,7 @@ db.ref("/rundor").once("value").then(function(snapshot){
 
 
 
-// Filtrerar ut alla platser ------------------------------------------------->>
+// Filtrerar ut alla platser och skapar kort --------------------------------->>
 let getTracks = (location)=>{
   let tracks = [];
   for(track in runningTracks){
@@ -242,3 +242,19 @@ let findUser=(userUId)=>{
   return allUsers[selectedUser]
 }
 //------------------------  END ----------------------------------------------//
+
+
+//------------------- Skicka in antal stjärnor som ska vara gula ------------->>
+let countStars=(numberOfStars)=>{
+  let newSpan = document.createElement('span');
+
+  for(i=0;i<6){
+    if(i<=numberOfStars){
+
+    }else {
+
+    }
+  }
+}
+
+//------------------- END ---------------------------------------------------//

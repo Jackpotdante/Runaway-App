@@ -13,11 +13,17 @@ window.addEventListener("load", function (){
 		let newSwitchBox = document.createElement("div");
 		let newSwitch = document.createElement("div");
 		let newSwitchCircle = document.createElement("div");
+		let newTextarea = document.createElement('textarea');
+		let newRating = document.createElement('span');
 		//let image = document.createElement("img");
 		let spanTotalLength = document.getElementById("spanTotalLength");
 		let spanLongestDist = document.getElementById("spanLongestDist");
 		let thisDistance = dataForRace.length;
 		newName.className="nameOfTrack";
+		newTextarea.type="textarea";
+		newTextarea.value= dataForRace.comment;
+		newTextarea.className="prestInput";
+		//newTextarea.readOnly = "false";
 
 
 		totalLength += thisDistance;
@@ -46,13 +52,17 @@ window.addEventListener("load", function (){
 		newSwitchCircle.classList.add("switchCircle");
 		newSwitchBox.innerText = "Dela: ";
 		newName.innerHTML = dataForRace.name;
+		newRating.innerHTML = `<i class="far fa-star star"></i>${dataForRace.rating}`;
 
 		prestList[0].appendChild(newDiv);
-		newDiv.appendChild(newPlace);
 		newDiv.appendChild(newLength);
-		newDiv.appendChild(newTime);
-		newDiv.appendChild(newDate);
 		newDiv.appendChild(newName);
+		newDiv.appendChild(newRating);
+		newDiv.appendChild(newTime);
+		newDiv.appendChild(newPlace);
+		newDiv.appendChild(newDate);
+		newDiv.appendChild(newTextarea);
+
 		//newDiv.appendChild(image);
 		newDiv.appendChild(newSwitchBox);
 		newSwitchBox.appendChild(newSwitch);
@@ -63,10 +73,26 @@ window.addEventListener("load", function (){
 
 
 		newSwitchBox.addEventListener("click", function(){
-			newSwitch.classList.toggle("active");
+			let inputTextCheck = newDiv.getElementsByClassName('prestInput')[0];
+			if(inputTextCheck.value !==""){
+				newSwitch.classList.toggle("active");
+
+			}else{
+				let str = inputTextCheck.value
+				inputTextCheck.value="Fyll i uppgifter";
+				inputTextCheck.classList.add("fail")
+				setTimeout(function () {
+					inputTextCheck.value= str;
+					inputTextCheck.classList.remove("fail");
+				}, 1500);
+			}
+
 
 			if(newSwitch.classList[1] == "active"){
-				db.ref("rundor/" + dataForRace.raceId).update({share: true})
+				db.ref("rundor/" + dataForRace.raceId).update({
+					share: true,
+					comment: inputTextCheck.value
+				})
 			}
 			else{
 				db.ref("rundor/" + dataForRace.raceId).update({share: false})
@@ -91,7 +117,9 @@ window.addEventListener("load", function (){
 					time : data.time,
 					date : data.date,
 					raceId : route,
-					share : data.share
+					share : data.share,
+					comment : data.comment,
+					rating: data.rating
 				}
 				createPrest(dataForRace);
 			}

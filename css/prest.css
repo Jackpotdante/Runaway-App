@@ -76,9 +76,7 @@
 
 
 .containerPrestation > div .nameOfTrack{
-	flex: 1 70%;
-	text-align: left;
-	margin: 10px;
+	flex: 1 50%;
 	font-size: 1.2em;
 }
 
@@ -112,4 +110,14 @@
     border: 0px solid transparent;
     background: transparent;
   }
+}
+
+.containerPrestation .fail{
+	color: red;
+}
+.containerPrestation .prestInput{
+	flex: 1 70%;
+	margin: 10px;
+	height: auto;
+	border: none;
 }
