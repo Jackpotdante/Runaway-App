@@ -58,7 +58,7 @@ let makeCards = (tracks,location)=>{
     let cardLi = document.createElement("li");
     cardLi.innerHTML = `<div class="cardHeader">
                           <span> &#128095 ${item.length}km </span>
-                          <span> Name of track </span>
+                          <span> ${item.name} </span>
 
                         </div>
 
