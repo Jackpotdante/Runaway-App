@@ -3,6 +3,7 @@ body{
   background: #ffa834;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .containerTimer {
@@ -38,6 +39,7 @@ body{
     background-color: #fbb659;
     position: fixed;
     bottom: 0;
+    display: none;
 
   }
 

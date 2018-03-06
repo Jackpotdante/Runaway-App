@@ -28,6 +28,40 @@
 
   </head>
   <body>
+    <div id="moreInfoProfile">
+
+       <!-- <div id="innerMoreInfo">-->
+
+            <p>Vill du tilläga mer information till din profil?</p>
+
+            <div class="formProfil">
+                <div id="form_content">
+                      <form action="">
+                        <label for="userName">Display namn</label>
+                        <input type = "text" name="userName" id = "uName" placeholder="Namn" />
+                        <label for="userAge">Ålder</label>
+                        <input type = "text" name="userAge" id = "uAge" placeholder="Ålder" />
+                        <label for="userCity">Stad</label>
+                        <input type = "text" name="userCity" id = "uCity" placeholder="Plats" />
+                        <label for="userGender">Kön</label>
+                        <select id="selectGender" name="userGender">
+                              <option value="">Select ...</option>
+                              <option value="Man">Man</option>
+                              <option value="Kvinna">Kvinna</option>
+                              <option value="Annan">Annan</option>
+                        </select>
+                      </form>
+                </div><!--formContent-->
+            </div>
+            <div class="btnProfil">
+                    <button id="btnAdd" class="btnsProfil">Lägg till</button>
+                    <button id="btnSenare" class="btnsProfil">Senare</button>
+            </div><!--btnProfil-->
+
+       <!-- </div><!innerMoreInfo-->
+      
+    </div><!--moreInfoProfile-->
+
    <div class="containerLogin">
 
         <div id="containerLoginMob">
@@ -62,7 +96,7 @@
             <div class="hej"><p>HIDE TRACKS</p></div>
             <div class="wrapper-Tracks"></div>
           </div>
-      </div>
+    </div>
 
   <div class="containerCommunity">
     <div class="kategoriVal"></div>
@@ -98,12 +132,31 @@
             <p id="totalLength">Längst sträcka: 5km</p>
         </div>
 
-        <div id="btnProfil">
+        <div class="btnProfil">
             <button id="btnEdit" class="btnsProfil">Redigera</button>
             <button id="btnLogOut" class="btnsProfil">Log out</button>
         </div><!--btnProfil-->
 
       </div><!--innerProfil1-->
+
+      <div id="innerProfil2">
+
+          <div id="picEdit">
+                <img id="pic" src="img/run.jpg" alt="User">
+          </div><!--end of userProfil-->
+
+          <div class="formProfil">
+              <p id="length">Total löplängd: 10km</p>
+              <p id="totalLength">Längst sträcka: 5km</p>
+          </div>
+
+          <div class="btnProfil">
+              <button id="btnCancel" class="btnsProfil">Avbryta</button>
+              <button id="btnSave" class="btnsProfil">Spara</button>
+          </div><!--btnProfil-->
+
+          
+      </div><!--innerProfil2 - Edit profil-->
 
   </div><!--containerProfil-->
 
