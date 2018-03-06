@@ -1,4 +1,4 @@
-//Sarantsesteg Hedenfalk
+//Sara
 //Global variable creating empty current user object
 var currentUser = {
 	name: "",
