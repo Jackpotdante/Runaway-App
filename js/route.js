@@ -9,7 +9,7 @@ var locations = [
   ['Skatås', 57.703899, 12.03589, 1]
   <!--[NAMN , LAT , LONG , NUMMER]-->
 ];
-console.log(locations[4][0]);
+
 
 let curLocation;
 
