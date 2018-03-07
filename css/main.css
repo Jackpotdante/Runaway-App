@@ -22,6 +22,8 @@ body{
   display: none;
 }
 
+
+
 #map {
         height: 100%;
       }
@@ -39,12 +41,10 @@ body{
     background-color: #fbb659;
     position: fixed;
     bottom: 0;
-    display: none;
 
   }
 
   .navContainer ul{
-
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -73,13 +73,13 @@ body{
 /** TEST COLORS FOR ROUTING ***/
 .containerTimer{
   display: none;
-  background-color: blue;
+
   width: 100%;
   height: 100%;
 }
 .containerPrestation{
   display: none;
-  background-color: red;
+
   width: 100%;
   height: 100%;
 }
@@ -95,7 +95,7 @@ body{
 }
 .containerProfile{
   display: none;
-  background-color: black;
+  
   width: 100%;
   height: 100%;
 }

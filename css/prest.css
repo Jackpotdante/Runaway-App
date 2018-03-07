@@ -49,7 +49,7 @@
 
 .switch.active {
 	background-color: #00acee;
- 
+
 }
 
 .switch.active > .switchCircle{
@@ -60,7 +60,7 @@
 
 #totalStat{
 	border-radius: 0;
-	height: 20px;
+	height: 27px;
 	margin: 0;
 	flex: 0;
 	position: fixed;
@@ -75,9 +75,9 @@
 }
 
 
-.containerPrestation > div img{
-	flex: 1 70%;
-	margin: 5px;
+.containerPrestation > div .nameOfTrack{
+	flex: 1 50%;
+	font-size: 1.2em;
 }
 
 @media screen and (max-width: 1000px) and (min-width: 320px){
@@ -110,4 +110,14 @@
     border: 0px solid transparent;
     background: transparent;
   }
+}
+
+.containerPrestation .fail{
+	color: red;
+}
+.containerPrestation .prestInput{
+	flex: 1 70%;
+	margin: 10px;
+	height: auto;
+	border: none;
 }

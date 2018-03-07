@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/route.css">
     <link rel="stylesheet" type="text/css" href="./css/cardsMap.css">
     <link rel="stylesheet" type="text/css" href="./css/prest.css">
+    <link rel="stylesheet" type="text/css" href="./css/timer.css">
     <link href="css/users.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -21,7 +22,8 @@
     <script src="./js/community.js"></script>
     <script src="./js/route.js"></script>
     <script src="./js/cardsMap.js"></script>
-    <script src="./js/prest.js" type="text/javascript"></script>
+    <script src="./js/prest.js"></script>
+    <script src="./js/timer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0cooAANtGVdiLnD0SZrZZ_1cN00Z2vpg&callback=initMap"
     async defer></script>
 
@@ -80,10 +82,22 @@
 
 
 
-  <div class="containerTimer"></div>
+  <div class="containerTimer">
+    <div class="menu">
+      <p class="infoTrack"></p>
+      <div class= "timer">
+        <span class="timeElapsedHours"></span>
+        <span class="timeElapsedMinutes"></span>
+        <span class="timeElapsedSecound"></span>
+      </div>
+      <button id="btnClockStop">Reset</button>
+      <button id="btnClockPause">Pause</button>
+      <button id="btnSaveToDb">Spara</button>
+      <button id="btnStartClock">StartRun</button>
+    </div>
+  </div>
 
   <div class="containerPrestation">
-    <button id="btnLoadTracks">Ladda banor</button>
     <div id="totalStat">
       <span id="spanTotalLength"></span><span id="spanLongestDist"></span>
     </div>
@@ -99,15 +113,27 @@
     </div>
 
   <div class="containerCommunity">
-    <div class="kategoriVal"></div>
-     <div id="containerChatt">
-        <div class="messageContainer">
-          <div class="profileImage"></div>
-          <p class="username">Per Karlsson</p>
-          <p class="date">2018-02-24</p>
+      <div class="togglePage">
+        <p id="toggleChat">Flow</p>
+        <p id="toggleMembers">Members</p>
+
+
       </div>
-    </div>
+      <div class="chatt"></div>
+        <div class="send">
+          <input id="inputMessage"></input>
+          <button id="sendBtn"><i class="fas fa-angle-right" id="iconSend"></i></button>
+        </div>
+      </div>
+
+
+
   </div>
+
+
+
+
+
 
 
   <div id="containerProfil" class="containerProfile">
@@ -157,6 +183,7 @@
 
           
       </div><!--innerProfil2 - Edit profil-->
+
 
   </div><!--containerProfil-->
 

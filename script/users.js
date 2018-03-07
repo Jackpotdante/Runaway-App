@@ -10,6 +10,8 @@ var currentUser = {
 	memberDate: "",
 	gender: "",
 	key: ""
+	totalLength: 0,
+	longestRun: 0
 };
 var totalRun = 0;
 var longestRun = 0;
@@ -135,7 +137,9 @@ window.addEventListener('load', function(event) {
 					city: "",
 					memberDate: "",
 					gender: "",
-					key: ""
+					key: "",
+					totalLength: 0,
+					longestRun: 0
 				};
 
 
@@ -258,7 +262,7 @@ function pushUserIntoFirebase(userO){
 		console.log("Here is inside db.ref");
 		for(let child in data){
 			let r = data[child];
-			
+
 			//console.log('r.uid: ' + r.uid);
 			//console.log('userO.uid: ' + userO.uid);
 
@@ -331,7 +335,7 @@ function pushUserIntoFirebase(userO){
 	    }
 	}//end of callLater
 
-	
+
 }//end of pushUserInfoIntoFirebase
 
 function gotoTimerPage(){
@@ -421,8 +425,6 @@ function updateAccountPage(){
 	medlemSedan.innerText = mdate;
 
 	getRunInfo();
-	
-	
 }//end of updateAccountPage
 
 function gotoEditAccountPage(){
@@ -441,7 +443,7 @@ function getRunInfo(){
 		console.log("Here is inside db.ref rundor");
 		for(let child in data){
 			let r = data[child];
-			
+
 			//console.log('r.uid: ' + r.uid);
 			//console.log('userO.uid: ' + userO.uid);
 
@@ -451,9 +453,14 @@ function getRunInfo(){
 				var str = r.length;
 				//str = str.substring(0, str.length - 2);
 				var number = parseInt(str);
+
 				var fullNumber = Math.round(number);
 				//console.log(number);				
 				runArray.push(fullNumber);
+
+				//console.log(number);
+				runArray.push(number);
+
 			} //end of if else
 
 		}//end of for

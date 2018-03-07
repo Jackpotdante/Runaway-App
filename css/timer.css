@@ -1,0 +1,68 @@
+.containerTimer{
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerTimer #btnClockStop{
+  background-color: #00ceff;
+  color: white;
+  border-radius: 10px;
+  height: 75px;
+  flex: 1 1 20%;
+
+}
+.containerTimer #btnSaveToDb{
+  background-color: #00ceff;
+  color: white;
+  border-radius: 10px;
+  height: 75px;
+  flex: 1 1 20%;
+
+}
+.containerTimer #btnClockPause{
+  background-color: #00ceff;
+  color: white;
+  border-radius: 10px;
+  height: 75px;
+  flex: 1 1 20%;
+
+}
+.containerTimer #btnStartClock{
+  background-color: #00ceff;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  height: 75px;
+  flex: 1 60%;
+    margin: 10px;
+}
+
+.containerTimer .menu{
+  flex: 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.containerTimer .menu p{
+  flex: 1 50%;
+  text-align: center;
+}
+
+.containerTimer .timer{
+  flex: 1 90%;
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 50px;
+}
+
+.containerTimer .infoTrack{
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  font-size: 1.2em;
+}
