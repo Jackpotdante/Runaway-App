@@ -9,7 +9,7 @@ var currentUser = {
 	city: "",
 	memberDate: "",
 	gender: "",
-	key: ""
+	key: "",
 	totalLength: 0,
 	longestRun: 0
 };
@@ -38,10 +38,10 @@ var provider = new firebase.auth.FacebookAuthProvider();
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
 
-        console.log('onAuthStateChanged: user is signed in', user);
+        //console.log('onAuthStateChanged: user is signed in', user);
 
         //gotoAccountPage(user);
-        console.log('User is logged in outside load');
+        //console.log('User is logged in outside load');
         pushUserIntoFirebase(user);
         gotoTimerPage();
 
@@ -49,7 +49,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     } else {
       // User is signed out.
       // ...
-    console.log('onAuthStateChanged: user is signed out');
+    //console.log('onAuthStateChanged: user is signed out');
     }
   });
 
@@ -77,12 +77,12 @@ window.addEventListener('load', function(event) {
 		      firebase.auth().getRedirectResult().then(function(result) {
 		        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
 		        var token = result.credential.accessToken;
-		        console.log('Token: ' + token);
+		        //console.log('Token: ' + token);
 		        // The signed-in user info.
 		        var user = result.user;
 		        //console.log('User info: ' + user)
 
-		        console.log('User is logged in inside load');
+		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
 		        pushUserIntoFirebase(user);
 		        gotoTimerPage();
@@ -97,7 +97,7 @@ window.addEventListener('load', function(event) {
 		        var email = error.email;
 		        // The firebase.auth.AuthCredential type that was used.
 		        var credential = error.credential;
-		        console.log('sign in is uncessful: ' + errorMessage);
+		        //console.log('sign in is uncessful: ' + errorMessage);
 		      });//end of signInWithPopup function
 
 
@@ -144,7 +144,7 @@ window.addEventListener('load', function(event) {
 
 
 			}).catch(function(error) {
-			  console.log('Error sign out: ' + error);
+			  //console.log('Error sign out: ' + error);
 			});
 
 
@@ -179,7 +179,7 @@ function getUserKey() {
             if(user.uid == currentUser.uid){
 				userKey = child.key;
 				//console.log("Current users name: " + user.name);
-				console.log("Current users key inside: " + userKey);
+				//console.log("Current users key inside: " + userKey);
 			} //end of if else
 
           })
@@ -192,7 +192,7 @@ function getUserKey() {
 }//end of function getUserKey
 
 function callAfter(key){
-	console.log("Current users key outside: " + key);
+	//console.log("Current users key outside: " + key);
 	//Updating users name
 	var inputUserName = document.getElementById('uName');
 	var uName = inputUserName.value;
@@ -224,7 +224,7 @@ function callAfter(key){
     //Updating gender info
 	var e = document.getElementById("selectGender");
 	var value = e.options[e.selectedIndex].value;
-	console.log("Users gender: " + value);
+	//console.log("Users gender: " + value);
        if (value != "") {
     		firebase.database().ref('users/' + key + '/gender').set(value);
     		currentUser.gender = value;
@@ -242,16 +242,16 @@ function callAfter(key){
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
 	var displayName = userO.displayName;
-	console.log('Display name: ' + displayName);
+	//console.log('Display name: ' + displayName);
 
 	var email = userO.email;
-	console.log('Email: ' + email);
+	//console.log('Email: ' + email);
 
 	var uid = userO.uid;
-	console.log('User id: ' + uid);
+	//console.log('User id: ' + uid);
 
 	var photoUrl = userO.photoURL;
-	console.log('Photo URL: ' + photoUrl);
+	//console.log('Photo URL: ' + photoUrl);
 
 	var userExist = false;
 
@@ -259,7 +259,7 @@ function pushUserIntoFirebase(userO){
 	//Checks if user already exist in the DB
 	db.ref('users/').once('value', function(snapshot) {
 		let data = snapshot.val();
-		console.log("Here is inside db.ref");
+		//console.log("Here is inside db.ref");
 		for(let child in data){
 			let r = data[child];
 
@@ -285,10 +285,10 @@ function pushUserIntoFirebase(userO){
 	})//end of db.ref
 
 	function callLater() {
-		console.log('User exist value after db:  ' + userExist);
+		//console.log('User exist value after db:  ' + userExist);
 		if (userExist != true){
 
-			console.log('User exist is set to false');
+			//console.log('User exist is set to false');
 
 			//getting current date
 			var currentDate = getCurrentDate();
@@ -305,7 +305,7 @@ function pushUserIntoFirebase(userO){
 		        gender: "",
 		        key: ""
 		      }//end of obj
-		      console.log("New user is added" + newUser);
+		      //console.log("New user is added" + newUser);
 
 				currentUser.name = newUser.name;
 				currentUser.email = newUser.email;
@@ -318,7 +318,7 @@ function pushUserIntoFirebase(userO){
 
 		      //Adding new user into the DB
 		      var userKey = db.ref('users/').push(newUser).key;
-		      console.log("Users key recieved: " + userKey);
+		      //console.log("Users key recieved: " + userKey);
 		      firebase.database().ref('users/' + userKey + '/key').set(userKey);
 		      currentUser.key = userKey;
 
@@ -348,7 +348,7 @@ function gotoTimerPage(){
 	navContainer.style.display = 'block';
 
 
-	console.log('Here is timer page');
+	//console.log('Here is timer page');
 }
 
 function getCurrentDate() {
