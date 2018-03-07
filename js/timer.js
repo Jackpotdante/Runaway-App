@@ -107,3 +107,19 @@ class Timer{
 
 
 }
+
+
+fetch('https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.96294/lat/57.6909/data.json').then(function(response) {
+
+
+    console.log(response.headers.get('Content-Type'));
+    console.log(response.headers.get('Date'));
+
+    console.log(response.status);
+    console.log(response.statusText);
+    console.log(response.type);
+    console.log(response.url);
+    return response.json();
+}).then(function(obj){
+  console.log(obj);
+});
