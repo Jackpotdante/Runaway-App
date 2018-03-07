@@ -36,6 +36,7 @@ let conPres = document.getElementsByClassName("containerPrestation")[0];
 let conRoute = document.getElementsByClassName("containerRoute")[0];
 let conCom = document.getElementsByClassName("containerCommunity")[0];
 let conProfile = document.getElementsByClassName("containerProfile")[0];
+let sendBar = document.getElementsByClassName("send")[0];
 
 timerBtn.addEventListener('click', function(event){
   conLogin.style.display = "none";
@@ -69,6 +70,7 @@ comBtn.addEventListener('click', function(event){
   conTimer.style.display = "none";
   conPres.style.display = "none"
   conRoute.style.display = "none";
+  sendBar.style.display = "flex;"
   conCom.style.display = "flex";
   conProfile.style.display = "none";
 });
