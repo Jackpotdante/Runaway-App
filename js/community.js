@@ -79,7 +79,7 @@ function createMessage(name, message , time, photo){
 
 db.ref('/message').on('child_added', function(snapshot , prevChildKey) {
   let snap= snapshot.val();
-  console.log(snap);
+
   let nameMe = snap.namn;
   let timeMe = snap.time;
   let messageMe = snap.message;

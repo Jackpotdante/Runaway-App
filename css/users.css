@@ -92,7 +92,8 @@
 		margin: 5px auto;
 		display: block;
 	}
-	#btnProfil {
+
+	.btnProfil {
 		width: 100%;
 		background-color: white;
 		display: flex;
@@ -100,7 +101,8 @@
 		justify-content: space-between;
 		margin: 0 auto;
 	}
-		#btnProfil .btnsProfil {
+
+		.btnProfil .btnsProfil {
 			width: 170px;
 			border: 2px solid white;
 			border-radius: 5px;
@@ -144,6 +146,7 @@
 			color: #23103A;
 
 		}
+
 		#medlemSedan {
 			color: #23103A;
 			margin-top: 5px;
@@ -151,6 +154,7 @@
 			margin-left: 10px;
 			font-size: 1.2rem;
 		}
+
 		#pic {
 			max-width: 250px;
 			max-height: 250px;
@@ -167,10 +171,12 @@
 			padding-bottom: 5px;
 			padding-left: 5px;
 		}
+
 		#locationUser .fas {
 			margin-right: 10px;
 			color: #23103A;
 		}
+
 	#lengthUser {
 		width: 100%;
 		position: relative;
@@ -181,6 +187,7 @@
 		padding-top: 2px;
 		padding-bottom: 2px;
 	}
+	
 		#lengthUser p {
 			font-size: 1.2rem;
 			padding-top: 2px;
@@ -202,6 +209,61 @@
 #innerProfil2 {
 	display: none;
 }
+
+/*Redigera profil vid första inloggning*/
+
+#moreInfoProfile {
+	position: absolute;
+	z-index: 10;
+	/*margin: auto;*/
+	width: 300px;
+	left: 20%;
+	left: 0; 
+  	right: 0; 
+  	margin-left: auto; 
+  	margin-right: auto;
+	background-color: white;
+	top: 20%;
+	border: 2px solid #B0E0E6;
+	padding: 10px;
+	display: none;
+}
+
+	#moreInfoProfile p {
+		color: #23103A;
+		font-size: 1.1rem;
+	}
+
+		div.formProfil {
+			max-width: 400px;
+			margin: 0 auto;
+		}
+
+		#form_content {
+			padding: 5px;
+		}
+
+		#form_content input {
+			 outline: none;
+			 transition: .2s all linear;
+			 display: flex;
+			 padding: 8px;
+			 width: 100%;
+			 margin: 10px 0;
+			 height: 30px;
+		}
+		#form_content form {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		#form_content label {
+			color: #23103A;
+			font-size: 1.1rem;
+		}
+		#selectGender {
+			margin-left: 10px;
+			padding: 3px;
+		}
 
 /*Media queries*/
 @media (max-width: 700px) {
@@ -235,6 +297,11 @@
 			padding-bottom: 4px;
 	}
 }
-@media (max-width: 350px) {
+@media (max-width: 300px) {
+
+	#moreInfoProfile {
+		padding-left: 0;
+		padding-right: 0;
+	}
 
 }

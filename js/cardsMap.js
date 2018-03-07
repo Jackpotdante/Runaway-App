@@ -3,7 +3,7 @@
 let allUsers = ""
 db.ref("/users").once("value").then(function(snapshot){
   allUsers = snapshot.val();
-  console.log(allUsers);
+  
 
 });
 //----------------------------END --------------------------------------------//
@@ -22,7 +22,7 @@ db.ref("/statrundor").once("value").then(function(snapshot){
 let allResults=""
 db.ref("/rundor").once("value").then(function(snapshot){
   allResults = snapshot.val();
-  console.log("rundor laddade");
+ 
 
 });
 //----------------------------END --------------------------------------------//
