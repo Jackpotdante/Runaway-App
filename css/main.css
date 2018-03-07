@@ -21,10 +21,6 @@ body{
   display: none;
 }
 
-/**** FOR DEVELOPMENT***/
-.containerLogin{
-  display: none;
-}
 
 
 #map {
@@ -44,7 +40,6 @@ body{
     background-color: #fbb659;
     position: fixed;
     bottom: 0;
-/*  display: none;*/
 
   }
 
