@@ -34,6 +34,10 @@ window.addEventListener('load',function(event){
 
   let timer = new Timer();
 
+  let weatherNow = new Weather();
+  weatherNow.loadWeather();
+
+
 }); // end of load
 
 
@@ -109,17 +113,56 @@ class Timer{
 }
 
 
-fetch('https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.96294/lat/57.6909/data.json').then(function(response) {
 
 
-    console.log(response.headers.get('Content-Type'));
-    console.log(response.headers.get('Date'));
 
-    console.log(response.status);
-    console.log(response.statusText);
-    console.log(response.type);
-    console.log(response.url);
-    return response.json();
-}).then(function(obj){
-  console.log(obj);
-});
+class Weather{
+  constructor(){
+    this.loaded = true;
+  }
+
+  loadWeather(){
+    let _this = this;
+    fetch('https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.96294/lat/57.6909/data.json').then(function(response) {
+      return response.json();
+    }).then(function(obj){
+      //console.log(obj);
+      //console.log(obj.timeSeries[0].parameters[18].values[0]);
+      _this.category = obj.timeSeries[0].parameters[18].values[0]; // väder symbol
+      _this.temperature = obj.timeSeries[0].parameters[11].values[0]; // temepratur
+      _this.windSpeed = obj.timeSeries[0].parameters[14].values[0]; // wind speed
+      _this.showWeather()
+    });
+  }
+
+  showWeather(){
+    document.getElementById('weatherIcon')
+
+    let symbolNb = this.category;
+    if(symbolNb){
+      let y = 0
+      while(symbolNb>5){
+        symbolNb=symbolNb-5;
+        y++
+      }
+
+      let x = symbolNb-1
+      let xcord = x * 80 - 330 + 5;
+      let ycord = y * -55
+      //console.log("x är: ", x,":",xcord," y är:",y,":",ycord);
+      document.getElementById("weatherIcon").style.right = xcord+"px";
+      document.getElementById("weatherIcon").style.top = ycord+"px";
+      document.getElementById("weatherTemperature").innerText = this.temperature + "°C";
+      document.getElementById("weatherWindSpeed").innerText = this.windSpeed + "m/s";
+
+    }
+  }
+
+
+}
+
+
+/*
+right -325,-245, -165,-85 ,-5
+top   0,-55,110,165,220
+ */

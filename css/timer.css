@@ -66,3 +66,41 @@
   right: 0;
   font-size: 1.2em;
 }
+
+.containerTimer .weather{
+  width: 80px;
+  height: 200px;
+  overflow: hidden;
+  top: -5px;
+  position: absolute;
+  right: 5px;
+}
+.containerTimer .weatherIconDiv{
+  width: 80px;
+  height: 60px;
+  overflow: hidden;
+  top: 0px;
+  position: absolute;
+  right: 5px;
+}
+.containerTimer .weather img{
+  width: 400px;
+  position: absolute;
+
+}
+.containerTimer .weather #weatherTemperature{
+  z-index: 100;
+  color: white;
+  font-size: 1.2em;
+  right: 10px;
+  position: absolute;
+  top: 50px;
+}
+.containerTimer .weather #weatherWindSpeed{
+  z-index: 100;
+  color: white;
+  font-size: 1.2em;
+  right: 10px;
+  position: absolute;
+  top: 70px;
+}
