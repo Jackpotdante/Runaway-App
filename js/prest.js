@@ -28,7 +28,7 @@ window.addEventListener("load", function (){
 
 		totalLength += thisDistance;
 		currentUser.totalLength = totalLength; //sparar totalsträcka till user objecktet
-	  currentUser.longestRun = longestDistance; //sparar totalsträcka till user objecktet
+	  	currentUser.longestRun = longestDistance; //sparar totalsträcka till user objecktet
 
 		spanTotalLength.innerText = `Total längd: ${totalLength}km`;
 		spanLongestDist.innerText = `Längst sträcka: ${longestDistance}km`;
@@ -40,7 +40,7 @@ window.addEventListener("load", function (){
 		}
 
 
-
+		getRunInfo();
 
 		newPlace.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${dataForRace.place}`
 		newLength.innerHTML = `&#128095 ${dataForRace.length}km`;
