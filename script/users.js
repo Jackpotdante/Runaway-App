@@ -13,9 +13,7 @@ var currentUser = {
 	totalLength: 0,
 	longestRun: 0
 };
-var totalRun = 0;
-var longestRun = 0;
-var key = "";
+
 
 
 // Initialize Firebase
@@ -109,7 +107,7 @@ window.addEventListener('load', function(event) {
 	  //Google login functionality
 	  btnLoginGoogle.addEventListener('click', function(event){
 
-	  	 //To sign in with a pop-up window, call redirect
+	  		//To sign in with a pop-up window, call redirect
 	  	 	  firebase.auth().signInWithRedirect(providerGoogle);
 		      firebase.auth().getRedirectResult().then(function(result) {
 		        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
@@ -136,7 +134,6 @@ window.addEventListener('load', function(event) {
 		        var credential = error.credential;
 		        //console.log('sign in is uncessful: ' + errorMessage);
 		      });//end of signInWithPopup function
-
 
 	  })//end of btnLoginGoogle eventListener
 
