@@ -40,6 +40,7 @@ body{
     background-color: #fbb659;
     position: fixed;
     bottom: 0;
+    display: none;
 
   }
 
@@ -94,7 +95,7 @@ body{
 }
 .containerProfile{
   display: none;
-  
+
   width: 100%;
   height: 100%;
 }

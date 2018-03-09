@@ -1,7 +1,12 @@
 window.addEventListener('load', function(event){
 
 
-
+  /*** HÄMTAR ALLA USERS ***/
+   let users=[];
+   db.ref('/users').on('child_added', function(snapshot , prevChildKey) {
+     let snaps = snapshot.val();
+     users.push(snaps);
+   });
 
 /*** SENDS MESSAGE TO DATABASE ***/
   function sendMessage(){
@@ -79,7 +84,6 @@ function createMessage(name, message , time, photo){
 
 db.ref('/message').on('child_added', function(snapshot , prevChildKey) {
   let snap= snapshot.val();
-  console.log(snap);
   let nameMe = snap.namn;
   let timeMe = snap.time;
   let messageMe = snap.message;
@@ -88,6 +92,96 @@ db.ref('/message').on('child_added', function(snapshot , prevChildKey) {
     updateScroll();
 
 });
+
+
+
+let containerCards = document.getElementsByClassName("containerCards")[0];
+let getMembers = function(){
+  containerCards.innerHTML = " ";
+  for(let i = 0; i < users.length; i++){
+    let nameCard = users[i].name;
+    let ageCard = users[i].age;
+    let locationCard = users[i].city;
+    let distance = "25";
+    let run = "10";
+    let photoCard = users[i].photoUrl;
+    createMembers(nameCard, ageCard, photoCard, locationCard, distance, run);
+
+  }
+}
+
+let inputSearch = document.getElementById('searchMembers');
+
+inputSearch.addEventListener('keyup', function(event){
+  containerCards.innerHTML = " ";
+  var keyword = inputSearch.value.toUpperCase();
+  var filtered_data = users.filter(function(item) {
+      return item.name.toUpperCase().includes(keyword);
+    });
+    function newSearch(){
+        for(let i = 0; i < 5 ; i++){
+          if(filtered_data[i] != undefined){
+            let nameCard = filtered_data[i].name;
+            let ageCard = filtered_data[i].age;
+            let locationCard = filtered_data[i].city;
+            let distance = "25";
+            let run = "10";
+            let photoCard = filtered_data[i].photoUrl;
+            createMembers(nameCard, ageCard, photoCard, locationCard, distance, run);
+          }
+        }
+      }
+    newSearch();
+  });
+
+
+
+
+/*** CREATE MEMEBERS ***/
+function createMembers(name, age, img, location, distance, run){
+  let containerCards = document.getElementsByClassName("containerCards")[0];
+
+  /** ALL CONTAINERS FOR CARD **/
+  const memberCard = document.createElement("div");
+  const headCard = document.createElement("div");
+  const headInfo = document.createElement("div");
+  const distanceCard = document.createElement("div");
+   /** CONTENT OF CONTAINERS **/
+   const imgCard = document.createElement("img");
+   const nameCard = document.createElement("p");
+   const locationCard = document.createElement("p");
+   const totalDistance = document.createElement("p");
+   const longestRun = document.createElement("p");
+
+   nameCard.innerHTML = name + " , " + age;
+   locationCard.innerHTML = `<i class="fas fa-map-marker-alt" id="iconLocation"></i>` + location;
+   totalDistance.innerHTML = "Total distance: " + distance + "km";
+   longestRun.innerHTML = "Longest run: " + run + "km";
+   imgCard.src = img;
+
+
+   memberCard.className = "memberCard";
+   headCard.className = "headCard";
+   imgCard.className = "imgCard";
+   headInfo.className ="headInfo";
+   distanceCard.className ="distanceCard";
+   nameCard.className = "nameCard";
+   locationCard.className ="locationCard";
+   totalDistance.className = "totalDistance";
+   longestRun.className = "longestRun";
+
+   containerCards.appendChild(memberCard);
+   memberCard.appendChild(headCard);
+   memberCard.appendChild(distanceCard);
+    headCard.appendChild(imgCard);
+   headCard.appendChild(headInfo);
+   headInfo.appendChild(nameCard);
+   headInfo.appendChild(locationCard);
+   distanceCard.appendChild(totalDistance);
+   distanceCard.appendChild(longestRun);
+
+
+}
 /*** TOOGLE MEMBERS ***/
  let toggleMembers = document.getElementById("toggleMembers");
 
@@ -96,6 +190,10 @@ db.ref('/message').on('child_added', function(snapshot , prevChildKey) {
    document.getElementById("toggleMembers").style.visibility= "hidden";
    document.getElementById("toggleChat").style.visibility= "visible";
    document.getElementsByClassName("send")[0].style.display = "none";
+   document.getElementsByClassName("containerMembers")[0].style.display = "flex";
+   document.getElementsByClassName("navContainer")[0].style.display = "none";
+   getMembers();
+
  });
 
  toggleChat.addEventListener('click', function(event){
@@ -103,13 +201,10 @@ db.ref('/message').on('child_added', function(snapshot , prevChildKey) {
    document.getElementById("toggleMembers").style.visibility= "visible";
    document.getElementById("toggleChat").style.visibility= "hidden";
    document.getElementsByClassName("send")[0].style.display = "flex";
+    document.getElementsByClassName("navContainer")[0].style.display = "block";
+    document.getElementsByClassName("containerMembers")[0].style.display = "none";
  });
 
-/*** HÄMTAR ALLA USERS ***/
- let runningTracks="";
- db.ref("/statrundor").once("value").then(function(snapshot){
-   runningTracks = snapshot.val();
 
- });
 /**WINDOW LOAD**/
 })
