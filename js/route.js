@@ -2,10 +2,10 @@
 
 /**** GOOGLE MAPS API ***/
 var locations = [
-  ['Bondi Beach', -33.890542, 151.274856, 4],
-  ['Coogee Beach', -33.923036, 151.259052, 5],
-  ['Cronulla Beach', -34.028249, 151.157507, 3],
-  ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+  ['Mossen', 57.68412409999999, 11.980051199999934, 4],
+  ['Slottskogen', 57.6904458, 11.951964399999952, 5],
+  ['Tuvevallen', 57.75227049999999, 11.91442029999996, 3],
+  ['Länsmansgården', 57.73335959999999, 11.88558480000006, 2],
   ['Skatås', 57.703899, 12.03589, 1]
   <!--[NAMN , LAT , LONG , NUMMER]-->
 ];
@@ -34,11 +34,12 @@ function initMap(){
 
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
-        document.getElementsByClassName("overmap")[0].style.display = "flex";
+        document.getElementsByClassName("hej")[0].style.display = "flex";
         map.setCenter(marker.getPosition());
         map.setZoom(14);
         curLocation = locations[i][0];
         getTracks(curLocation);
+       
 
 
       }
@@ -47,9 +48,15 @@ function initMap(){
 }
 window.addEventListener('load', function(event){
   let toggleButton = document.getElementsByClassName("hej")[0];
+  let overmaps = document.getElementById("overmap");
+  let showBtn = document.getElementById("showBtn");
 
   toggleButton.addEventListener('click' ,function(event){
-    document.getElementsByClassName("overmap")[0].style.display = "none";
+    if( overmaps.style.display == "none"){
+       overmaps.style.display = "flex";
+    }else if(overmaps.style.display == "flex"){
+      overmaps.style.display = "none";
+    }
   })
-
+/** window **/
 })
