@@ -39,7 +39,7 @@ function initMap(){
         map.setZoom(14);
         curLocation = locations[i][0];
         getTracks(curLocation);
-        console.log(curLocation);
+       
 
 
       }
