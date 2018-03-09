@@ -4,6 +4,8 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  color: White;
+  font-family: Montserrat;
 }
 
 .containerTimer #btnClockStop{
@@ -12,7 +14,8 @@
   border-radius: 10px;
   height: 75px;
   flex: 1 1 20%;
-
+  display: none;
+  text-align: center;
 }
 .containerTimer #btnSaveToDb{
   background-color: #00ceff;
@@ -20,6 +23,8 @@
   border-radius: 10px;
   height: 75px;
   flex: 1 1 20%;
+  display: none;
+  text-align: center;
 
 }
 .containerTimer #btnClockPause{
@@ -28,7 +33,10 @@
   border-radius: 10px;
   height: 75px;
   flex: 1 1 20%;
-
+  display: none;
+  margin-left: 10px;
+  margin-right:10px;
+  text-align: center;
 }
 .containerTimer #btnStartClock{
   background-color: #00ceff;
@@ -37,7 +45,7 @@
   border-radius: 10px;
   height: 75px;
   flex: 1 60%;
-    margin: 10px;
+  margin: 10px;
 }
 
 .containerTimer .menu{
@@ -64,14 +72,14 @@
   top: 2px;
   left: 0;
   right: 0;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .containerTimer .weather{
   width: 80px;
   height: 200px;
   overflow: hidden;
-  top: -5px;
+  top: 4px;
   position: absolute;
   right: 5px;
 }
@@ -85,6 +93,7 @@
 }
 .containerTimer .weather img{
   width: 400px;
+
   position: absolute;
 
 }
@@ -94,7 +103,7 @@
   font-size: 1.2em;
   right: 10px;
   position: absolute;
-  top: 50px;
+  top: 55px;
 }
 .containerTimer .weather #weatherWindSpeed{
   z-index: 100;
@@ -102,5 +111,5 @@
   font-size: 1.2em;
   right: 10px;
   position: absolute;
-  top: 70px;
+  top: 78px;
 }
