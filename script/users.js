@@ -41,7 +41,6 @@ firebase.auth().onAuthStateChanged(function(user) {
         //console.log('onAuthStateChanged: user is signed in', user);
 
         //gotoAccountPage(user);
-        //console.log('User is logged in outside load');
         pushUserIntoFirebase(user);
         gotoTimerPage();
 
@@ -242,16 +241,18 @@ function callAfter(key){
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
 	var displayName = userO.displayName;
-	//console.log('Display name: ' + displayName);
+
+	
 
 	var email = userO.email;
-	//console.log('Email: ' + email);
+	
 
 	var uid = userO.uid;
-	//console.log('User id: ' + uid);
+	
 
 	var photoUrl = userO.photoURL;
-	//console.log('Photo URL: ' + photoUrl);
+	
+
 
 	var userExist = false;
 
@@ -259,15 +260,15 @@ function pushUserIntoFirebase(userO){
 	//Checks if user already exist in the DB
 	db.ref('users/').once('value', function(snapshot) {
 		let data = snapshot.val();
-		//console.log("Here is inside db.ref");
+
 		for(let child in data){
 			let r = data[child];
 
-			//console.log('r.uid: ' + r.uid);
-			//console.log('userO.uid: ' + userO.uid);
 
-			if(r.email == userO.email){
-				console.log("User is already registered");
+
+			if(r.uid == userO.uid){
+				
+
 				userExist = true;
 				currentUser.name = r.name;
 				currentUser.email = r.email;
@@ -285,7 +286,7 @@ function pushUserIntoFirebase(userO){
 	})//end of db.ref
 
 	function callLater() {
-		//console.log('User exist value after db:  ' + userExist);
+
 		if (userExist != true){
 
 			//console.log('User exist is set to false');
@@ -305,7 +306,7 @@ function pushUserIntoFirebase(userO){
 		        gender: "",
 		        key: ""
 		      }//end of obj
-		      //console.log("New user is added" + newUser);
+
 
 				currentUser.name = newUser.name;
 				currentUser.email = newUser.email;
@@ -348,7 +349,7 @@ function gotoTimerPage(){
 	navContainer.style.display = 'block';
 
 
-	//console.log('Here is timer page');
+
 }
 
 function getCurrentDate() {
@@ -383,15 +384,7 @@ function getCurrentDate() {
 //changing into profile page page
 function updateAccountPage(){
 
-	//console.log("Here is updateAccountPage function");
 
-	//console.log('Current user displayName: ' + currentUser.name);
-	//console.log('Current user memberDate: ' + currentUser.memberDate);
-	//console.log('Current user photo: ' + currentUser.photoUrl);
-	//console.log('Current user gender: ' + currentUser.gender);
-	//console.log('Current user age: ' + currentUser.age);
-	//console.log('Current user location: ' + currentUser.city);
-	//console.log('Current user membership date: ' + currentUser.memberDate);
 
 	var picUser = document.getElementById('pic');
   	picUser.src = currentUser.photoUrl;
@@ -440,7 +433,7 @@ function getRunInfo(){
 	/*
 	db.ref('rundor/').once('value', function(snapshot) {
 		let data = snapshot.val();
-		console.log("Here is inside db.ref rundor");
+		
 		for(let child in data){
 			let r = data[child];
 
@@ -448,7 +441,7 @@ function getRunInfo(){
 			//console.log('userO.uid: ' + userO.uid);
 
 			if(r.user == currentUser.uid){
-				console.log("Users run info available");
+				
 				//removing km from string
 				var str = r.length;
 				//str = str.substring(0, str.length - 2);
@@ -464,6 +457,7 @@ function getRunInfo(){
 			} //end of if else
 
 		}//end of for
+
 		console.log("runArray: " + runArray);
 		if (runArray != []) {
 

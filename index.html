@@ -30,6 +30,7 @@
 
   </head>
   <body>
+
     <div id="moreInfoProfile">
 
        <!-- <div id="innerMoreInfo">-->
@@ -61,7 +62,7 @@
             </div><!--btnProfil-->
 
        <!-- </div><!innerMoreInfo-->
-      
+
     </div><!--moreInfoProfile-->
 
    <div class="containerLogin">
@@ -83,6 +84,13 @@
 
 
   <div class="containerTimer">
+    <div class="weather">
+      <span id="weatherTemperature"></span>
+      <span id="weatherWindSpeed"></span>
+      <div class="weatherIconDiv">
+        <img id="weatherIcon"src="./img/weather10.png" alt="väder"/>
+      </div>
+    </div>
     <div class="menu">
       <p class="infoTrack"></p>
       <div class= "timer">
@@ -92,9 +100,10 @@
       </div>
       <button id="btnClockStop">Reset</button>
       <button id="btnClockPause">Pause</button>
-      <button id="btnSaveToDb">Spara</button>
-      <button id="btnStartClock">StartRun</button>
+      <button id="btnSaveToDb">Save</button>
+      <button id="btnStartClock">Start Timer</button>
     </div>
+
   </div>
 
   <div class="containerPrestation">
@@ -106,8 +115,8 @@
 
     <div class="containerRoute">
           <div id="map"></div>
-          <div class="overmap">
-            <div class="hej"><p>HIDE TRACKS</p></div>
+          <div class="hej"><p>HIDE TRACKS</p></div>
+          <div  id="overmap" style="display: none;">
             <div class="wrapper-Tracks"></div>
           </div>
     </div>
@@ -116,19 +125,24 @@
       <div class="togglePage">
         <p id="toggleChat">Flow</p>
         <p id="toggleMembers">Members</p>
-
-
       </div>
       <div class="chatt"></div>
         <div class="send">
-          <input id="inputMessage"></input>
+          <input id="inputMessage" type="serach" placeholder="Message"></input>
           <button id="sendBtn"><i class="fas fa-angle-right" id="iconSend"></i></button>
+        </div>
+        <div class="containerMembers">
+          <div class="searchDiv">
+            <input id="searchMembers" placeholder="Search"></input>
+          </diV>
+          <div class="containerCards">
+          </div>
         </div>
       </div>
 
 
 
-  </div>
+  <!--</div>-->
 
 
 
@@ -181,12 +195,11 @@
               <button id="btnSave" class="btnsProfil">Spara</button>
           </div><!--btnProfil-->
 
-          
+
       </div><!--innerProfil2 - Edit profil-->
 
 
   </div><!--containerProfil-->
-
 
 
 
