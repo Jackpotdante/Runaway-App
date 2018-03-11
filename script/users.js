@@ -104,12 +104,12 @@ window.addEventListener('load', function(event) {
 
 
 	  //Log out button functionality
-	 var btnLogOut = document.getElementById('btnLogOut');
+	 var btnLogOut = document.getElementById('settings');
 	 btnLogOut.addEventListener('click', function(event) {
 
 	 		firebase.auth().signOut().then(function() {
 			  // Sign-out successful.
-			  	var wrapProfile = document.getElementById('containerProfil');
+			  var wrapProfile = document.getElementById('containerProfil');
 				wrapProfile.style.display = 'none';
 
 				var timerPage = document.getElementsByClassName("containerTimer")[0];
@@ -124,8 +124,8 @@ window.addEventListener('load', function(event) {
 				navContainer.style.display = 'none';
 
 				var moreInfoProfile = document.getElementById('moreInfoProfile');
-	    		moreInfoProfile.style.display = "none";
-				
+	    	moreInfoProfile.style.display = "none";
+
 
 				currentUser = {
 					name: "",
@@ -171,9 +171,9 @@ window.addEventListener('load', function(event) {
 function getUserKey() {
 	var userKey = "";
 	db.ref('users/').once('value', function(snapshot) {
-          //dataArray = []; 
+          //dataArray = [];
           snapshot.forEach( child => {
-          
+
             var user = child.val();
             if(user.uid == currentUser.uid){
 				userKey = child.key;
@@ -186,8 +186,8 @@ function getUserKey() {
           //console.log("Current users key outside: " + userKey);
           callAfter(userKey);
   	});//end of db.ref
-  	
-    	
+
+
 }//end of function getUserKey
 
 function callAfter(key){
@@ -242,16 +242,16 @@ function callAfter(key){
 function pushUserIntoFirebase(userO){
 	var displayName = userO.displayName;
 
-	
+
 
 	var email = userO.email;
-	
+
 
 	var uid = userO.uid;
-	
+
 
 	var photoUrl = userO.photoURL;
-	
+
 
 
 	var userExist = false;
@@ -267,7 +267,7 @@ function pushUserIntoFirebase(userO){
 
 
 			if(r.uid == userO.uid){
-				
+
 
 				userExist = true;
 				currentUser.name = r.name;
@@ -382,40 +382,41 @@ function getCurrentDate() {
 }
 
 //changing into profile page page
+
 function updateAccountPage(){
+	let profileAge = document.getElementsByClassName("dynamic")[0];
+	let profileGender = document.getElementsByClassName("dynamic")[1];
+	let profileSince = document.getElementsByClassName("dynamic")[2];
+	let profilePicture = document.getElementById("profilePicture");
+	let profileName = document.getElementsByClassName("profileName")[0];
+	let profileLocation = document.getElementsByClassName("profileLocation")[0];
 
 
 
-	var picUser = document.getElementById('pic');
-  	picUser.src = currentUser.photoUrl;
+  	profilePicture.src = currentUser.photoUrl;
 
-	var nameUser = document.getElementById('nameUser');
-	nameUser.innerText = currentUser.name;
+
+		profileName.innerText = currentUser.name;
 
 	if(currentUser.gender != ""){
-		var genderUser = document.getElementById('genderUser');
-		var gender = "Kön: " + currentUser.gender;
-		genderUser.innerText = gender;
-		genderUser.style.display = "block";
+		var gender = currentUser.gender;
+		profileGender.innerText = gender;
+
 	}
 
 	if(currentUser.age != 0){
-		var ageUser = document.getElementById('ageUser');
-		var age = "Ålder: " + currentUser.age;
-		ageUser.innerText = age;
-		ageUser.style.display = "block";
+		var age = currentUser.age;
+		profileAge.innerText = age;
 	}
 
 	if(currentUser.city != ""){
-		var locationUser = document.getElementById('locationUser');
-		//var location = "Stad: " + currentUser.city;
-		locationUser.innerHTML += currentUser.city;
-		locationUser.style.display = "block";
+
+		profileLocation.innerHTML += currentUser.city;
+
 	}
 
-	var medlemSedan = document.getElementById('medlemSedan');
-	var mdate = "Medlem sedan " + currentUser.memberDate;
-	medlemSedan.innerText = mdate;
+	var mdate =  currentUser.memberDate;
+	profileSince.innerText = mdate;
 
 	getRunInfo();
 }//end of updateAccountPage
@@ -433,7 +434,7 @@ function getRunInfo(){
 	/*
 	db.ref('rundor/').once('value', function(snapshot) {
 		let data = snapshot.val();
-		
+
 		for(let child in data){
 			let r = data[child];
 
@@ -441,14 +442,14 @@ function getRunInfo(){
 			//console.log('userO.uid: ' + userO.uid);
 
 			if(r.user == currentUser.uid){
-				
+
 				//removing km from string
 				var str = r.length;
 				//str = str.substring(0, str.length - 2);
 				var number = parseInt(str);
 
 				var fullNumber = Math.round(number);
-				//console.log(number);				
+				//console.log(number);
 				runArray.push(fullNumber);
 
 				//console.log(number);
@@ -481,11 +482,11 @@ function getRunInfo(){
 		}//end of if
 
 	})//end of db.ref*/
-			var runLength = document.getElementById('length');
+			/*var runLength = document.getElementById('length');
 			runLength.innerText = "Total löplängd: " + 5 + "km";;
 
 			var longRun = document.getElementById('totalLength');
 			var longestLength = "Längst sträcka: " + 5 + "km";
-			longRun.innerText = longestLength;
+			longRun.innerText = longestLength;*/
 
 }
