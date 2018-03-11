@@ -20,9 +20,11 @@
 .hej{
   position: absolute;
   display: none;
+  top:0;
+  left: 0;
   justify-content: center;
   color: white;
-  background-color: #00BFFF;
+  background-color: #00ceff;
   font-family: 'Montserrat';
   width: 100%;
   height: 30px;
