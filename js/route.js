@@ -39,7 +39,7 @@ function initMap(){
         map.setZoom(14);
         curLocation = locations[i][0];
         getTracks(curLocation);
-       
+
 
 
       }
@@ -53,8 +53,10 @@ window.addEventListener('load', function(event){
 
   toggleButton.addEventListener('click' ,function(event){
     if( overmaps.style.display == "none"){
+        document.getElementById("showHide").innerHTML = "HIDE TRACKS";
        overmaps.style.display = "flex";
     }else if(overmaps.style.display == "flex"){
+      document.getElementById("showHide").innerHTML = "SHOW TRACKS";
       overmaps.style.display = "none";
     }
   })
