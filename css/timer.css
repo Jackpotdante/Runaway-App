@@ -8,26 +8,37 @@
   font-family: "Droid Sans Mono";
 }
 
+.containerTimer .timerBtn{
+  display: flex;
+  position: relative;
+  width: 100%;
+  top: 100px;
+}
 .containerTimer #btnClockStop{
   background-color: #00ceff;
   color: white;
   border-radius: 10px;
-  height: 75px;
-  flex: 1 1 20%;
+  height: 50px;
+  position: absolute;
   margin: 10px 20px;
   display: none;
+  top: -80px;
+  width: 100px;
   text-align: center;
+  left: 22px;
 }
 .containerTimer #btnSaveToDb{
   background-color: #00ceff;
   color: white;
   border-radius: 10px;
-  height: 75px;
-  flex: 1 1 20%;
+  height: 50px;
+  position: absolute;
   margin: 10px 20px;
   display: none;
   text-align: center;
-
+  top: -80px;
+  width: 100px;
+  right: 24px;
 }
 .containerTimer #btnClockPause{
   background-color: #00ceff;
@@ -63,13 +74,11 @@
 }
 
 .containerTimer .timer{
-
-  text-align: center;
   font-size: 3.5em;
-  
   position: fixed;
-  top: 22vh;
-
+  top: 25vh;
+  width: 95%;
+  text-align: center;
 }
 
 .containerTimer .infoTrack{
