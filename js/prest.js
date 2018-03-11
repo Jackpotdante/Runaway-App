@@ -21,7 +21,7 @@ window.addEventListener("load", function (){
 		let thisDistance = dataForRace.length;
 		newName.className="nameOfTrack";
 		newTextarea.type="textarea";
-		console.log(dataForRace.comment);
+		
 		if(dataForRace.comment!==undefined){
 			newTextarea.value= dataForRace.comment;
 		}
