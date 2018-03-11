@@ -37,7 +37,7 @@ window.addEventListener('load',function(event){
   })
 
   btnStartClock.addEventListener('click', function(event){
-    btnClockPause.style.display = "inline-block";
+    btnClockPause.style.display = "block";
     btnStartClock.style.display = "none";
     btnClockStop.style.display = "none";
     btnSaveToDb.style.display = "none";
@@ -140,11 +140,18 @@ class Weather{
     fetch('https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.96294/lat/57.6909/data.json').then(function(response) {
       return response.json();
     }).then(function(obj){
-      //console.log(obj);
-      //console.log(obj.timeSeries[0].parameters[18].values[0]);
-      _this.category = obj.timeSeries[0].parameters[18].values[0]; // väder symbol
-      _this.temperature = obj.timeSeries[0].parameters[11].values[0]; // temepratur
-      _this.windSpeed = obj.timeSeries[0].parameters[4].values[0]; // wind speed
+
+      let measurementNow = obj.timeSeries[0].parameters
+      let temperature = measurementNow.filter(measurement => (measurement.name=="t"));
+      let windSp =  measurementNow.filter(measurement => (measurement.name=="ws"));
+      let weatherSymbol = measurementNow.filter(measurement => (measurement.name=="Wsymb2"));
+      temperature = temperature[0].values[0]
+      windSp = windSp[0].values[0]
+      weatherSymbol = weatherSymbol[0].values[0]
+
+      _this.category = weatherSymbol // väder symbol
+      _this.temperature = temperature;
+      _this.windSpeed = windSp; // wind speed
       _this.showWeather()
     });
   }

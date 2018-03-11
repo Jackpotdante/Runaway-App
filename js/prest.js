@@ -21,7 +21,10 @@ window.addEventListener("load", function (){
 		let thisDistance = dataForRace.length;
 		newName.className="nameOfTrack";
 		newTextarea.type="textarea";
-		newTextarea.value= dataForRace.comment;
+		console.log(dataForRace.comment);
+		if(dataForRace.comment!==undefined){
+			newTextarea.value= dataForRace.comment;
+		}
 		newTextarea.className="prestInput";
 		//newTextarea.readOnly = "false";
 
@@ -44,7 +47,7 @@ window.addEventListener("load", function (){
 
 		newPlace.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${dataForRace.place}`
 		newLength.innerHTML = `&#128095 ${dataForRace.length}km`;
-		newTime.innerHTML = `<i class="fas fa-stopwatch"></i> ${dataForRace.time}`;
+		newTime.innerHTML = `<i class="fas fa-stopwatch"></i> ${convertToTime(dataForRace.time)}`; //convertToTime ligger i cardsMap
 		newDate.innerHTML = `<i class="far fa-calendar"></i> ${dataForRace.date}`;
 		//image.src = "#";
 		newSwitchBox.classList.add("switchBox");
@@ -79,10 +82,10 @@ window.addEventListener("load", function (){
 
 			}else{
 				let str = inputTextCheck.value
-				inputTextCheck.value="Fyll i uppgifter";
+				inputTextCheck.placeholder="Fyll i uppgifter";
 				inputTextCheck.classList.add("fail")
 				setTimeout(function () {
-					inputTextCheck.value= str;
+					inputTextCheck.placeholder= str;
 					inputTextCheck.classList.remove("fail");
 				}, 1500);
 			}
