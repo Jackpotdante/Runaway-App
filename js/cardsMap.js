@@ -3,7 +3,7 @@
 let allUsers = ""
 db.ref("/users").once("value").then(function(snapshot){
   allUsers = snapshot.val();
-  
+
 
 });
 //----------------------------END --------------------------------------------//
@@ -22,7 +22,7 @@ db.ref("/statrundor").once("value").then(function(snapshot){
 let allResults=""
 db.ref("/rundor").once("value").then(function(snapshot){
   allResults = snapshot.val();
- 
+
 
 });
 //----------------------------END --------------------------------------------//
@@ -141,7 +141,7 @@ let makeCards = (tracks,location)=>{
 let saveTrackToDb =()=>{
   let newPostKey = db.ref("statrundor").push().key;
   let track = {
-    id: newPostKey,
+    trackid: newPostKey,
     length: 15,
     place: "Skatås",
     type: "Terräng",
@@ -258,7 +258,7 @@ let findResultsOfTrack=(trackid)=>{
     liResults.innerHTML=`<div>
                           <img src=${user.photoUrl}>
                           <p>${user.name}</p>
-                          <p>${track.time}min</p>
+                          <p>${convertToTime(track.time)}</p>
                         </div>`
     ulResult.appendChild(liResults);
   })
@@ -298,3 +298,14 @@ let countStars=(numberOfStars)=>{
 }
 
 //------------------- END ---------------------------------------------------//
+
+
+//-------------  Räknar ut tid och skickar tillbaka en sträng ----------------->
+let convertToTime=(time)=>{
+  let elapsedTimeHours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let elapsedTimeMinutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+  let elapsedTimeSecounds = Math.floor((time % (1000 * 60)) / 1000);
+  return elapsedTimeHours+"h"+elapsedTimeMinutes+"m"+elapsedTimeSecounds+"s";
+}
+
+//----------------------END --------------------------------------------------//

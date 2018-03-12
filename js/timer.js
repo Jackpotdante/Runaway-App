@@ -12,11 +12,21 @@ window.addEventListener('load',function(event){
   let timeElapsedHours = document.getElementsByClassName('timeElapsedHours')[0].innerText="0h";
 
   btnClockStop.addEventListener('click',function(event){
+    btnClockStop.style.display = "none";
+    btnSaveToDb.style.display = "none";
+    btnClockPause.style.display = "none";
+    btnClockPause.style.display = "none";
+    btnStartClock.innerText = "Start Timer";
     timer.stopTimer();
     timer.resetTimer();
   })
 
   btnClockPause.addEventListener('click',function(event){
+    btnSaveToDb.style.display = "inline-block";
+    btnClockStop.style.display = "inline-block";
+    btnStartClock.style.display = "inline-block";
+    btnStartClock.innerText = "Continue";
+    btnClockPause.style.display = "none";
     timer.pauseTimer();
   })
 
@@ -27,12 +37,20 @@ window.addEventListener('load',function(event){
   })
 
   btnStartClock.addEventListener('click', function(event){
-    //timerForRun();
+    btnClockPause.style.display = "block";
+    btnStartClock.style.display = "none";
+    btnClockStop.style.display = "none";
+    btnSaveToDb.style.display = "none";
     timer.startTimer();
   })
+
   infoSelectedTrack.innerText = "Ingen vald bana";
 
   let timer = new Timer();
+
+  let weatherNow = new Weather();
+  weatherNow.loadWeather();
+
 
 }); // end of load
 
@@ -105,5 +123,89 @@ class Timer{
     document.getElementsByClassName('timeElapsedSecound')[0].innerText= "00s";
   }
 
+
+}
+
+
+
+
+
+class Weather{
+  constructor(){
+    this.loaded = true;
+  }
+
+  loadWeather(){
+    let _this = this;
+    fetch('https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.96294/lat/57.6909/data.json').then(function(response) {
+      return response.json();
+    }).then(function(obj){
+
+      let measurementNow = obj.timeSeries[0].parameters
+      let temperature = measurementNow.filter(measurement => (measurement.name=="t"));
+      let windSp =  measurementNow.filter(measurement => (measurement.name=="ws"));
+      let weatherSymbol = measurementNow.filter(measurement => (measurement.name=="Wsymb2"));
+      temperature = temperature[0].values[0]
+      windSp = windSp[0].values[0]
+      weatherSymbol = weatherSymbol[0].values[0]
+
+      _this.category = weatherSymbol // väder symbol
+      _this.temperature = temperature;
+      _this.windSpeed = windSp; // wind speed
+      _this.showWeather()
+    });
+  }
+
+  showWeather(){
+    document.getElementById('weatherIcon')
+
+    let symbolNb = this.category;
+    if(symbolNb){
+      let y = 0
+      while(symbolNb>5){
+        symbolNb=symbolNb-5;
+        y++
+      }
+
+      let x = symbolNb
+      let xcord= 10;
+      switch(x){
+        case 1:
+          xcord=10;
+          break;
+        case 2:
+          xcord=-72;
+          break;
+        case 3:
+          xcord= -155;
+          break;
+        case 4:
+          xcord= -242;
+          break;
+        case 5:
+          xcord= -322;
+          break;
+        default:
+          console.log("default");
+      }
+
+
+      //let xcord = x * -80+10;
+      let ycord = y * -86
+      //console.log("x är: ", x,":",xcord," y är:",y,":",ycord);
+      document.getElementById("weatherIcon").style.left = xcord+"px";
+      document.getElementById("weatherIcon").style.top = ycord+"px";
+      document.getElementById("weatherTemperature").innerText = this.temperature + "°C";
+      document.getElementById("weatherWindSpeed").innerText = this.windSpeed + "m/s";
+
+    }
+  }
+
+  /* En stor bild av alla moln. Man flyttar rutan över vad som skall visas
+  right -325,-245, -165,-85 ,-5
+  top   0,-55,110,165,220
+  höjd 1200    200höjd
+  bred 1250    250bred
+  */
 
 }
