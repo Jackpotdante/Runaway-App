@@ -22,6 +22,10 @@ body{
   display: none;
 }
 
+.navContainer {
+  display: none;
+}
+
 
 
 #map {
@@ -74,7 +78,6 @@ body{
 /** TEST COLORS FOR ROUTING ***/
 .containerTimer{
   display: none;
-
   width: 100%;
   height: 100%;
 }
