@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runaway</title>
+
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/community.css">
+    <link rel="stylesheet" type="text/css" href="./css/route.css">
+    <link rel="stylesheet" type="text/css" href="./css/cardsMap.css">
+    <link rel="stylesheet" type="text/css" href="./css/prest.css">
+    <link rel="stylesheet" type="text/css" href="./css/timer.css">
+    <link href="css/users.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./script/users.js"></script>
+    <script src="./js/community.js"></script>
+    <script src="./js/route.js"></script>
+    <script src="./js/cardsMap.js"></script>
+    <script src="./js/prest.js"></script>
+    <script src="./js/timer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0cooAANtGVdiLnD0SZrZZ_1cN00Z2vpg&callback=initMap"
+    async defer></script>
+    <link rel="icon" href="./img/icon.png" type="image/gif" sizes="16x16">
+
+  </head>
+  <body>
+
+    <div id="moreInfoProfile">
+
+       <!-- <div id="innerMoreInfo">-->
+
+            <p>Vill du tilläga mer information till din profil?</p>
+
+            <div class="formProfil">
+                <div id="form_content">
+                      <form action="">
+                        <label for="userName">Display namn</label>
+                        <input type = "text" name="userName" id = "uName" placeholder="Namn" />
+                        <label for="userAge">Ålder</label>
+                        <input type = "text" name="userAge" id = "uAge" placeholder="Ålder" />
+                        <label for="userCity">Stad</label>
+                        <input type = "text" name="userCity" id = "uCity" placeholder="Plats" />
+                        <label for="userGender">Kön</label>
+                        <select id="selectGender" name="userGender">
+                              <option value="">Select ...</option>
+                              <option value="Man">Man</option>
+                              <option value="Kvinna">Kvinna</option>
+                              <option value="Annan">Annan</option>
+                        </select>
+                      </form>
+                </div><!--formContent-->
+            </div>
+            <div class="btnProfil">
+                    <button id="btnAdd" class="btnsProfil">Lägg till</button>
+                    <button id="btnSenare" class="btnsProfil">Senare</button>
+            </div><!--btnProfil-->
+
+       <!-- </div><!innerMoreInfo-->
+
+    </div><!--moreInfoProfile-->
+
+   <div class="containerLogin">
+
+        <div id="containerLoginMob">
+
+            <h1>Runaway</h1>
+
+            <div id="wrapBtnLogin">
+              <button id="btnLoginFace" class="btnLogin"><i class="fab fa-facebook-f" id="iconF"></i>Login with facebook</button>
+              <button id="btnLoginGoogle" class="btnLogin"><i class="fab fa-google" id="iconG"></i>Login with google</button>
+            </div> <!--wrapBtnLogin-->
+
+        </div><!--containerLoginMob-->
+    </div>
+
+
+
+
+
+  <div class="containerTimer">
+    <p class="infoTrack"></p>
+    <div class="weather">
+      <span id="weatherTemperature"></span>
+      <span id="weatherWindSpeed"></span>
+      <div class="weatherIconDiv">
+        <img id="weatherIcon"src="./img/weather10.png" alt="väder"/>
+      </div>
+    </div>
+    <div class="menu">
+      <div class= "timer">
+        <span class="timeElapsedHours"></span>
+        <span class="timeElapsedMinutes"></span>
+        <span class="timeElapsedSecound"></span>
+      </div>
+      <div class="timerBtn">
+        <button id="btnClockStop">Reset</button>
+        <button id="btnClockPause">Pause</button>
+        <button id="btnSaveToDb">Save</button>
+        <button id="btnStartClock">Start Timer</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="containerPrestation">
+    <div id="totalStat">
+      <span id="spanTotalLength"></span><span id="spanLongestDist"></span>
+    </div>
+  </div>
+
+
+    <div class="containerRoute">
+          <div id="map"></div>
+          <div class="hej"><p id="showHide">SHOW TRACKS</p></div>
+          <div  id="overmap" style="display: none;">
+            <div class="wrapper-Tracks"></div>
+          </div>
+    </div>
+
+  <div class="containerCommunity">
+      <div class="togglePage">
+        <p id="toggleChat">Flow</p>
+        <p id="toggleMembers">Members</p>
+      </div>
+      <div class="chatt"></div>
+        <div class="send">
+          <input id="inputMessage" type="serach" placeholder="Message"></input>
+          <button id="sendBtn"><i class="fas fa-angle-right" id="iconSend"></i></button>
+        </div>
+        <div class="containerMembers">
+          <div class="searchDiv">
+            <input id="searchMembers" placeholder="Search"></input>
+          </diV>
+          <div class="containerCards">
+          </div>
+        </div>
+      </div>
+
+
+
+
+  <div id="containerProfil" class="containerProfile">
+
+
+
+      <div id="contentProfil">
+        <div class="headProfil">
+          <i class="fas fa-cog" id="settings"></i>
+          <img id="profilePicture"></img>
+          <div class="profileInfo">
+            <p class="profileName"></p>
+            <p class="profileLocation"><i class="fas fa-map-marker-alt" id="markerLocation"></i><span id="locationCity"></span></p>
+          </div>
+
+        </div>
+        <div id="containerSome">
+
+
+          <div class="divProfile">
+              <p class="categori">Age</p>
+              <p class="dynamic"></p>
+          </div>
+          <div class="divProfile">
+            <p class="categori">Gender</p>
+            <p class="dynamic"></p>
+          </div>
+          <div class="divProfile">
+            <p class="categori">Member since</p>
+            <p class="dynamic"></p>
+          </div>
+        </div>
+      </div>
+      <!--- BYGGA IHOP-->
+      <div id="innerProfil2">
+
+               <div id="form_content" class="form_content2">
+                   <img id="pic2" class="picProfile" src="img/run.jpg" alt="User">
+                   <form action="">
+                       <label for="userName2">Display namn</label>
+                       <input type = "text" name="userName2" id = "uName2" placeholder="Namn" />
+                       <label for="userAge2">Ålder</label>
+                       <input type = "text" name="userAge2" id = "uAge2" placeholder="Ålder" />
+                       <label for="userCity2">Stad</label>
+                       <input type = "text" name="userCity2" id = "uCity2" placeholder="Plats" />
+                       <label for="userGender2">Kön</label>
+                       <select id="selectGender2" name="userGender2">
+                             <option value="">Select ...</option>
+                             <option value="Man">Man</option>
+                             <option value="Kvinna">Kvinna</option>
+                             <option value="Annan">Annan</option>
+                       </select>
+                   </form>
+                    <div class="btnProfil">
+                   <button id="btnCancel" class="btnsProfil">Avbryta</button>
+                   <button id="btnSave" class="btnsProfil">Spara</button>
+               </div><!--btnProfil-->
+               <button id="logOut">Logout</button>
+               </div><!--formContent-->
+
+     </div><!--innerProfil2 - Edit profil-->
+
+
+  </div>
+
+
+
+    <!---NAVIGATION-->
+    <div class="navContainer">
+      <ul>
+        <li>
+          <button id="timerBtn">
+          <i class="fas fa-stopwatch" style="font-size: 25px; color: white;"></i>
+          </button>
+        </li>
+        <li>
+          <button id="presBtn">
+          <i class="fas fa-child" style="font-size: 25px; color: white;"></i>
+          </button>
+        </li>
+        <li>
+          <button id="routeBtn">
+          <i class="fas fa-map-marker-alt" style="font-size: 25px; color: white;"></i>
+          </button>
+        </li>
+        <li>
+          <button id="comBtn">
+          <i class="fas fa-clipboard"style="font-size: 25px; color: white;"></i>
+          </button>
+        </li>
+        <li>
+          <button id="profileBtn">
+          <i class="fas fa-user" style="font-size: 25px; color: white;"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
