@@ -331,7 +331,56 @@
 		}*/
 /*Edit profile page styles*/
 
+/**EDIT PAGE **/
 
+#innerProfil2 {
+	display: none;
+	width: 100%;
+	position: relative;
+	transition: all .5s ease-out;
+	margin-left: 5px;
+	margin-right: 5px;margin-top: 5px;
+	min-width: 250px;
+}
+	.form_content2 {
+		background-color: white;
+	}
+
+	.picProfile {
+		max-width: 250px;
+		max-height: 250px;
+		width:auto;
+	    height:auto;
+	    min-width: 150px;
+	    flex: 0 0 auto;
+	}
+
+	.btnProfil {
+		width: 100%;
+		background-color: white;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		margin: 0 auto;
+	}
+
+		.btnProfil .btnsProfil {
+			width: 170px;
+			border: 2px solid white;
+			border-radius: 5px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-right: 5px;
+			padding-left: 5px;
+			background-color: yellow;
+			color: #23103A;
+			font-size: 1.1rem;
+			animation-name: fadeIn;
+			animation-delay: 2s;
+			margin-bottom: 5px;
+			margin-top: 10px;
+			text-align: center;
+		}
 
 /*Redigera profil vid första inloggning*/
 
