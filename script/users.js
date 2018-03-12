@@ -27,7 +27,6 @@ var config = {
     messagingSenderId: "223527826161"
 };
 firebase.initializeApp(config);
-
 const db = firebase.database();
 */
 //facebook provider object
@@ -138,7 +137,7 @@ window.addEventListener('load', function(event) {
 
 
 	  //Log out button functionality
-	 var btnLogOut = document.getElementById('settings');
+	 var btnLogOut = document.getElementById('logOut');
 	 btnLogOut.addEventListener('click', function(event) {
 
 	 		firebase.auth().signOut().then(function() {
@@ -189,7 +188,7 @@ window.addEventListener('load', function(event) {
 	    	inputUserCity.placeholder = "Plats";
 
 
-	 }) //end of btnSignOut eventlistener
+	 }) //end of btnSignOut eventlistener*/
 
 	 //btnSEnare funktion
 	 var btnSenare = document.getElementById('btnSenare');
@@ -209,15 +208,16 @@ window.addEventListener('load', function(event) {
 	 }) //end of btnAdd eventlistener
 
 	  //Edit profile from Profile page
-	 var btnEdit = document.getElementById('btnEdit');
+		/* EDIT *****/
+	 var btnEdit = document.getElementById('settings');
 	 btnEdit.addEventListener('click', function(event) {
 
 	 	var innerProfil1 = document.getElementById('innerProfil1');
-	    innerProfil1.style.display = "none";
+	    document.getElementById("contentProfil").style.display = "none";
 
 	    var innerProfil2 = document.getElementById('innerProfil2');
 	    innerProfil2.style.display = "block";
-	    
+
 	    var picUser = document.getElementById('pic2');
   		picUser.src = currentUser.photoUrl;
 
@@ -237,11 +237,11 @@ window.addEventListener('load', function(event) {
 	 }) //end of btnEdit eventlistener
 
 
-	 var btnCancel = document.getElementById('btnCancel');
+	var btnCancel = document.getElementById('btnCancel');
 	 btnCancel.addEventListener('click', function(event) {
 
 	 	var innerProfil1 = document.getElementById('innerProfil1');
-	    innerProfil1.style.display = "block";
+	    document.getElementById("contentProfil").style.display = "block";
 
 	    var innerProfil2 = document.getElementById('innerProfil2');
 	    innerProfil2.style.display = "none";
@@ -299,7 +299,7 @@ window.addEventListener('load', function(event) {
 			updateAccountPage();
 
 			var innerProfil1 = document.getElementById('innerProfil1');
-	    	innerProfil1.style.display = "block";
+	    	document.getElementById("contentProfil").style.display = "block";
 
 	    	var innerProfil2 = document.getElementById('innerProfil2');
 	   		innerProfil2.style.display = "none";
@@ -309,55 +309,42 @@ window.addEventListener('load', function(event) {
 	    	var inputUserCity = document.getElementById('uCity2');
 	    	inputUserCity.placeholder = "Plats";
 
-	}) //end of btnSave eventlistener
+	}) //end of btnSave eventlistener*/
 }); //windows.load
-/*
+
 function getUserKey() {
 	var userKey = "";
 	db.ref('users/').once('value', function(snapshot) {
           //dataArray = [];
           snapshot.forEach( child => {
-
             var user = child.val();
             if(user.uid == currentUser.uid){
 				userKey = child.key;
 				//console.log("Current users name: " + user.name);
 				//console.log("Current users key inside: " + userKey);
 			} //end of if else
-
           })
-
           //console.log("Current users key outside: " + userKey);
           callAfter(userKey);
   	});//end of db.ref
-
-
-
 }//end of function getUserKey
-
-
 function callAfter(key){
 	//console.log("Current users key outside: " + key);
 	//Updating users name
 	var inputUserName = document.getElementById('uName');
 	var uName = inputUserName.value;
     inputUserName.value = "";
-
     	if (uName != "") {
     		firebase.database().ref('users/' + key + '/name').set(uName);
     		currentUser.name = uName;
     	}
-
-
     //Updating users age
     var uAge = document.getElementById('uAge').value;
     document.getElementById('uAge').value = "";
-
     	if (uAge != "") {
     		firebase.database().ref('users/' + key + '/age').set(uAge);
     		currentUser.age = uAge;
     	}
-
     //Updating users city
     var uCity = document.getElementById('uCity').value;
     document.getElementById('uCity').value = "";
@@ -365,7 +352,6 @@ function callAfter(key){
     		firebase.database().ref('users/' + key + '/city').set(uCity);
     		currentUser.city = uCity;
     	}
-
     //Updating gender info
 	var e = document.getElementById("selectGender");
 	var value = e.options[e.selectedIndex].value;
@@ -374,47 +360,23 @@ function callAfter(key){
     		firebase.database().ref('users/' + key + '/gender').set(value);
     		currentUser.gender = value;
     	}
-
     var moreInfoProfile = document.getElementById('moreInfoProfile');
 	moreInfoProfile.style.display = "none";
-
 	updateAccountPage()
-
-
 }//end of function callAfter
-
-
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
 	var displayName = userO.displayName;
-
-
-
 	var email = userO.email;
-
-
 	var uid = userO.uid;
-
-
 	var photoUrl = userO.photoURL;
-
-
-
 	var userExist = false;
-
-
 	//Checks if user already exist in the DB
 	db.ref('users/').once('value', function(snapshot) {
 		let data = snapshot.val();
-
 		for(let child in data){
 			let r = data[child];
-
-
-
 			if(r.uid == userO.uid){
-
-
 				userExist = true;
 				currentUser.name = r.name;
 				currentUser.email = r.email;
@@ -426,20 +388,14 @@ function pushUserIntoFirebase(userO){
 				currentUser.gender = r.gender;
 				currentUser.key = r.key;
 			} //end of if else
-
 		}//end of for
 		callLater();
 	})//end of db.ref
-
 	function callLater() {
-
 		if (userExist != true){
-
 			//console.log('User exist is set to false');
-
 			//getting current date
 			var currentDate = getCurrentDate();
-
 			//Creating user object
 		      const newUser = {
 		        name: displayName,
@@ -452,8 +408,6 @@ function pushUserIntoFirebase(userO){
 		        gender: "",
 		        key: ""
 		      }//end of obj
-
-
 				currentUser.name = newUser.name;
 				currentUser.email = newUser.email;
 				currentUser.uid = newUser.uid;
@@ -462,17 +416,13 @@ function pushUserIntoFirebase(userO){
 				currentUser.city = newUser.city;
 				currentUser.memberDate = newUser.memberDate;
 				currentUser.gender = newUser.gender;
-
 		      //Adding new user into the DB
 		      var userKey = db.ref('users/').push(newUser).key;
 		      //console.log("Users key recieved: " + userKey);
 		      firebase.database().ref('users/' + userKey + '/key').set(userKey);
 		      currentUser.key = userKey;
-
 	    }//end of if
-
 	    updateAccountPage();
-
 	    //Show additional user info window for first time user
 	    if (userExist != true){
 	    	var moreInfoProfile = document.getElementById('moreInfoProfile');
@@ -481,27 +431,17 @@ function pushUserIntoFirebase(userO){
 	 		inputUserName.placeholder = currentUser.name;
 	    }
 	}//end of callLater
-
-
 }//end of pushUserInfoIntoFirebase
-
 function gotoTimerPage(){
 	var timerPage = document.getElementsByClassName("containerTimer")[0];
 	var containerLogin = document.getElementsByClassName("containerLogin")[0];
 	var navContainer = document.getElementsByClassName("navContainer")[0];
-
 	containerLogin.style.display = 'none';
 	timerPage.style.display = "flex";
 	navContainer.style.display = 'block';
-
-
-
 }
-
 function getCurrentDate() {
-
 	var currentDate = new Date();
-
 	//get the day
 	var dayNr = currentDate.getDate();
 	var day = "";
@@ -510,7 +450,6 @@ function getCurrentDate() {
 	} else if (dayNr > 9) {
 		day = dayNr;
 	}
-
 	var monthNr = currentDate.getMonth() + 1;
 	var month = "";
 	if (monthNr <= 9){
@@ -518,17 +457,12 @@ function getCurrentDate() {
 	} else if (monthNr > 9) {
 		month = monthNr;
 	}
-
 	var year = currentDate.getFullYear();
-
 	var fullDate = year + '-' + month + '-' + day;
-
 	//var date = "2018-03-01";
 	return fullDate;
 }
-
 //changing into profile page page
-
 function updateAccountPage(){
 	let profileAge = document.getElementsByClassName("dynamic")[0];
 	let profileGender = document.getElementsByClassName("dynamic")[1];
@@ -536,106 +470,72 @@ function updateAccountPage(){
 	let profilePicture = document.getElementById("profilePicture");
 	let profileName = document.getElementsByClassName("profileName")[0];
 	let profileLocation = document.getElementsByClassName("profileLocation")[0];
-
-
-
   	profilePicture.src = currentUser.photoUrl;
-
-
 		profileName.innerText = currentUser.name;
-
 	if(currentUser.gender != ""){
 		var gender = currentUser.gender;
 		profileGender.innerText = gender;
-
 	}
-
 	if(currentUser.age != 0){
 		var age = currentUser.age;
 		profileAge.innerText = age;
 	}
-
 	if(currentUser.city != ""){
-
 		profileLocation.innerHTML += currentUser.city;
-
 	}
-
 	var mdate =  currentUser.memberDate;
 	profileSince.innerText = mdate;
-
 	getRunInfo();
 }//end of updateAccountPage
-
 function updateEditAccountPage(){
 	var picUser = document.getElementById('pic2');
   	picUser.src = currentUser.photoUrl;
   	console.log("hhhhh");
-
 }
-
-
 function getRunInfo(){
-
 	//var runArray = [];
-
 	//Getting current users running data from DB
 	/*
 	db.ref('rundor/').once('value', function(snapshot) {
 		let data = snapshot.val();
-
 		for(let child in data){
 			let r = data[child];
-
 			//console.log('r.uid: ' + r.uid);
 			//console.log('userO.uid: ' + userO.uid);
-
 			if(r.user == currentUser.uid){
-
 				//removing km from string
 				var str = r.length;
 				//str = str.substring(0, str.length - 2);
 				var number = parseInt(str);
-
 				var fullNumber = Math.round(number);
 				//console.log(number);
 				runArray.push(fullNumber);
-
 				//console.log(number);
 				runArray.push(number);
-
 			} //end of if else
-
 		}//end of for
-
 		console.log("runArray: " + runArray);
 		if (runArray != []) {
-
 				totalRun = runArray.reduce((a, b) => a + b, 0);
 				var longestRun = runArray.reduce(function(a, b) {
 		    		return Math.max(a, b);
 				});
 				//longestRun = Math.max(runArray);
-
 				console.log("Longest run: " + longestRun);
 				console.log("Total run: " + totalRun);
 				console.log("Longest run: " + longestRun);
-
 				var runLength = document.getElementById('length');
 				var length = "Total löplängd: " + totalRun + "km";
 				runLength.innerText = length;
-
 				var longRun = document.getElementById('totalLength');
 				var longestLength = "Längst sträcka: " + longestRun + "km";
 				longRun.innerText = longestLength;
 		}//end of if
-
 	})//end of db.ref*/
 
 
 			/*var runLength = document.getElementById('length');
 			runLength.innerText = "Total löplängd: " + 5 + "km";;
-
 			var longRun = document.getElementById('totalLength');
 			var longestLength = "Längst sträcka: " + 5 + "km";
 			longRun.innerText = longestLength;*/
