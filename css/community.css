@@ -1,0 +1,273 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body, html {
+    height:100%;
+}
+.containerCommunity{
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+
+}
+
+
+/** CHAT **/
+.chatt{
+  position: relative;
+  max-height:78%;
+  width: 100%;
+  align-self: flex-end;
+  margin-bottom: 84px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+
+}
+
+/** MESSAGES **/
+.containerMessage{
+  -webkit-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+  -moz-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+  box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin: 10px 0 5px 0;
+  width: 95%;
+  min-height: 75px;
+  background-color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+
+
+
+}
+
+.containerHead{
+  background-color: gren;
+  width: 100%;
+  display: flex;
+}
+
+.containerMain{
+  word-wrap: break-word;
+  display: flex;
+  background-color: ble;
+  width: 100%;
+  white-space: pre-line;
+
+}
+.imageMessage{
+
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #a5a5a5;
+  margin: 7px;
+}
+.containerTime{
+  display: flex;
+  width: 100%;
+
+}
+
+.nameMessage{
+  margin: 12px 0 0 0;
+  font-size: 13px;
+  font-family: 'Montserrat';
+
+}
+
+.mainMessage{
+  white-space: pre-line;
+  word-wrap: break-word;
+  margin: 2px 7px 0 7px;
+  font-size: 10px;
+  font-family: 'Montserrat';
+}
+
+.timeMessage{
+  margin: 0 0 0 7px;
+  padding: 5px 0 0 0 ;
+  font-size: 10px;
+  font-family: 'Montserrat';
+  color: #5f5f5f;
+}
+/** INPUT SNED FIELD **/
+.send{
+  width: 100%;
+  display: flex;
+  position: fixed;
+  bottom: 42px;
+  left: 0;
+  height: 40px;
+}
+
+
+.send input{
+  height:80%;
+  width: 100%;
+  font-family: 'Montserrat';
+  font-size: 12px;
+  padding: 0 5px;
+  border: none;
+  border-radius: 2px;
+}
+.send button{
+  color: white;
+  font-family: 'Montserrat';
+  height: 80%;
+  width: 15%;
+  border-radius: 0px;
+  border: none;
+  padding: 0 3px;
+  background-color: #00ceff;
+}
+
+#iconSend{
+  color: white;
+  font-size: 20px;
+}
+
+/** TOGGLE BETWEEN MEMBERS AND FLOW **/
+.togglePage{
+  font-size: 14px;
+  color: white;
+  width: 100%;
+  font-family: 'Montserrat';
+  display: flex;
+  margin: 5px 10px;
+  height: 30px;
+  justify-content: space-between;
+}
+
+
+.togglePage p {
+  padding: 7px;
+}
+
+#toggleChat{
+  visibility: hidden;
+}
+
+/** FLOW PAGE **/
+.containerMembers{
+  height: 91%;
+  width: 100%;
+  display: none;
+  background-color: ble;
+  flex-direction: column;
+}
+.searchDiv{
+  display: flex;
+  justify-content: center;
+  height: 25px;
+  width: 100%;
+  background-color: yelow;
+}
+
+#searchMembers{
+  font-family: 'Montserrat';
+  width: 80%;
+  outline: 0;
+  border: none;
+  border-radius: 30px;
+  padding: 0  0 0 10px;
+}
+
+
+/** MEMBER CARDS**/
+.containerCards{
+  height: 95%;
+  width: 100%;
+  background-color: gren;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  overflow: auto;
+  flex-wrap: wrap;
+
+}
+
+.memberCard{
+  margin: 15px 0 0 0;
+  border-radius: 10px;
+  width: 95%;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f3f3;
+  -webkit-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+  -moz-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+  box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+}
+
+.headCard{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  background-color: bue;
+}
+
+.imgCard{
+  color: white;
+  margin: 5px;
+  height: 35px;
+  width: 35px;
+  border: none;
+  background-color: #bf9a9a;
+  border-radius: 100%;
+}
+.headInfo{
+  background-color: geen;
+}
+.nameCard{
+  font-family: 'Montserrat';
+  font-size: 13px;
+  margin: 7px 0 0 5px;
+}
+
+.locationCard{
+  font-family: 'Montserrat';
+  font-size: 12px;
+  margin: 0px 0 0 5px;
+  color: #656565;
+}
+
+#iconLocation{
+  margin-right: 5px;
+}
+.distanceCard{
+  color: #2f2f2f;
+  font-family: 'Montserrat';
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: gren;
+}
+/** MEDIA QUERIES **/
+
+/*
+
+@media screen and (max-width: 320px){
+  .containerChatt{
+    height: 91%;
+  }
+
+}
+
+@media screen and (min-width: 321px)and (max-width: 415px){
+  .containerChatt{
+    height: 93.5%;
+  }
+  .send{
+    height: 5%;
+  }
+}
+*/
