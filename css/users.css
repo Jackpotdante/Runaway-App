@@ -1,3 +1,4 @@
+/*Sara*/
 * {
 	box-sizing: border-box;
 }
@@ -243,7 +244,6 @@
 			margin-bottom: 5px;
 			margin-top: 10px;
 			text-align: center;
-			font-weight: bold;
 		}
 
 		#userProfil {
@@ -330,6 +330,7 @@
 			display: none;
 		}*/
 /*Edit profile page styles*/
+
 
 
 /*Redigera profil vid första inloggning*/

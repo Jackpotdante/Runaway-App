@@ -13,9 +13,7 @@ var currentUser = {
 	totalLength: 0,
 	longestRun: 0
 };
-var totalRun = 0;
-var longestRun = 0;
-var key = "";
+
 
 
 // Initialize Firebase
@@ -34,6 +32,7 @@ const db = firebase.database();
 */
 //facebook provider object
 var provider = new firebase.auth.FacebookAuthProvider();
+var providerGoogle = new firebase.auth.GoogleAuthProvider();
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -59,6 +58,8 @@ window.addEventListener('load', function(event) {
 		var wrapUsersMob = document.getElementById('containerLoginMob');
 		var wrapUsersDesk = document.getElementById('containerLoginDesk');
 		var wrapProfile = document.getElementById('containerProfil');
+		var btnLoginGoogle = document.getElementById('btnLoginGoogle');
+
 
 
 	  //console.log('windows is loaded');
@@ -100,7 +101,40 @@ window.addEventListener('load', function(event) {
 		      });//end of signInWithPopup function
 
 
-	   })//end of btnLoginFace eventListener
+	  })//end of btnLoginFace eventListener
+
+	  //Google login functionality
+	  btnLoginGoogle.addEventListener('click', function(event){
+
+	  		//To sign in with a pop-up window, call redirect
+	  	 	  firebase.auth().signInWithRedirect(providerGoogle);
+		      firebase.auth().getRedirectResult().then(function(result) {
+		        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+		        var token = result.credential.accessToken;
+		        //console.log('Token: ' + token);
+		        // The signed-in user info.
+		        var user = result.user;
+		        //console.log('User info: ' + user)
+
+		        //console.log('User is logged in inside load');
+		        //gotoAccountPage(user);
+		        pushUserIntoFirebase(user);
+		        gotoTimerPage();
+
+
+
+		      }).catch(function(error) {
+		        // Handle Errors here.
+		        var errorCode = error.code;
+		        var errorMessage = error.message;
+		        // The email of the user's account used.
+		        var email = error.email;
+		        // The firebase.auth.AuthCredential type that was used.
+		        var credential = error.credential;
+		        //console.log('sign in is uncessful: ' + errorMessage);
+		      });//end of signInWithPopup function
+
+	  })//end of btnLoginGoogle eventListener
 
 
 	  //Log out button functionality
@@ -124,7 +158,10 @@ window.addEventListener('load', function(event) {
 				navContainer.style.display = 'none';
 
 				var moreInfoProfile = document.getElementById('moreInfoProfile');
+
+
 	    	moreInfoProfile.style.display = "none";
+
 
 
 				currentUser = {
@@ -146,6 +183,11 @@ window.addEventListener('load', function(event) {
 			  //console.log('Error sign out: ' + error);
 			});
 
+			var inputUserAge = document.getElementById('uAge2');
+	    	inputUserAge.placeholder = "Ålder";
+	    	var inputUserCity = document.getElementById('uCity2');
+	    	inputUserCity.placeholder = "Plats";
+
 
 	 }) //end of btnSignOut eventlistener
 
@@ -162,12 +204,114 @@ window.addEventListener('load', function(event) {
 	 var btnAdd = document.getElementById('btnAdd');
 	 btnAdd.addEventListener('click', function(event) {
 
-	 	getUserKey();
+	 	callAfter(currentUser.key);
 
 	 }) //end of btnAdd eventlistener
 
-}); //windows.load
+	  //Edit profile from Profile page
+	 var btnEdit = document.getElementById('btnEdit');
+	 btnEdit.addEventListener('click', function(event) {
 
+	 	var innerProfil1 = document.getElementById('innerProfil1');
+	    innerProfil1.style.display = "none";
+
+	    var innerProfil2 = document.getElementById('innerProfil2');
+	    innerProfil2.style.display = "block";
+	    
+	    var picUser = document.getElementById('pic2');
+  		picUser.src = currentUser.photoUrl;
+
+  		var inputUserName = document.getElementById('uName2');
+	 	inputUserName.placeholder = currentUser.name;
+
+	 	if (currentUser.age != 0) {
+	 		var inputUserAge = document.getElementById('uAge2');
+	 		inputUserAge.placeholder = currentUser.age;
+	 	}
+
+	 	if (currentUser.city != "") {
+	 		var inputUserCity = document.getElementById('uCity2');
+	 		inputUserCity.placeholder = currentUser.city;
+	 	}
+
+	 }) //end of btnEdit eventlistener
+
+
+	 var btnCancel = document.getElementById('btnCancel');
+	 btnCancel.addEventListener('click', function(event) {
+
+	 	var innerProfil1 = document.getElementById('innerProfil1');
+	    innerProfil1.style.display = "block";
+
+	    var innerProfil2 = document.getElementById('innerProfil2');
+	    innerProfil2.style.display = "none";
+
+	    var inputUserAge = document.getElementById('uAge2');
+	    inputUserAge.placeholder = "Ålder";
+	    var inputUserCity = document.getElementById('uCity2');
+	    inputUserCity.placeholder = "Plats";
+
+	 }) //end of btnCancel eventlistener
+
+	 var btnSave = document.getElementById('btnSave');
+	 btnSave.addEventListener('click', function(event) {
+
+			 	//Updating users name
+			var inputUserName = document.getElementById('uName2');
+			var uName = inputUserName.value;
+		    inputUserName.value = "";
+
+		    	if (uName != "") {
+		    		firebase.database().ref('users/' + currentUser.key + '/name').set(uName);
+		    		currentUser.name = uName;
+		    	}
+
+
+		    //Updating users age
+		    var uAge = document.getElementById('uAge2').value;
+		    document.getElementById('uAge').value = "";
+
+		    	if (uAge != "") {
+		    		firebase.database().ref('users/' + currentUser.key + '/age').set(uAge);
+		    		currentUser.age = uAge;
+		    	}
+
+		    //Updating users city
+		    var uCity = document.getElementById('uCity2').value;
+		    document.getElementById('uCity').value = "";
+		    	if (uCity != "") {
+		    		firebase.database().ref('users/' + currentUser.key + '/city').set(uCity);
+		    		currentUser.city = uCity;
+		    	}
+
+		    //Updating gender info
+			var e = document.getElementById("selectGender2");
+			var value = e.options[e.selectedIndex].value;
+			//console.log("Users gender: " + value);
+		       if (value != "") {
+		    		firebase.database().ref('users/' + currentUser.key + '/gender').set(value);
+		    		currentUser.gender = value;
+		    	}
+
+		    var moreInfoProfile = document.getElementById('moreInfoProfile');
+			moreInfoProfile.style.display = "none";
+
+			updateAccountPage();
+
+			var innerProfil1 = document.getElementById('innerProfil1');
+	    	innerProfil1.style.display = "block";
+
+	    	var innerProfil2 = document.getElementById('innerProfil2');
+	   		innerProfil2.style.display = "none";
+
+	   		var inputUserAge = document.getElementById('uAge2');
+	    	inputUserAge.placeholder = "Ålder";
+	    	var inputUserCity = document.getElementById('uCity2');
+	    	inputUserCity.placeholder = "Plats";
+
+	}) //end of btnSave eventlistener
+}); //windows.load
+/*
 function getUserKey() {
 	var userKey = "";
 	db.ref('users/').once('value', function(snapshot) {
@@ -188,7 +332,9 @@ function getUserKey() {
   	});//end of db.ref
 
 
+
 }//end of function getUserKey
+
 
 function callAfter(key){
 	//console.log("Current users key outside: " + key);
@@ -421,14 +567,17 @@ function updateAccountPage(){
 	getRunInfo();
 }//end of updateAccountPage
 
-function gotoEditAccountPage(){
+function updateEditAccountPage(){
+	var picUser = document.getElementById('pic2');
+  	picUser.src = currentUser.photoUrl;
+  	console.log("hhhhh");
 
 }
 
 
 function getRunInfo(){
 
-	var runArray = [];
+	//var runArray = [];
 
 	//Getting current users running data from DB
 	/*
@@ -482,11 +631,14 @@ function getRunInfo(){
 		}//end of if
 
 	})//end of db.ref*/
+
+
 			/*var runLength = document.getElementById('length');
 			runLength.innerText = "Total löplängd: " + 5 + "km";;
 
 			var longRun = document.getElementById('totalLength');
 			var longestLength = "Längst sträcka: " + 5 + "km";
 			longRun.innerText = longestLength;*/
+
 
 }
