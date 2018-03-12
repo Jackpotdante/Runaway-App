@@ -145,11 +145,9 @@
 
 
 
-
-
-
-
   <div id="containerProfil" class="containerProfile">
+
+
 
       <div id="contentProfil">
         <div class="headProfil">
@@ -159,6 +157,7 @@
             <p class="profileName"></p>
             <p class="profileLocation"><i class="fas fa-map-marker-alt" id="markerLocation"></i></p>
           </div>
+
         </div>
         <div id="containerSome">
 
@@ -177,6 +176,36 @@
           </div>
         </div>
       </div>
+      <!--- BYGGA IHOP-->
+      <div id="innerProfil2">
+
+               <div id="form_content" class="form_content2">
+                   <img id="pic2" class="picProfile" src="img/run.jpg" alt="User">
+                   <form action="">
+                       <label for="userName2">Display namn</label>
+                       <input type = "text" name="userName2" id = "uName2" placeholder="Namn" />
+                       <label for="userAge2">Ålder</label>
+                       <input type = "text" name="userAge2" id = "uAge2" placeholder="Ålder" />
+                       <label for="userCity2">Stad</label>
+                       <input type = "text" name="userCity2" id = "uCity2" placeholder="Plats" />
+                       <label for="userGender2">Kön</label>
+                       <select id="selectGender2" name="userGender2">
+                             <option value="">Select ...</option>
+                             <option value="Man">Man</option>
+                             <option value="Kvinna">Kvinna</option>
+                             <option value="Annan">Annan</option>
+                       </select>
+                   </form>
+                    <div class="btnProfil">
+                   <button id="btnCancel" class="btnsProfil">Avbryta</button>
+                   <button id="btnSave" class="btnsProfil">Spara</button>
+               </div><!--btnProfil-->
+               <button id="logOut">Logout</button>
+               </div><!--formContent-->
+
+
+
+     </div><!--innerProfil2 - Edit profil-->
 
 
   </div>
