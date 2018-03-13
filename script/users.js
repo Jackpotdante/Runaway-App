@@ -364,6 +364,7 @@ function callAfter(key){
 	moreInfoProfile.style.display = "none";
 	updateAccountPage()
 }//end of function callAfter
+
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
 	var displayName = userO.displayName;
@@ -432,6 +433,7 @@ function pushUserIntoFirebase(userO){
 	    }
 	}//end of callLater
 }//end of pushUserInfoIntoFirebase
+
 function gotoTimerPage(){
 	var timerPage = document.getElementsByClassName("containerTimer")[0];
 	var containerLogin = document.getElementsByClassName("containerLogin")[0];
@@ -462,6 +464,7 @@ function getCurrentDate() {
 	//var date = "2018-03-01";
 	return fullDate;
 }
+
 //changing into profile page page
 function updateAccountPage(){
 	let profileAge = document.getElementsByClassName("dynamic")[0];
@@ -470,6 +473,7 @@ function updateAccountPage(){
 	let profilePicture = document.getElementById("profilePicture");
 	let profileName = document.getElementsByClassName("profileName")[0];
 	let profileLocation = document.getElementsByClassName("profileLocation")[0];
+	let locationCity = document.getElementById("locationCity");
   	profilePicture.src = currentUser.photoUrl;
 		profileName.innerText = currentUser.name;
 	if(currentUser.gender != ""){
@@ -481,17 +485,24 @@ function updateAccountPage(){
 		profileAge.innerText = age;
 	}
 	if(currentUser.city != ""){
-		profileLocation.innerHTML += currentUser.city;
+
+		locationCity.innerHTML = currentUser.city;
+
+		var markerLocation = document.getElementById('markerLocation');
+	    markerLocation.style.display = "block";
 	}
+
 	var mdate =  currentUser.memberDate;
 	profileSince.innerText = mdate;
-	getRunInfo();
+
 }//end of updateAccountPage
+
 function updateEditAccountPage(){
 	var picUser = document.getElementById('pic2');
   	picUser.src = currentUser.photoUrl;
-  	console.log("hhhhh");
+  	//console.log("hhhhh");
 }
+
 function getRunInfo(){
 	//var runArray = [];
 	//Getting current users running data from DB
