@@ -360,3 +360,17 @@
 	}
 }
 
+<<<<<<< HEAD
+=======
+
+@media screen and (min-width: 501px){ 
+	.headProfil{
+		margin-top: 55px;
+	}
+
+	.containerProfile{
+		flex: 1 50%;
+	}
+
+}
+>>>>>>> development

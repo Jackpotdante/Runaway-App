@@ -139,3 +139,14 @@
   color: #FF2BE6;
 
 }
+
+@media screen and (min-width: 501px){
+
+  .wrapper-Tracks{
+    margin-top: 85px;
+  }
+  .btnGoToTimer{
+    display: none;
+  }
+
+}
