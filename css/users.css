@@ -86,7 +86,13 @@
 	}
 
 /** TEST PROFILE DESIGN **/
-#contentProfil{
+#containerProfil {
+	flex-flow: row wrap;
+	min-width: 250px;
+}
+
+
+.profilMobil{
 
 	height: 90%;
 	width: 100%;
@@ -191,148 +197,7 @@
 	color: #f4f4f4;
 }
 	/*Profile page styles*/
-	/*
-	#containerProfil {
-		font-family: 'Open Sans', Arial, sans-serif;
-		word-wrap: break-word;
-		line-height: 30px;
-		position: relative;
-		font-size: 16px;
-		width: 100%;
-		height: 100%;
-		min-width: 250px;
-		display: none;
-		color: white;
-		background-color: #FF6C00;
-	}
-	#innerProfil1 {
-		display: block;
-		width: 100%;
-		height: 100%;
-		background-color: transparent;
-		padding-right: 5px;
-		padding-left: 5px;
-		min-width: 250px;
-	}
 
-	#userProfil {
-		width: 100%;
-		background-color: white;
-		margin: 5px auto;
-		display: block;
-	}
-
-	.btnProfil {
-		width: 100%;
-		background-color: white;
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-		margin: 0 auto;
-	}
-
-		.btnProfil .btnsProfil {
-			width: 170px;
-			border: 2px solid white;
-			border-radius: 5px;
-			padding-top: 10px;
-			padding-bottom: 10px;
-			padding-right: 5px;
-			padding-left: 5px;
-			background-color: yellow;
-			color: #23103A;
-			font-size: 1.1rem;
-			animation-name: fadeIn;
-			animation-delay: 2s;
-			margin-bottom: 5px;
-			margin-top: 10px;
-			text-align: center;
-		}
-
-		#userProfil {
-			width: 100%;
-			position: relative;
-			color: white;
-			transition: all .5s ease-out;
-			display: flex;
-			flex-flow: column nowrap;
-			justify-content: flex-start;
-		}
-
-		#profilContent {
-			display: flex;
-			flex-flow: row nowrap;
-			justify-content: flex-start;
-			position: relative;
-			margin-top: 10px;
-			margin-left: 10px;
-		}
-
-		#text {
-			width: 300px;
-			padding-left: 0;
-			color: #23103A;
-
-		}
-
-		#medlemSedan {
-			color: #23103A;
-			margin-top: 5px;
-			margin-bottom: 5px;
-			margin-left: 10px;
-			font-size: 1.2rem;
-		}
-
-		#pic {
-			max-width: 250px;
-			max-height: 250px;
-			width:auto;
-	    	height:auto;
-	    	min-width: 150px;
-	    	flex: 0 0 auto;
-	    	padding-right: 10px;
-		}
-
-		#profilContent p {
-			font-size: 1.2rem;
-			padding-top: 5px;
-			padding-bottom: 5px;
-			padding-left: 5px;
-		}
-
-		#locationUser .fas {
-			margin-right: 10px;
-			color: #23103A;
-		}
-
-	#lengthUser {
-		width: 100%;
-		position: relative;
-		margin-top: 10px;
-		margin-left: 10px;
-		background-color: white;
-		margin: 5px auto;
-		padding-top: 2px;
-		padding-bottom: 2px;
-	}
-
-		#lengthUser p {
-			font-size: 1.2rem;
-			padding-top: 2px;
-			padding-bottom: 2px;
-			padding-left: 8px;
-			color: #23103A;
-		}
-		#ageUser {
-			display: none;
-		}
-		#locationUser {
-			display: none;
-		}
-		#genderUser {
-			display: none;
-		}*/
-/*Edit profile page styles*/
 
 /**EDIT PAGE **/
 
@@ -347,6 +212,7 @@
 }
 	.form_content2 {
 		background-color: white;
+		position: relative;
 	}
 
 	.picProfile {
@@ -357,6 +223,16 @@
 	    min-width: 150px;
 	    flex: 0 0 auto;
 	}
+	#logOut {
+		position: relative;
+		float: right;
+		background-color: transparent;
+		border: none;
+	}
+		#signOutPic {
+			height: 50px;
+			width: 50px;
+		}
 
 	.btnProfil {
 		width: 100%;
@@ -449,6 +325,10 @@
 }
 
 @media (max-width: 450px) {
+
+	#profilDesktop {
+		display: none;
+	}
 
 	#profilContent {
 		margin-left: 5px;

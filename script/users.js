@@ -113,7 +113,8 @@ window.addEventListener('load', function(event) {
 		        //console.log('Token: ' + token);
 		        // The signed-in user info.
 		        var user = result.user;
-		        //console.log('User info: ' + user)
+		        //console.log('User info: ' + user);
+		        console.log('User email: ' + user.email);
 
 		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
@@ -367,6 +368,9 @@ function callAfter(key){
 
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
+
+	//console.log("Logged in user: " + userO);
+	//console.log("Logged in user email: " + userO.email);
 	var displayName = userO.displayName;
 	var email = userO.email;
 	var uid = userO.uid;
@@ -377,7 +381,13 @@ function pushUserIntoFirebase(userO){
 		let data = snapshot.val();
 		for(let child in data){
 			let r = data[child];
-			if(r.uid == userO.uid){
+			//console.log("remail: " + r.email);
+			//console.log("userO.email: " + userO.email);
+			if(r.email == userO.email){
+				//console.log("remail: " + r.email);
+				
+				//console.log("userO.email: " + userO.email);
+				//console.log('User exist is set to true');
 				userExist = true;
 				currentUser.name = r.name;
 				currentUser.email = r.email;
@@ -393,7 +403,7 @@ function pushUserIntoFirebase(userO){
 		callLater();
 	})//end of db.ref
 	function callLater() {
-		if (userExist != true){
+		if (userExist == false){
 			//console.log('User exist is set to false');
 			//getting current date
 			var currentDate = getCurrentDate();
