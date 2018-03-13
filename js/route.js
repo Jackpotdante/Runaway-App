@@ -51,14 +51,20 @@ window.addEventListener('load', function(event){
   let overmaps = document.getElementById("overmap");
   let showBtn = document.getElementById("showBtn");
 
-  toggleButton.addEventListener('click' ,function(event){
-    if( overmaps.style.display == "none"){
+
+    toggleButton.addEventListener('click' ,function(event){
+      if( overmaps.style.display == "none"){
         document.getElementById("showHide").innerHTML = "HIDE TRACKS";
-       overmaps.style.display = "flex";
-    }else if(overmaps.style.display == "flex"){
-      document.getElementById("showHide").innerHTML = "SHOW TRACKS";
-      overmaps.style.display = "none";
+        overmaps.style.display = "flex";
+      }else if(overmaps.style.display == "flex"){
+        document.getElementById("showHide").innerHTML = "SHOW TRACKS";
+        overmaps.style.display = "none";
+      }
+    })
+
+    if(screen.width>500){
+      overmaps.style.display="flex";
     }
-  })
+
 /** window **/
 })
