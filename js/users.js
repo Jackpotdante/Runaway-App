@@ -274,6 +274,58 @@ window.addEventListener('load', function(event) {
 	}) //end of btnSave eventlistener*/
 }); //windows.load
 
+function getUserKey() {
+	var userKey = "";
+	db.ref('users/').once('value', function(snapshot) {
+          //dataArray = [];
+          snapshot.forEach( child => {
+            var user = child.val();
+            if(user.uid == currentUser.uid){
+				userKey = child.key;
+				//console.log("Current users name: " + user.name);
+				//console.log("Current users key inside: " + userKey);
+			} //end of if else
+          })
+          //console.log("Current users key outside: " + userKey);
+          callAfter(userKey);
+  	});//end of db.ref
+}//end of function getUserKey
+function callAfter(key){
+	//console.log("Current users key outside: " + key);
+	//Updating users name
+	var inputUserName = document.getElementById('uName');
+	var uName = inputUserName.value;
+    inputUserName.value = "";
+    	if (uName != "") {
+    		firebase.database().ref('users/' + key + '/name').set(uName);
+    		currentUser.name = uName;
+    	}
+    //Updating users age
+    var uAge = document.getElementById('uAge').value;
+    document.getElementById('uAge').value = "";
+    	if (uAge != "") {
+    		firebase.database().ref('users/' + key + '/age').set(uAge);
+    		currentUser.age = uAge;
+    	}
+    //Updating users city
+    var uCity = document.getElementById('uCity').value;
+    document.getElementById('uCity').value = "";
+    	if (uCity != "") {
+    		firebase.database().ref('users/' + key + '/city').set(uCity);
+    		currentUser.city = uCity;
+    	}
+    //Updating gender info
+	var e = document.getElementById("selectGender");
+	var value = e.options[e.selectedIndex].value;
+	//console.log("Users gender: " + value);
+       if (value != "") {
+    		firebase.database().ref('users/' + key + '/gender').set(value);
+    		currentUser.gender = value;
+    	}
+    var moreInfoProfile = document.getElementById('moreInfoProfile');
+	moreInfoProfile.style.display = "none";
+	updateAccountPage()
+}//end of function callAfter
 
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
@@ -352,15 +404,20 @@ function pushUserIntoFirebase(userO){
 		      //console.log("Users key recieved: " + userKey);
 		      firebase.database().ref('users/' + userKey + '/key').set(userKey);
 		      currentUser.key = userKey;
+		      var moreInfoProfile = document.getElementById('moreInfoProfile');
+	    	moreInfoProfile.style.display = "block";
+	    	var inputUserName = document.getElementById('uName');
+	 		inputUserName.placeholder = currentUser.name;
 	    }//end of if
 	    updateAccountPage();
 	    //Show additional user info window for first time user
+	    /*
 	    if (userExist != true){
 	    	var moreInfoProfile = document.getElementById('moreInfoProfile');
 	    	moreInfoProfile.style.display = "block";
 	    	var inputUserName = document.getElementById('uName');
 	 		inputUserName.placeholder = currentUser.name;
-	    }
+	    }*/
 
 	}//end of callLater
 }//end of pushUserInfoIntoFirebase
