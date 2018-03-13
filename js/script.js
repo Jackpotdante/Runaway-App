@@ -22,7 +22,7 @@ window.addEventListener('load', function(event){
 
 
 
-/*** ROUTING BETWEEN PAGES ***/
+/*** ROUTING BETWEEN PAGES MOBILE***/
 
 let timerBtn = document.getElementById("timerBtn");
 let presBtn = document.getElementById("presBtn");
@@ -83,6 +83,44 @@ profileBtn.addEventListener('click', function(event){
   conCom.style.display = "none";
   conProfile.style.display = "flex";
 });
+
+
+/** ROUTING BETWEEN PAGES DESKTOP **/
+let mapDesktop = document.getElementById("mapDesktop");
+let achDesktop = document.getElementById("achDesktop");
+let communityDesktop = document.getElementById("communityDesktop");
+
+mapDesktop.addEventListener('click', function(event){
+  conLogin.style.display = "none";
+  conTimer.style.display = "none";
+  conPres.style.display = "none"
+  conRoute.style.display = "flex";
+  conCom.style.display = "none";
+  conProfile.style.display = "none";
+});
+
+
+achDesktop.addEventListener('click', function(event){
+  conLogin.style.display = "none";
+  conTimer.style.display = "none";
+  conPres.style.display = "flex"
+  conRoute.style.display = "none";
+  conCom.style.display = "none";
+  conProfile.style.display = "flex";
+});
+
+communityDesktop.addEventListener('click', function(event){
+  conLogin.style.display = "none";
+  conTimer.style.display = "none";
+  conPres.style.display = "none"
+  conRoute.style.display = "none";
+  conCom.style.display = "flex";
+  conProfile.style.display = "none";
+});
+
+
+
+
 /*** WINDOW LOAD**/
 
 });
