@@ -1,4 +1,4 @@
-//Sara
+
 //Global variable creating empty current user object
 var currentUser = {
 	name: "",
@@ -60,8 +60,6 @@ window.addEventListener('load', function(event) {
 		var btnLoginGoogle = document.getElementById('btnLoginGoogle');
 
 
-
-	  //console.log('windows is loaded');
 	  //var screenH = document.documentElement.clientHeight;
 
 	  //wrapUsersMob.style.height = screenH;
@@ -79,7 +77,13 @@ window.addEventListener('load', function(event) {
 		        //console.log('Token: ' + token);
 		        // The signed-in user info.
 		        var user = result.user;
-		        //console.log('User info: ' + user)
+		        //console.log('User info: ' + user);
+		           var user = result.user;
+		        //console.log('User info: ' + user);
+		        //console.log('User email: ' + user.email);
+		        //console.log('User name: ' + user.displayName);
+		        //console.log('User uid: ' + user.uid);
+
 
 		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
@@ -114,7 +118,10 @@ window.addEventListener('load', function(event) {
 		        // The signed-in user info.
 		        var user = result.user;
 		        //console.log('User info: ' + user);
-		        console.log('User email: ' + user.email);
+		        //console.log('User email: ' + user.email);
+		        //console.log('User name: ' + user.displayName);
+		        //console.log('User uid: ' + user.uid);
+
 
 		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
@@ -141,53 +148,7 @@ window.addEventListener('load', function(event) {
 	 var btnLogOut = document.getElementById('logOut');
 	 btnLogOut.addEventListener('click', function(event) {
 
-	 		firebase.auth().signOut().then(function() {
-			  // Sign-out successful.
-			  var wrapProfile = document.getElementById('containerProfil');
-				wrapProfile.style.display = 'none';
-
-				var timerPage = document.getElementsByClassName("containerTimer")[0];
-				timerPage.style.display = "none";
-
-				var containerLogin = document.getElementsByClassName("containerLogin")[0];
-
-				containerLogin.style.display = 'block';
-
-				var navContainer = document.getElementsByClassName("navContainer")[0];
-
-				navContainer.style.display = 'none';
-
-				var moreInfoProfile = document.getElementById('moreInfoProfile');
-
-
-	    	moreInfoProfile.style.display = "none";
-
-
-
-				currentUser = {
-					name: "",
-					email: "",
-					uid: "",
-					photoUrl: "",
-					age: 0,
-					city: "",
-					memberDate: "",
-					gender: "",
-					key: "",
-					totalLength: 0,
-					longestRun: 0
-				};
-
-
-			}).catch(function(error) {
-			  //console.log('Error sign out: ' + error);
-			});
-
-			var inputUserAge = document.getElementById('uAge2');
-	    	inputUserAge.placeholder = "Ålder";
-	    	var inputUserCity = document.getElementById('uCity2');
-	    	inputUserCity.placeholder = "Plats";
-
+	 		logOut();
 
 	 }) //end of btnSignOut eventlistener*/
 
@@ -313,61 +274,10 @@ window.addEventListener('load', function(event) {
 	}) //end of btnSave eventlistener*/
 }); //windows.load
 
-function getUserKey() {
-	var userKey = "";
-	db.ref('users/').once('value', function(snapshot) {
-          //dataArray = [];
-          snapshot.forEach( child => {
-            var user = child.val();
-            if(user.uid == currentUser.uid){
-				userKey = child.key;
-				//console.log("Current users name: " + user.name);
-				//console.log("Current users key inside: " + userKey);
-			} //end of if else
-          })
-          //console.log("Current users key outside: " + userKey);
-          callAfter(userKey);
-  	});//end of db.ref
-}//end of function getUserKey
-function callAfter(key){
-	//console.log("Current users key outside: " + key);
-	//Updating users name
-	var inputUserName = document.getElementById('uName');
-	var uName = inputUserName.value;
-    inputUserName.value = "";
-    	if (uName != "") {
-    		firebase.database().ref('users/' + key + '/name').set(uName);
-    		currentUser.name = uName;
-    	}
-    //Updating users age
-    var uAge = document.getElementById('uAge').value;
-    document.getElementById('uAge').value = "";
-    	if (uAge != "") {
-    		firebase.database().ref('users/' + key + '/age').set(uAge);
-    		currentUser.age = uAge;
-    	}
-    //Updating users city
-    var uCity = document.getElementById('uCity').value;
-    document.getElementById('uCity').value = "";
-    	if (uCity != "") {
-    		firebase.database().ref('users/' + key + '/city').set(uCity);
-    		currentUser.city = uCity;
-    	}
-    //Updating gender info
-	var e = document.getElementById("selectGender");
-	var value = e.options[e.selectedIndex].value;
-	//console.log("Users gender: " + value);
-       if (value != "") {
-    		firebase.database().ref('users/' + key + '/gender').set(value);
-    		currentUser.gender = value;
-    	}
-    var moreInfoProfile = document.getElementById('moreInfoProfile');
-	moreInfoProfile.style.display = "none";
-	updateAccountPage()
-}//end of function callAfter
 
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
+
 
 	//console.log("Logged in user: " + userO);
 	//console.log("Logged in user email: " + userO.email);
@@ -376,6 +286,14 @@ function pushUserIntoFirebase(userO){
 	var uid = userO.uid;
 	var photoUrl = userO.photoURL;
 	var userExist = false;
+	//console.log("Email: " + email);
+
+	if(email==null){
+		logOut();
+		errorMessage = document.getElementById("errorMessage");
+		errorMessage.style.display = "block";
+	} else {
+
 	//Checks if user already exist in the DB
 	db.ref('users/').once('value', function(snapshot) {
 		let data = snapshot.val();
@@ -402,6 +320,8 @@ function pushUserIntoFirebase(userO){
 		}//end of for
 		callLater();
 	})//end of db.ref
+
+	} //end of else
 	function callLater() {
 		if (userExist == false){
 			//console.log('User exist is set to false');
@@ -441,6 +361,7 @@ function pushUserIntoFirebase(userO){
 	    	var inputUserName = document.getElementById('uName');
 	 		inputUserName.placeholder = currentUser.name;
 	    }
+
 	}//end of callLater
 }//end of pushUserInfoIntoFirebase
 
@@ -511,6 +432,57 @@ function updateEditAccountPage(){
 	var picUser = document.getElementById('pic2');
   	picUser.src = currentUser.photoUrl;
   	//console.log("hhhhh");
+}
+
+function logOut(){
+	firebase.auth().signOut().then(function() {
+			  // Sign-out successful.
+			  var wrapProfile = document.getElementById('containerProfil');
+				wrapProfile.style.display = 'none';
+
+				var timerPage = document.getElementsByClassName("containerTimer")[0];
+				timerPage.style.display = "none";
+
+				var containerLogin = document.getElementsByClassName("containerLogin")[0];
+
+				containerLogin.style.display = 'block';
+
+				var navContainer = document.getElementsByClassName("navContainer")[0];
+
+				navContainer.style.display = 'none';
+
+				var moreInfoProfile = document.getElementById('moreInfoProfile');
+
+
+	    	moreInfoProfile.style.display = "none";
+
+
+
+				currentUser = {
+					name: "",
+					email: "",
+					uid: "",
+					photoUrl: "",
+					age: 0,
+					city: "",
+					memberDate: "",
+					gender: "",
+					key: "",
+					totalLength: 0,
+					longestRun: 0
+				};
+
+
+			}).catch(function(error) {
+			  //console.log('Error sign out: ' + error);
+			});
+
+			var inputUserAge = document.getElementById('uAge2');
+	    	inputUserAge.placeholder = "Ålder";
+	    	var inputUserCity = document.getElementById('uCity2');
+	    	inputUserCity.placeholder = "Plats";
+
+
 }
 
 function getRunInfo(){

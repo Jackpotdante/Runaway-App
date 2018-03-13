@@ -1,4 +1,4 @@
-/*Sara*/
+
 * {
 	box-sizing: border-box;
 }
@@ -21,8 +21,8 @@
 
 	min-width: 250px;
 	display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+ 	flex-wrap: wrap;
+    justify-content: center;
 	color: white;
 }
 	#containerLoginMob h1 {
@@ -35,6 +35,9 @@
 		margin: 0 auto;
 		margin-top: 150px;
 		letter-spacing: 1px;
+	}
+	#errorMessage {
+		display: none;
 	}
 	#wrapBtnLogin {
 		margin: 50px auto;
@@ -360,8 +363,6 @@
 	}
 }
 
-<<<<<<< HEAD
-=======
 
 @media screen and (min-width: 501px){ 
 	.headProfil{
@@ -372,5 +373,9 @@
 		flex: 1 50%;
 	}
 
+	#innerProfil2 {
+		margin-top: 70px;
+	}
+
 }
->>>>>>> development
+
