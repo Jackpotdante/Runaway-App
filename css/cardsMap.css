@@ -4,7 +4,6 @@
 }
 
 
-
 .cardHolder .cardHeader{
   display: flex;
   position: absolute;
@@ -12,6 +11,7 @@
   width: 97%;
   border-radius: 5px;
   text-align: center;
+  font-family: 'Montserrat';
 }
 
 .cardHolder .cardHeader span:nth-child(1){
@@ -20,24 +20,38 @@
 
 .cardHolder .cardHeader span:nth-child(2){
   flex: 1 50%;
-  font-size: 1.2em;
+  font-size: 13px;
   font-weight: 500;
 }
 .cardHolder .cardHeader span:nth-child(3){
   flex: 1 25%;
 }
-
-.cardHolder > li{
-  padding: 5px;
-  flex: 1 1 auto;
-  position: relative;
-  margin: 8px 5px;
-  list-style: none;
-  height: auto;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 1);
-  line-height: 1em;
+.cardHolder > li:last-child{
+	margin-bottom: 100px;
 }
+.cardHolder > li{
+  -webkit-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+	-moz-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+	box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.2);
+	display: flex;
+	position: relative;
+	max-height:78%;
+	min-height: 100px;
+	margin: 10px 0 5px 0;
+	background-color: #f3f3f3;
+	border-radius: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	align-content: flex-start;
+	align-items: center;
+	overflow: auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+  font-size: 10px;
+}
+
+
 .cardHolder img{
   border-radius: 5px;
   margin-top: 5px;
@@ -64,20 +78,21 @@
   width: 75px;
   margin: 20px 20px 10px 20px;
   color: white;
+  font-size: 13px;
 }
 
 
 .cardHolder .trackComments img,
 .cardHolder .trackResult img{
   float: left;
-  border-radius: 20%;
-  height: 30px;
-  width: 30px;
-  border-radius:10%;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
   margin-right: 10px;
 }
 
 .cardHolder .toggle{
+  width: 95%;
   max-height: 0;
   overflow: hidden;
   flex-direction: column;
@@ -86,9 +101,11 @@
 
 .cardHolder .trackResult p:nth-of-type(1){
   font-weight: 600;
+  padding-top:5px;
 }
 .cardHolder .trackComments p:nth-of-type(1){
   font-weight: 600;
+  padding-top:5px;
 }
 
 .cardHolder .trackResult,
@@ -96,19 +113,25 @@
   width: 90%;
   margin: 5px auto;
   border-radius: 5px;
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(215, 215, 215);
   margin-bottom: 20px;
+  padding-bottom: 10px;
 }
-.cardHolder .trackResult div,
-.cardHolder .trackComments div{
-  background-color:  rgb(240, 240, 240);
-  margin: 10px 0px 10px 0px;
+
+.cardHolder .innerContainerResults li{
+  padding: 5px 5px 0px 8px;
+  min-height: 30px;
 }
+.cardHolder .innerContainerComments li{
+  padding: 5px 5px 0px 8px;
+  min-height: 30px;
+}
+
+
 .cardHolder .innerContainerResults h3,
 .cardHolder .innerContainerComments h3{
   margin-left: 20px;
-  margin-top: 30px;
-  font-size: 1.1em
+  font-size: 13px;
 }
 
 
