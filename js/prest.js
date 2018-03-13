@@ -21,7 +21,10 @@ window.addEventListener("load", function (){
 		let thisDistance = dataForRace.length;
 		newName.className="nameOfTrack";
 		newTextarea.type="textarea";
-		
+		newDiv.className="prest";
+		newPlace.className="place";
+
+
 		if(dataForRace.comment!==undefined){
 			newTextarea.value= dataForRace.comment;
 		}
@@ -45,10 +48,14 @@ window.addEventListener("load", function (){
 
 		getRunInfo();
 
+
+		let dt= new Date(dataForRace.date)
+		dt = dt.getFullYear()+"-" + (dt.getMonth()+1)+"-"+ dt.getDate();
+
 		newPlace.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${dataForRace.place}`
 		newLength.innerHTML = `&#128095 ${dataForRace.length}km`;
 		newTime.innerHTML = `<i class="fas fa-stopwatch"></i> ${convertToTime(dataForRace.time)}`; //convertToTime ligger i cardsMap
-		newDate.innerHTML = `<i class="far fa-calendar"></i> ${dataForRace.date}`;
+		newDate.innerHTML = `<i class="far fa-calendar"></i> ${dt}`;
 		//image.src = "#";
 		newSwitchBox.classList.add("switchBox");
 		newSwitch.classList.add("switch");
@@ -59,11 +66,11 @@ window.addEventListener("load", function (){
 
 		prestList[0].appendChild(newDiv);
 		newDiv.appendChild(newLength);
-		newDiv.appendChild(newName);
-		newDiv.appendChild(newRating);
 		newDiv.appendChild(newTime);
-		newDiv.appendChild(newPlace);
 		newDiv.appendChild(newDate);
+		newDiv.appendChild(newRating);
+		newDiv.appendChild(newPlace);
+		newDiv.appendChild(newName);
 		newDiv.appendChild(newTextarea);
 
 		//newDiv.appendChild(image);
