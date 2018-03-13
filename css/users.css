@@ -480,3 +480,15 @@
 	}
 
 }
+
+
+@media screen and (min-width: 500px){ 
+	.headProfil{
+		margin-top: 55px;
+	}
+
+	.containerProfile{
+		flex: 1 50%;
+	}
+
+}
