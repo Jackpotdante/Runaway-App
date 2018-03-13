@@ -93,6 +93,7 @@
 
 }
 
+
 .headProfil{
 	position: relative;
 	display: flex;
@@ -112,12 +113,12 @@
 	right: 15px;
 	font-size: 20px;
 
-
 }
 
 #markerLocation{
 	font-size: 12px;
 	margin: 0 5px 0 0;
+	display: none;
 }
 #profilePicture{
 	width: 150px;
@@ -148,6 +149,8 @@
 .profileLocation{
 	color: #f4f4f4;
 	font-size: 14px;
+	display: flex;
+	flex-flow: row nowrap;
 }
 
 #containerSome{
@@ -474,6 +477,18 @@
 	#moreInfoProfile {
 		padding-left: 0;
 		padding-right: 0;
+	}
+
+}
+
+
+@media screen and (min-width: 500px){ 
+	.headProfil{
+		margin-top: 55px;
+	}
+
+	.containerProfile{
+		flex: 1 50%;
 	}
 
 }
