@@ -106,7 +106,7 @@ let makeCards = (tracks,location)=>{
       let toggle = card.getElementsByClassName('toggle');
 
       for(i=0; i<toggle.length;i++){
-        toggle[i].style.transition = slideSetup;
+        //toggle[i].style.transition = slideSetup;
         toggle[i].style.maxHeight = range;
       }
 
@@ -196,6 +196,7 @@ let findCommentsOfTrack=(trackid)=>{
 
 
     let liComment = document.createElement("li");
+
     let user = findUser(track.user);
     liComment.innerHTML=`<div>
                           <img src=${user.photoUrl}>
