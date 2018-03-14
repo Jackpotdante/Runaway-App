@@ -22,6 +22,7 @@ window.addEventListener('load', function(event){
 
 
 
+
 /*** ROUTING BETWEEN PAGES MOBILE***/
 
 let timerBtn = document.getElementById("timerBtn");
