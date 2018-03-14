@@ -60,11 +60,7 @@ window.addEventListener('load', function(event) {
 		var btnLoginGoogle = document.getElementById('btnLoginGoogle');
 
 
-	  //var screenH = document.documentElement.clientHeight;
-
-	  //wrapUsersMob.style.height = screenH;
-	  //wrapUsersDesk.style.height = screenH;
-	  //console.log('Current screen heigth: ' + screenH);
+	 
 
 	  //facebok login functionality
 	  btnLoginFace.addEventListener('click', function(event){
@@ -272,6 +268,9 @@ window.addEventListener('load', function(event) {
 	    	inputUserCity.placeholder = "Plats";
 
 	}) //end of btnSave eventlistener*/
+
+	//Windows resized to desktop läge
+	window.addEventListener('resize', resizeDesktop);
 }); //windows.load
 
 function getUserKey() {
@@ -346,32 +345,32 @@ function pushUserIntoFirebase(userO){
 		errorMessage.style.display = "block";
 	} else {
 
-	//Checks if user already exist in the DB
-	db.ref('users/').once('value', function(snapshot) {
-		let data = snapshot.val();
-		for(let child in data){
-			let r = data[child];
-			//console.log("remail: " + r.email);
-			//console.log("userO.email: " + userO.email);
-			if(r.email == userO.email){
-				//console.log("remail: " + r.email);
-				
-				//console.log("userO.email: " + userO.email);
-				//console.log('User exist is set to true');
-				userExist = true;
-				currentUser.name = r.name;
-				currentUser.email = r.email;
-				currentUser.uid = r.uid;
-				currentUser.photoUrl = r.photoUrl;
-				currentUser.age = r.age;
-				currentUser.city = r.city;
-				currentUser.memberDate = r.memberDate;
-				currentUser.gender = r.gender;
-				currentUser.key = r.key;
-			} //end of if else
-		}//end of for
-		callLater();
-	})//end of db.ref
+			//Checks if user already exist in the DB
+			db.ref('users/').once('value', function(snapshot) {
+				let data = snapshot.val();
+				for(let child in data){
+					let r = data[child];
+					//console.log("remail: " + r.email);
+					//console.log("userO.email: " + userO.email);
+					if(r.email == userO.email){
+						//console.log("remail: " + r.email);
+						
+						//console.log("userO.email: " + userO.email);
+						//console.log('User exist is set to true');
+						userExist = true;
+						currentUser.name = r.name;
+						currentUser.email = r.email;
+						currentUser.uid = r.uid;
+						currentUser.photoUrl = r.photoUrl;
+						currentUser.age = r.age;
+						currentUser.city = r.city;
+						currentUser.memberDate = r.memberDate;
+						currentUser.gender = r.gender;
+						currentUser.key = r.key;
+					} //end of if else
+				}//end of for
+				callLater();
+			})//end of db.ref
 
 	} //end of else
 	function callLater() {
@@ -423,12 +422,22 @@ function pushUserIntoFirebase(userO){
 }//end of pushUserInfoIntoFirebase
 
 function gotoTimerPage(){
-	var timerPage = document.getElementsByClassName("containerTimer")[0];
+
 	var containerLogin = document.getElementsByClassName("containerLogin")[0];
 	var navContainer = document.getElementsByClassName("navContainer")[0];
-	containerLogin.style.display = 'none';
-	timerPage.style.display = "flex";
 	navContainer.style.display = 'block';
+	containerLogin.style.display = 'none';
+
+	 var screenWidth = document.documentElement.clientWidth;
+
+	 if (screenWidth > 501) {
+	 	var routePage = document.getElementsByClassName("containerRoute")[0];
+		routePage.style.display = "flex";
+	 } else {
+		var timerPage = document.getElementsByClassName("containerTimer")[0];
+		timerPage.style.display = "flex";
+	}
+	
 }
 function getCurrentDate() {
 	var currentDate = new Date();
@@ -539,6 +548,32 @@ function logOut(){
 	    	var inputUserCity = document.getElementById('uCity2');
 	    	inputUserCity.placeholder = "Plats";
 
+
+}
+
+function resizeDesktop(){
+	let conLogin = document.getElementsByClassName("containerLogin")[0];
+	let conTimer = document.getElementsByClassName("containerTimer")[0];
+	let conPres = document.getElementsByClassName("containerPrestation")[0];
+	let conRoute = document.getElementsByClassName("containerRoute")[0];
+	let conCom = document.getElementsByClassName("containerCommunity")[0];
+	let conProfile = document.getElementsByClassName("containerProfile")[0];
+
+	var screenWidth = document.documentElement.clientWidth;
+	var displayValue = conProfile.style.display;
+
+	 if (screenWidth > 501 && displayValue!="none") {
+	 	console.log("Desktop screen Läge");
+	 	//var routePage = document.getElementsByClassName("containerRoute")[0];
+		//routePage.style.display = "flex";
+
+		conLogin.style.display = "none";
+		conTimer.style.display = "none";
+		conPres.style.display = "flex"
+		conRoute.style.display = "none";
+		conCom.style.display = "none";
+		conProfile.style.display = "flex";
+	 } 
 
 }
 
