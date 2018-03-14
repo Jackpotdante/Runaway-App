@@ -6,15 +6,16 @@ window.addEventListener('load',function(event){
   let btnClockPause = document.getElementById('btnClockPause');
   let btnClockStop = document.getElementById('btnClockStop');
   let btnSaveToDb = document.getElementById('btnSaveToDb');
+  let btnShowStars = document.getElementById('btnShowStars');
   let infoSelectedTrack = document.getElementsByClassName('infoTrack')[0];
   let timeElapsedSecound = document.getElementsByClassName('timeElapsedSecound')[0].innerText="00s";
   let timeElapsedMinutes = document.getElementsByClassName('timeElapsedMinutes')[0].innerText="0m";
   let timeElapsedHours = document.getElementsByClassName('timeElapsedHours')[0].innerText="0h";
-
+  let stars = document.getElementsByClassName('stars');
+  let containerStars= document.getElementsByClassName('containerStars')[0];
   btnClockStop.addEventListener('click',function(event){
     btnClockStop.style.display = "none";
-    btnSaveToDb.style.display = "none";
-    btnClockPause.style.display = "none";
+    btnShowStars.style.display = "none";
     btnClockPause.style.display = "none";
     btnStartClock.innerText = "Start Timer";
     timer.stopTimer();
@@ -22,7 +23,7 @@ window.addEventListener('load',function(event){
   })
 
   btnClockPause.addEventListener('click',function(event){
-    btnSaveToDb.style.display = "inline-block";
+    btnShowStars.style.display = "inline-block";
     btnClockStop.style.display = "inline-block";
     btnStartClock.style.display = "inline-block";
     btnStartClock.innerText = "Continue";
@@ -33,6 +34,21 @@ window.addEventListener('load',function(event){
   btnSaveToDb.addEventListener('click',function(){
     if(currentUser.hasOwnProperty("trackid")){
       saveRoundToDbTimer();
+      containerStars.style.display="none";
+      btnStartClock.style.display = "inline-block";
+      btnStartClock.innerText = "Start Timer";
+      timer.resetTimer();
+      document.getElementsByClassName('containerPrestation')[0].style.display="flex";
+      document.getElementsByClassName('containerTimer')[0].style.display="none";
+    }
+  })
+  btnShowStars.addEventListener('click',function(){
+    if(currentUser.hasOwnProperty("trackid")){
+      btnClockStop.style.display = "none";
+      btnShowStars.style.display = "none";
+      btnClockPause.style.display = "none";
+      btnStartClock.style.display = "none";
+      containerStars.style.display="block";
     }
   })
 
@@ -40,9 +56,17 @@ window.addEventListener('load',function(event){
     btnClockPause.style.display = "block";
     btnStartClock.style.display = "none";
     btnClockStop.style.display = "none";
-    btnSaveToDb.style.display = "none";
+    btnShowStars.style.display = "none";
     timer.startTimer();
   })
+
+  for(let i=0;i<stars.length;i++){ //lägger till lyssnare och skickar vidare värdet
+    stars[i].addEventListener("click",function(event){
+      currentUser.stars=i+1;
+      fillStars(i);
+    })
+  }
+
 
   infoSelectedTrack.innerText = "Ingen vald bana";
 
@@ -54,6 +78,17 @@ window.addEventListener('load',function(event){
 
 }); // end of load
 
+//------------------------- Sätter stjärnor som är uppp till i --------------->>
+let fillStars=(i)=>{ // sätter stjärnor som fyllda upp till i
+  for(let j=0;j<stars.length;j++){
+    if(j<=i){
+      stars[j].innerHTML=`<i style="color:#fff72b;" class="fas fa-star fa-2x">`
+    }else{
+      stars[j].innerHTML=`<i class="far fa-star fa-2x"></i>`
+    }
+  }
+}
+
 
 let saveRoundToDbTimer =()=>{
   //let newPostKey = db.ref("rundor").push().key;
@@ -62,7 +97,8 @@ let saveRoundToDbTimer =()=>{
     date: new Date().getTime(),
     time: currentUser.timeOfRun,
     trackid: currentUser.trackid,
-    user: currentUser.uid
+    user: currentUser.uid,
+    rating: currentUser.stars
   }
   db.ref(`/rundor/`).push(track)
 }
