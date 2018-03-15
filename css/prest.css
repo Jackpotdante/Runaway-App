@@ -117,31 +117,37 @@
 	border-radius: 5px;
 	padding: 3px;
 }
+.containerPrestation .divBtnPrest{
+	display: flex;
+	flex: 1 100%;
+}
 
-
-
+.containerPrestation .divBtnPrest .btnRemove,
+.containerPrestation .divBtnPrest .btnStars{
+	flex: 1 50%;
+	max-width: 85px;
+	margin-left: 10px;
+	border-radius: 5px;
+	background-color: inherit;
+}
 
 
 @media screen and (min-width: 500px){
 	body{
 		display: flex;
 	}
-	.containerPrestation >:nth-child(2){
+	.containerPrestation >:nth-child(3){
 		margin-top: 205px;
 	}
-	.headProfil{
-		margin-top: 55px;
-	}
+
 	.containerPrestation{
 		flex: 1 50%;
 	}
-	.containerProfile{
-		flex: 1 50%;
-	}
+
 	#totalStat{
 		position: relative;
 		top: 65px;
 		background-color: #ffa834;
 	}
-	
+
 }

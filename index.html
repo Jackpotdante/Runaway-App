@@ -18,7 +18,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="./js/script.js"></script>
-    <script src="./script/users.js"></script>
+    <script src="./js/users.js"></script>
     <script src="./js/community.js"></script>
     <script src="./js/route.js"></script>
     <script src="./js/cardsMap.js"></script>
@@ -74,6 +74,7 @@
             <div id="wrapBtnLogin">
               <button id="btnLoginFace" class="btnLogin"><i class="fab fa-facebook-f" id="iconF"></i>Login with facebook</button>
               <button id="btnLoginGoogle" class="btnLogin"><i class="fab fa-google" id="iconG"></i>Login with google</button>
+              <p id="errorMessage">Your email is linked with different login provider. Please change your login provider.</p>
             </div> <!--wrapBtnLogin-->
 
         </div><!--containerLoginMob-->
@@ -84,6 +85,17 @@
 
 
   <div class="containerTimer">
+      <div class="containerStars">
+        <h3>Rating</h3>
+        <ul>
+          <li class="stars"><i style="color:#fff72b;" class="fas fa-star fa-2x"></i></li>
+          <li class="stars"><i style="color:#fff72b;" class="fas fa-star fa-2x"></i></li>
+          <li class="stars"><i style="color:#fff72b;" class="fas fa-star fa-2x"></i></li>
+          <li class="stars"><i class="far fa-star fa-2x"></i></li>
+          <li class="stars"><i class="far fa-star fa-2x"></i></li>
+        </ul>
+        <button id="btnSaveToDb">save</button>
+      </div>
     <p class="infoTrack"></p>
     <div class="weather">
       <span id="weatherTemperature"></span>
@@ -101,16 +113,18 @@
       <div class="timerBtn">
         <button id="btnClockStop">Reset</button>
         <button id="btnClockPause">Pause</button>
-        <button id="btnSaveToDb">Save</button>
+        <button id="btnShowStars">Save</button>
         <button id="btnStartClock">Start Timer</button>
       </div>
     </div>
   </div>
 
   <div class="containerPrestation">
+    <div id="profileDesktop"></div>
     <div id="totalStat">
       <span id="spanTotalLength"></span><span id="spanLongestDist"></span>
     </div>
+
   </div>
 
 
@@ -147,39 +161,39 @@
   <div id="containerProfil" class="containerProfile">
 
 
+          <div id="contentProfil" class="profilMobil">
+            <div class="headProfil">
+              <i class="fas fa-cog" id="settings"></i>
+              <img id="profilePicture"></img>
+              <div class="profileInfo">
+                <p class="profileName"></p>
+                <p class="profileLocation"><i class="fas fa-map-marker-alt" id="markerLocation"></i><span id="locationCity"></span></p>
+              </div>
 
-      <div id="contentProfil">
-        <div class="headProfil">
-          <i class="fas fa-cog" id="settings"></i>
-          <img id="profilePicture"></img>
-          <div class="profileInfo">
-            <p class="profileName"></p>
-            <p class="profileLocation"><i class="fas fa-map-marker-alt" id="markerLocation"></i><span id="locationCity"></span></p>
+            </div>
+            <div id="containerSome">
+
+
+              <div class="divProfile">
+                  <p class="categori">Age</p>
+                  <p class="dynamic"></p>
+              </div>
+              <div class="divProfile">
+                <p class="categori">Gender</p>
+                <p class="dynamic"></p>
+              </div>
+              <div class="divProfile">
+                <p class="categori">Member since</p>
+                <p class="dynamic"></p>
+              </div>
+            </div>
           </div>
 
-        </div>
-        <div id="containerSome">
-
-
-          <div class="divProfile">
-              <p class="categori">Age</p>
-              <p class="dynamic"></p>
-          </div>
-          <div class="divProfile">
-            <p class="categori">Gender</p>
-            <p class="dynamic"></p>
-          </div>
-          <div class="divProfile">
-            <p class="categori">Member since</p>
-            <p class="dynamic"></p>
-          </div>
-        </div>
-      </div>
-      <!--- BYGGA IHOP-->
       <div id="innerProfil2">
 
                <div id="form_content" class="form_content2">
                    <img id="pic2" class="picProfile" src="img/run.jpg" alt="User">
+                   <button id="logOut"><img id="signOutPic" src="img/signOut.png" alt="User"></button>
                    <form action="">
                        <label for="userName2">Display namn</label>
                        <input type = "text" name="userName2" id = "uName2" placeholder="Namn" />
@@ -194,18 +208,18 @@
                              <option value="Kvinna">Kvinna</option>
                              <option value="Annan">Annan</option>
                        </select>
+                       <div class="btnProfil">
+                         <button id="btnCancel" class="btnsProfil">Avbryta</button>
+                         <button id="btnSave" class="btnsProfil">Spara</button>
+                    </div><!--btnProfil-->
                    </form>
-                    <div class="btnProfil">
-                   <button id="btnCancel" class="btnsProfil">Avbryta</button>
-                   <button id="btnSave" class="btnsProfil">Spara</button>
-               </div><!--btnProfil-->
-               <button id="logOut">Logout</button>
+                    
                </div><!--formContent-->
 
      </div><!--innerProfil2 - Edit profil-->
 
 
-  </div>
+  </div><!--containerProfil-->
 
 
 
@@ -243,6 +257,7 @@
         <li id="achDesktop" class="listItems"><a href="#">ACHIEVMENTS</a></li>
         <li id="communityDesktop"class="listItems"><a href="#">COMMUNITY</a></li>
         <li id="nameDesktopNav"><p id="nameDesktop"></p></li>
+
         <li><img id="imgDesktopNav"></img></li>
       </ul>
 
