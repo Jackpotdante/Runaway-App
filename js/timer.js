@@ -63,7 +63,7 @@ window.addEventListener('load',function(event){
   for(let i=0;i<stars.length;i++){ //lägger till lyssnare och skickar vidare värdet
     stars[i].addEventListener("click",function(event){
       currentUser.stars=i+1;
-      fillStars(i);
+      fillStars(i,stars);
     })
   }
 
@@ -78,8 +78,9 @@ window.addEventListener('load',function(event){
 
 }); // end of load
 
-//------------------------- Sätter stjärnor som är uppp till i --------------->>
-let fillStars=(i)=>{ // sätter stjärnor som fyllda upp till i
+//------------------ Sätter stjärnor som är uppp till i --------------------->>
+let fillStars=(i,stars)=>{
+
   for(let j=0;j<stars.length;j++){
     if(j<=i){
       stars[j].innerHTML=`<i style="color:#fff72b;" class="fas fa-star fa-2x">`
@@ -88,19 +89,21 @@ let fillStars=(i)=>{ // sätter stjärnor som fyllda upp till i
     }
   }
 }
+//---------------------- END -------------------------------------------------//
 
 
 let saveRoundToDbTimer =()=>{
-  //let newPostKey = db.ref("rundor").push().key;
+  let newPostKey = db.ref("rundor").push().key;
   let track = {
     share: false,
     date: new Date().getTime(),
     time: currentUser.timeOfRun,
     trackid: currentUser.trackid,
     user: currentUser.uid,
-    rating: currentUser.stars
+    rating: currentUser.stars,
+    roundid: newPostKey
   }
-  db.ref(`/rundor/`).push(track)
+  db.ref(`/rundor/${newPostKey}`).set(track)
 }
 
 

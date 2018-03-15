@@ -141,20 +141,6 @@
 }
 
 
-.containerTimer .containerStars{
-  width: 100%;
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 15px;
-  background-color: rgba(245, 245, 245, 0.37);
-}
-.containerTimer .containerStars ul li{
-  display: inline-block;
-  list-style-type: none;
-}
-
 @media screen and (min-width: 501px){
 
   .wrapper-Tracks{

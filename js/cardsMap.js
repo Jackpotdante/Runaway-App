@@ -291,7 +291,7 @@ let countStars=(numberOfStars)=>{
     if(i<=numberOfStars){
       newSpan.innerHTML+=`<i style="color:#FF2BE6;" class="fas fa-star fa-xs"></i>`;
     }else {
-      newSpan.innerHTML+=`<i class="far fa-star fa-xs"></i>`;
+      newSpan.innerHTML+=`<i style="color:rgb(145, 145, 145);" class="far fa-star fa-xs"></i>`;
     }
   }
   newSpan.className ="rating";
@@ -299,43 +299,6 @@ let countStars=(numberOfStars)=>{
 }
 
 //------------------- END ---------------------------------------------------//
-
-
-
-window.addEventListener("load",function(){
-  let stars = document.getElementsByClassName('stars');
-  for(let i=0;i<stars.length;i++){ //lägger till lyssnare och skickar vidare värdet
-    stars[i].addEventListener("click",function(event){
-      currentUser.stars=i+1;
-      fillStars(i);
-    })
-  }
-
-  let fillStars=(i)=>{ // sätter stjärnor som fyllda upp till i
-    for(let j=0;j<stars.length;j++){
-      if(j<=i){
-        stars[j].innerHTML=`<i style="color:#fff72b;" class="fas fa-star fa-2x">`
-      }else{
-        stars[j].innerHTML=`<i class="far fa-star fa-2x"></i>`
-      }
-    }
-  }
-
-});
-
-//----------------- Räknar antal stjänor man satt till rundan ---------------->>
-let countStarsOfTrack =()=>{
-
-  console.log("funkar");
-}
-/*
-  <i style="color:#FF2BE6;" class="fas fa-star fa-2x"></i>
-  <i class="far fa-star fa-2x"></i>
-*/
-
-
-//------------------ END -----------------------------------------------------//
-
 
 
 
