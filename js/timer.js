@@ -13,7 +13,8 @@ window.addEventListener('load',function(event){
   let timeElapsedHours = document.getElementsByClassName('timeElapsedHours')[0].innerText="0h";
   let stars = document.getElementsByClassName('stars');
   let containerStars= document.getElementsByClassName('containerStars')[0];
-  btnClockStop.addEventListener('click',function(event){
+
+  btnClockStop.addEventListener('click',function(event){ // Stoppa klockan
     btnClockStop.style.display = "none";
     btnShowStars.style.display = "none";
     btnClockPause.style.display = "none";
@@ -22,7 +23,7 @@ window.addEventListener('load',function(event){
     timer.resetTimer();
   })
 
-  btnClockPause.addEventListener('click',function(event){
+  btnClockPause.addEventListener('click',function(event){ // Pausa klockan
     btnShowStars.style.display = "inline-block";
     btnClockStop.style.display = "inline-block";
     btnStartClock.style.display = "inline-block";
@@ -31,28 +32,38 @@ window.addEventListener('load',function(event){
     timer.pauseTimer();
   })
 
-  btnSaveToDb.addEventListener('click',function(){
-    if(currentUser.hasOwnProperty("trackid")){
-      saveRoundToDbTimer();
+  btnSaveToDb.addEventListener('click',function(){ // spara runda/rating till databas.
+    let containerPrestation = document.getElementsByClassName('containerPrestation')[0];
+    let containerTimer = document.getElementsByClassName('containerTimer')[0];
+
+    if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
+      if(currentUser.hasOwnProperty("trackid")){
+        saveRoundToDbTimer();
+        containerStars.style.display="none";
+        btnStartClock.style.display = "inline-block";
+        btnStartClock.innerText = "Start Timer";
+        timer.resetTimer();
+        containerPrestation.style.display="flex";
+        containerTimer.style.display="none";
+      }
+    }else{                                            // händer om prestationsida är aktiv
+      saveRoundStarsToDb(currentUser.stars)
       containerStars.style.display="none";
-      btnStartClock.style.display = "inline-block";
-      btnStartClock.innerText = "Start Timer";
-      timer.resetTimer();
-      document.getElementsByClassName('containerPrestation')[0].style.display="flex";
-      document.getElementsByClassName('containerTimer')[0].style.display="none";
     }
+
+
   })
-  btnShowStars.addEventListener('click',function(){
+  btnShowStars.addEventListener('click',function(){  // Rating av banan
     if(currentUser.hasOwnProperty("trackid")){
       btnClockStop.style.display = "none";
       btnShowStars.style.display = "none";
       btnClockPause.style.display = "none";
       btnStartClock.style.display = "none";
-      containerStars.style.display="block";
+      containerStars.style.display="flex";
     }
   })
 
-  btnStartClock.addEventListener('click', function(event){
+  btnStartClock.addEventListener('click', function(event){  // starta klockan
     btnClockPause.style.display = "block";
     btnStartClock.style.display = "none";
     btnClockStop.style.display = "none";
@@ -69,29 +80,30 @@ window.addEventListener('load',function(event){
 
 
   infoSelectedTrack.innerText = "Ingen vald bana";
-
   let timer = new Timer();
-
   let weatherNow = new Weather();
   weatherNow.loadWeather();
 
+}); // end of window load
 
-}); // end of load
+
 
 //------------------ Sätter stjärnor som är uppp till i --------------------->>
 let fillStars=(i,stars)=>{
-
   for(let j=0;j<stars.length;j++){
     if(j<=i){
       stars[j].innerHTML=`<i style="color:#fff72b;" class="fas fa-star fa-2x">`
     }else{
-      stars[j].innerHTML=`<i class="far fa-star fa-2x"></i>`
+      stars[j].innerHTML=`<i style="color: rgb(181, 181, 181);" class="far fa-star fa-2x"></i>`
     }
   }
 }
 //---------------------- END -------------------------------------------------//
 
 
+
+
+//------------------------- Sparar runda till db ----------------------------->>
 let saveRoundToDbTimer =()=>{
   let newPostKey = db.ref("rundor").push().key;
   let track = {
@@ -106,7 +118,21 @@ let saveRoundToDbTimer =()=>{
   db.ref(`/rundor/${newPostKey}`).set(track)
 }
 
+//------------------------ END -----------------------------------------------//
 
+
+
+
+//-----------------------  Spara Rating till databas ------------------------->>
+let saveRoundStarsToDb=(nb)=>{
+  db.ref(`/rundor/${currentUser.trackid}/rating`).set(nb)
+}
+
+//----------------------- END ------------------------------------------------//
+
+
+
+//----------------------------- Skapa klocka -------------------------------->>
 class Timer{
   constructor(time){
     this.timeRunning = false;
@@ -161,14 +187,13 @@ class Timer{
     document.getElementsByClassName('timeElapsedMinutes')[0].innerText = "0m";
     document.getElementsByClassName('timeElapsedSecound')[0].innerText= "00s";
   }
-
-
 }
+//----------------------- END ------------------------------------------------//
 
 
 
 
-
+//-----------------------  SKapa väder --------------------------------------->>
 class Weather{
   constructor(){
     this.loaded = true;
@@ -248,3 +273,4 @@ class Weather{
   */
 
 }
+//----------------------- END ------------------------------------------------//

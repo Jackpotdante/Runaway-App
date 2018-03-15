@@ -114,7 +114,6 @@ let makeCards = (tracks,location)=>{
 
     // eventListener för knapp för att gå till timersidan
     btnGoToTimer.addEventListener('click', function(event){
-      console.log(item.trackid);
       currentUser.trackid= item.trackid;
       document.getElementsByClassName('infoTrack')[0].innerText = "Vald bana: "+ runningTracks[item.trackid].name + " Längd: "+ runningTracks[item.trackid].length+"km";
       document.getElementsByClassName('containerTimer')[0].style.display = "flex";
