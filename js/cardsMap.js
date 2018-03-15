@@ -114,7 +114,6 @@ let makeCards = (tracks,location)=>{
 
     // eventListener för knapp för att gå till timersidan
     btnGoToTimer.addEventListener('click', function(event){
-      console.log(item.trackid);
       currentUser.trackid= item.trackid;
       document.getElementsByClassName('infoTrack')[0].innerText = "Vald bana: "+ runningTracks[item.trackid].name + " Längd: "+ runningTracks[item.trackid].length+"km";
       document.getElementsByClassName('containerTimer')[0].style.display = "flex";
@@ -291,7 +290,7 @@ let countStars=(numberOfStars)=>{
     if(i<=numberOfStars){
       newSpan.innerHTML+=`<i style="color:#FF2BE6;" class="fas fa-star fa-xs"></i>`;
     }else {
-      newSpan.innerHTML+=`<i class="far fa-star fa-xs"></i>`;
+      newSpan.innerHTML+=`<i style="color:rgb(145, 145, 145);" class="far fa-star fa-xs"></i>`;
     }
   }
   newSpan.className ="rating";
@@ -299,6 +298,8 @@ let countStars=(numberOfStars)=>{
 }
 
 //------------------- END ---------------------------------------------------//
+
+
 
 
 //-------------  Räknar ut tid och skickar tillbaka en sträng ----------------->

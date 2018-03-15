@@ -117,16 +117,26 @@
 	border-radius: 5px;
 	padding: 3px;
 }
+.containerPrestation .divBtnPrest{
+	display: flex;
+	flex: 1 100%;
+}
 
-
-
+.containerPrestation .divBtnPrest .btnRemove,
+.containerPrestation .divBtnPrest .btnStars{
+	flex: 1 50%;
+	max-width: 85px;
+	margin-left: 10px;
+	border-radius: 5px;
+	background-color: inherit;
+}
 
 
 @media screen and (min-width: 500px){
 	body{
 		display: flex;
 	}
-	.containerPrestation >:nth-child(2){
+	.containerPrestation >:nth-child(3){
 		margin-top: 205px;
 	}
 

@@ -27,7 +27,8 @@
   text-align: center;
   left: 22px;
 }
-.containerTimer #btnSaveToDb{
+
+.containerTimer #btnShowStars{
   background-color: #00ceff;
   color: white;
   border-radius: 10px;
@@ -126,4 +127,37 @@
   right: 10px;
   position: absolute;
   top: 78px;
+}
+
+.containerStars{
+  display: none;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  background-color: #ffa834cc;
+  z-index: 200;
+}
+
+#btnSaveToDb{
+  background-color: #00ceff;
+  color: white;
+  border-radius: 10px;
+  height: 40px;
+  margin: 15px 20px;
+  text-align: center;
+  top: -80px;
+  width: 100px;
+  right: 24px;
+}
+
+.containerStars ul li{
+  display: inline-block;
+  list-style-type: none;
+}
+.containerStars ul{
+  flex:1 100%;
 }
