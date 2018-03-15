@@ -1,3 +1,4 @@
+let currentLocation = "";
 
 // Hämtar hem alla användare från databas.
 let allUsers = ""
@@ -20,9 +21,15 @@ db.ref("/statrundor").once("value").then(function(snapshot){
 
 // Hämtar hem alla resultat från databas. ------------------------------------>>
 let allResults=""
-db.ref("/rundor").once("value").then(function(snapshot){
-  allResults = snapshot.val();
+db.ref("/rundor").on("value",function(snapshot){
 
+
+  allResults = snapshot.val();
+  if(currentLocation!=""){
+    console.log("update");
+    document.getElementsByClassName('wrapper-Tracks')[0].innerText="";
+    getTracks(currentLocation);
+  }
 
 });
 //----------------------------END --------------------------------------------//
@@ -35,6 +42,7 @@ db.ref("/rundor").once("value").then(function(snapshot){
 
 // Filtrerar ut alla platser och skapar kort --------------------------------->>
 let getTracks = (location)=>{
+  currentLocation = location;
   let tracks = [];
   for(track in runningTracks){
     if(runningTracks[track].place==location){
