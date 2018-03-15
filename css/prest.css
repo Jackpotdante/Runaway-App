@@ -103,10 +103,6 @@
 	font-size: 13px;
 	margin-top:5px;
 }
-.containerPrestation .prest .rating{
-	text-align: right;
-	padding-right:5px;
-}
 
 
 .containerPrestation .fail{
@@ -121,23 +117,8 @@
 	border-radius: 5px;
 	padding: 3px;
 }
-.containerPrestation .divBtnPrest{
-	display: flex;
-	flex: 1 100%;
-}
-.containerPrestation .divBtnPrest .btnStars,
-.containerPrestation .divBtnPrest .btnRemove{
 
-  border-radius: 10px;
-  max-width: 67px;
-  text-align: center;
-	align-items: center;
-	justify-content: center;
-	left: 22px;
-	flex: 1 50%;
-	margin: 0 auto;
-	background-color: inherit;
-}
+
 
 
 
@@ -145,7 +126,7 @@
 	body{
 		display: flex;
 	}
-	.containerPrestation >:nth-child(2){
+	.containerPrestation >:nth-child(3){
 		margin-top: 205px;
 	}
 
