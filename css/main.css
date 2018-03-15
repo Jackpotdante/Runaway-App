@@ -144,11 +144,15 @@ body{
   #navDesktop a:hover{
     font-weight: bold;
   }
+  #nameDesktop{
+    margin: 5px 0 0 0;
+    font-size: 16px;
+  }
 
   #imgDesktopNav{
     margin: 0 10px 0 10px;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
     background-color: gray;
   }

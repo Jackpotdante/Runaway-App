@@ -85,6 +85,17 @@
 
 
   <div class="containerTimer">
+      <div class="containerStars">
+        <h3>Rating</h3>
+        <ul>
+          <li class="stars"><i style="color:#fff72b;" class="fas fa-star fa-2x"></i></li>
+          <li class="stars"><i style="color:#fff72b;" class="fas fa-star fa-2x"></i></li>
+          <li class="stars"><i style="color:#fff72b;" class="fas fa-star fa-2x"></i></li>
+          <li class="stars"><i class="far fa-star fa-2x"></i></li>
+          <li class="stars"><i class="far fa-star fa-2x"></i></li>
+        </ul>
+        <button id="btnSaveToDb">save</button>
+      </div>
     <p class="infoTrack"></p>
     <div class="weather">
       <span id="weatherTemperature"></span>
@@ -102,7 +113,7 @@
       <div class="timerBtn">
         <button id="btnClockStop">Reset</button>
         <button id="btnClockPause">Pause</button>
-        <button id="btnSaveToDb">Save</button>
+        <button id="btnShowStars">Save</button>
         <button id="btnStartClock">Start Timer</button>
       </div>
     </div>
@@ -113,6 +124,7 @@
     <div id="totalStat">
       <span id="spanTotalLength"></span><span id="spanLongestDist"></span>
     </div>
+
   </div>
 
 
@@ -242,8 +254,9 @@
       <ul id="navDesktop">
         <li id="mapDesktop" class="listItems"><a href="#">MAP</a></li>
         <li id="achDesktop" class="listItems"><a href="#">ACHIEVMENTS</a></li>
-        <li id="communityDesktop" class="listItems"><a href="#">COMMUNITY</a></li>
-        <li id="nameDesktopNav"><p>Oskar Jonsson</p></li>
+        <li id="communityDesktop"class="listItems"><a href="#">COMMUNITY</a></li>
+        <li id="nameDesktopNav"><p id="nameDesktop"></p></li>
+
         <li><img id="imgDesktopNav"></img></li>
       </ul>
 

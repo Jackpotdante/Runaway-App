@@ -28,6 +28,10 @@ window.addEventListener('load', function(event){
     document.getElementById("inputMessage").value = " ";
   };
 
+
+
+
+
 /** SENDS MESSAGE **/
 
   let sendBtn = document.getElementById("sendBtn");
@@ -109,7 +113,6 @@ let getMembers = function(){
 
   }
 }
-
 let inputSearch = document.getElementById('searchMembers');
 
 inputSearch.addEventListener('keyup', function(event){
@@ -204,6 +207,12 @@ function createMembers(name, age, img, location, distance, run){
     document.getElementsByClassName("navContainer")[0].style.display = "block";
     document.getElementsByClassName("containerMembers")[0].style.display = "none";
  });
+
+ communityDesktop.addEventListener('click', function(event){
+   getMembers();
+   updateScroll();
+ });
+
 
 
 /**WINDOW LOAD**/

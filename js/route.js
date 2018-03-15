@@ -39,7 +39,7 @@ function initMap(){
         map.setZoom(14);
         curLocation = locations[i][0];
         getTracks(curLocation);
-
+        
 
 
       }
@@ -47,6 +47,7 @@ function initMap(){
   }
 }
 window.addEventListener('load', function(event){
+
   let toggleButton = document.getElementsByClassName("hej")[0];
   let overmaps = document.getElementById("overmap");
   let showBtn = document.getElementById("showBtn");
