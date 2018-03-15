@@ -14,7 +14,7 @@ var currentUser = {
 	longestRun: 0
 };
 
-
+var userExist = false;
 
 // Initialize Firebase
 /*
@@ -29,6 +29,19 @@ var config = {
 firebase.initializeApp(config);
 const db = firebase.database();
 */
+
+//Loader function
+
+		var loader;
+		function loaderFunction() {
+			document.getElementsByClassName("lds-spinner")[0].style.display = "inline-block";
+			loader = setTimeout(showPage, 3000);
+		}
+
+		function showPage() {
+		  document.getElementsByClassName("lds-spinner")[0].style.display = "none";
+		}
+
 //facebook provider object
 var provider = new firebase.auth.FacebookAuthProvider();
 var providerGoogle = new firebase.auth.GoogleAuthProvider();
@@ -40,7 +53,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         //gotoAccountPage(user);
         pushUserIntoFirebase(user);
-        gotoTimerPage();
+        //gotoTimerPage();
 
 
     } else {
@@ -84,7 +97,7 @@ window.addEventListener('load', function(event) {
 		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
 		        pushUserIntoFirebase(user);
-		        gotoTimerPage();
+		        //gotoTimerPage();
 
 
 
@@ -122,7 +135,7 @@ window.addEventListener('load', function(event) {
 		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
 		        pushUserIntoFirebase(user);
-		        gotoTimerPage();
+		       
 
 
 
@@ -171,7 +184,7 @@ window.addEventListener('load', function(event) {
 	 var btnEdit = document.getElementById('settings');
 	 btnEdit.addEventListener('click', function(event) {
 
-	 	var innerProfil1 = document.getElementById('innerProfil1');
+	 	//var innerProfil1 = document.getElementById('innerProfil1');
 	    document.getElementById("contentProfil").style.display = "none";
 
 	    var innerProfil2 = document.getElementById('innerProfil2');
@@ -199,7 +212,7 @@ window.addEventListener('load', function(event) {
 	var btnCancel = document.getElementById('btnCancel');
 	 btnCancel.addEventListener('click', function(event) {
 
-	 	var innerProfil1 = document.getElementById('innerProfil1');
+	 	//var innerProfil1 = document.getElementById('innerProfil1');
 	    document.getElementById("contentProfil").style.display = "block";
 
 	    var innerProfil2 = document.getElementById('innerProfil2');
@@ -253,44 +266,31 @@ window.addEventListener('load', function(event) {
 		    		currentUser.gender = value;
 		    	}
 
-		    var moreInfoProfile = document.getElementById('moreInfoProfile');
-			moreInfoProfile.style.display = "none";
 
 			updateAccountPage();
 
-			var innerProfil1 = document.getElementById('innerProfil1');
-	    	document.getElementById("contentProfil").style.display = "block";
+			var moreInfoProfile = document.getElementById('moreInfoProfile');
+			moreInfoProfile.style.display = "none";
+
 
 	    	var innerProfil2 = document.getElementById('innerProfil2');
 	   		innerProfil2.style.display = "none";
 
-	   		var inputUserAge = document.getElementById('uAge2');
-	    	inputUserAge.placeholder = "Ålder";
-	    	var inputUserCity = document.getElementById('uCity2');
-	    	inputUserCity.placeholder = "Plats";
+	   		
 
+			document.getElementById("contentProfil").style.display = "block";
+
+
+		    var inputUserAge = document.getElementById('uAge2');
+		    inputUserAge.placeholder = "Ålder";
+		    var inputUserCity = document.getElementById('uCity2');
+		    inputUserCity.placeholder = "Plats";
 	}) //end of btnSave eventlistener*/
 
 	//Windows resized to desktop läge
 	window.addEventListener('resize', resizeDesktop);
 }); //windows.load
 
-function getUserKey() {
-	var userKey = "";
-	db.ref('users/').once('value', function(snapshot) {
-          //dataArray = [];
-          snapshot.forEach( child => {
-            var user = child.val();
-            if(user.uid == currentUser.uid){
-				userKey = child.key;
-				//console.log("Current users name: " + user.name);
-				//console.log("Current users key inside: " + userKey);
-			} //end of if else
-          })
-          //console.log("Current users key outside: " + userKey);
-          callAfter(userKey);
-  	});//end of db.ref
-}//end of function getUserKey
 function callAfter(key){
 	//console.log("Current users key outside: " + key);
 	//Updating users name
@@ -338,7 +338,7 @@ function pushUserIntoFirebase(userO){
 	var email = userO.email;
 	var uid = userO.uid;
 	var photoUrl = userO.photoURL;
-	var userExist = false;
+	
 	//console.log("Email: " + email);
 
 	if(email==null){
@@ -405,20 +405,19 @@ function pushUserIntoFirebase(userO){
 		      //console.log("Users key recieved: " + userKey);
 		      firebase.database().ref('users/' + userKey + '/key').set(userKey);
 		      currentUser.key = userKey;
-		      var moreInfoProfile = document.getElementById('moreInfoProfile');
-	    	moreInfoProfile.style.display = "block";
-	    	var inputUserName = document.getElementById('uName');
-	 		inputUserName.placeholder = currentUser.name;
+
+		      	//First time edit prfile info page shows up
+			    /*var moreInfoProfile = document.getElementById('moreInfoProfile');
+		    	moreInfoProfile.style.display = "block";
+		    	var inputUserName = document.getElementById('uName');
+		 		inputUserName.placeholder = currentUser.name;*/
 	    }//end of if
+	    
+	    
+	    gotoTimerPage();
 	    updateAccountPage();
 	    //Show additional user info window for first time user
-	    /*
-	    if (userExist != true){
-	    	var moreInfoProfile = document.getElementById('moreInfoProfile');
-	    	moreInfoProfile.style.display = "block";
-	    	var inputUserName = document.getElementById('uName');
-	 		inputUserName.placeholder = currentUser.name;
-	    }*/
+	    
 
 	}//end of callLater
 }//end of pushUserInfoIntoFirebase
@@ -438,6 +437,13 @@ function gotoTimerPage(){
 	 } else {
 		var timerPage = document.getElementsByClassName("containerTimer")[0];
 		timerPage.style.display = "flex";
+	}
+
+	if (userExist==false) {
+		var moreInfoProfile = document.getElementById('moreInfoProfile');
+		 moreInfoProfile.style.display = "block";
+		 var inputUserName = document.getElementById('uName');
+		inputUserName.placeholder = currentUser.name;
 	}
 	
 }
@@ -529,10 +535,13 @@ function logOut(){
 
 				navContainer.style.display = 'none';
 
+				var containerPrestation = document.getElementsByClassName("containerPrestation")[0];
+
+				containerPrestation.style.display = 'none';
+
 				var moreInfoProfile = document.getElementById('moreInfoProfile');
 
-
-	    	moreInfoProfile.style.display = "none";
+	    		moreInfoProfile.style.display = "none";
 
 
 
