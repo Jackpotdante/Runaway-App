@@ -129,19 +129,15 @@
 	.containerPrestation >:nth-child(2){
 		margin-top: 205px;
 	}
-	.headProfil{
-		margin-top: 55px;
-	}
+
 	.containerPrestation{
 		flex: 1 50%;
 	}
-	.containerProfile{
-		flex: 1 50%;
-	}
+
 	#totalStat{
 		position: relative;
 		top: 65px;
 		background-color: #ffa834;
 	}
-	
+
 }
