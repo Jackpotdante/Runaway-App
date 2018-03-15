@@ -32,6 +32,17 @@
   color: white;
   border-radius: 10px;
   height: 50px;
+  margin: 15px 20px;
+  text-align: center;
+  top: -80px;
+  width: 100px;
+  right: 24px;
+}
+.containerTimer #btnShowStars{
+  background-color: #00ceff;
+  color: white;
+  border-radius: 10px;
+  height: 50px;
   position: absolute;
   margin: 10px 20px;
   display: none;
@@ -126,4 +137,19 @@
   right: 10px;
   position: absolute;
   top: 78px;
+}
+
+.containerTimer .containerStars{
+  display: none;
+  width: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  background-color: rgba(245, 245, 245, 0.37);
+}
+.containerTimer .containerStars ul li{
+  display: inline-block;
+  list-style-type: none;
 }

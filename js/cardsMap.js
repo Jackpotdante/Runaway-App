@@ -291,7 +291,7 @@ let countStars=(numberOfStars)=>{
     if(i<=numberOfStars){
       newSpan.innerHTML+=`<i style="color:#FF2BE6;" class="fas fa-star fa-xs"></i>`;
     }else {
-      newSpan.innerHTML+=`<i class="far fa-star fa-xs"></i>`;
+      newSpan.innerHTML+=`<i style="color:rgb(145, 145, 145);" class="far fa-star fa-xs"></i>`;
     }
   }
   newSpan.className ="rating";
@@ -299,6 +299,8 @@ let countStars=(numberOfStars)=>{
 }
 
 //------------------- END ---------------------------------------------------//
+
+
 
 
 //-------------  Räknar ut tid och skickar tillbaka en sträng ----------------->
