@@ -209,6 +209,7 @@ window.addEventListener('load', function(event) {
 
 	  //Edit profile from Profile page
 		/* EDIT *****/
+
 	 var btnEdit = document.getElementById('settings');
 	 btnEdit.addEventListener('click', function(event) {
 
@@ -252,6 +253,7 @@ window.addEventListener('load', function(event) {
 	    inputUserCity.placeholder = "Plats";
 
 	 }) //end of btnCancel eventlistener
+
 
 	 var btnSave = document.getElementById('btnSave');
 	 btnSave.addEventListener('click', function(event) {
@@ -476,6 +478,16 @@ function updateAccountPage(){
 	let locationCity = document.getElementById("locationCity");
   	profilePicture.src = currentUser.photoUrl;
 		profileName.innerText = currentUser.name;
+
+		/** SETS USER INFO DESKTOP **/
+		let nameDesktop = document.getElementById("nameDesktop");
+		let imgDesktopNav = document.getElementById("imgDesktopNav");
+
+		nameDesktop.innerHTML = currentUser.name;
+		imgDesktopNav.src = currentUser.photoUrl;
+
+	/******************************************/
+
 	if(currentUser.gender != ""){
 		var gender = currentUser.gender;
 		profileGender.innerText = gender;

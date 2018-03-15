@@ -277,7 +277,8 @@ body, html {
     align-self: flex-start;
     display: flex;
     width: 49%;
-    margin: 55px 0 0 0;
+    margin: 65px 0 0 0;
+
   }
   .containerCommunity{
     flex-direction: row;
