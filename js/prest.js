@@ -18,14 +18,12 @@ window.addEventListener("load", function (){
 		let newRating = document.createElement('span');
 		let btnRemovePrest = document.createElement('button');
 		let btnSetStars = document.createElement('button');
-		//let image = document.createElement("img");
 		let spanTotalLength = document.getElementById("spanTotalLength");
 		let spanLongestDist = document.getElementById("spanLongestDist");
 		let thisDistance = dataForRace.length;
 		newName.className="nameOfTrack";
 		newTextarea.type="textarea";
 		newDiv.className="prest";
-		newDiv.idOfRound = dataForRace.roundid;
 		newPlace.className="place";
 		newRating.className="rating";
 		btnRemovePrest.innerText="x";
@@ -34,6 +32,8 @@ window.addEventListener("load", function (){
 		btnRemovePrest.className="btnRemove";
 		btnSetStars.className="btnStars";
 		newDivBtn.className="divBtnPrest";
+		newDivBtn.idOfRound = dataForRace.roundid;
+		newDiv.idOfRound = dataForRace.roundid;
 		newDivBtn.appendChild(btnRemovePrest);
 		newDivBtn.appendChild(btnSetStars);
 
@@ -59,17 +59,24 @@ window.addEventListener("load", function (){
 		}
 
 
-		getRunInfo();
+		getRunInfo(); //används för att uppdatera profil
 
 
-		btnRemovePrest.addEventListener('click', function(event){
-			console.log("hej");
-			console.log(event.target.idOfRound);
+		btnRemovePrest.addEventListener('click', function(event){  // tar bort vald prestation
 			let key = event.target.idOfRound;
 			 db.ref(`/rundor/${key}`).remove();
 		});
-		btnSetStars.addEventListener('click', function(event){
-			console.log("hej");
+
+
+		btnSetStars.addEventListener('click', function(event){  //justera rating på vald prestation
+			let containerStars = document.getElementsByClassName('containerStars')[0];
+			let stars = document.getElementsByClassName('stars');
+			let grandpa = event.target.parentNode.parentNode;
+			grandpa = grandpa.getElementsByClassName('rating')[1];
+			let amount = countStarsOfSpan(grandpa.children) //räknar ut rating
+			fillStars(amount-1,stars);											// innan justering av rating sätts den till samma klickad prestation.
+			currentUser.trackid = event.target.parentNode.idOfRound;
+			containerStars.style.display="flex"
 		});
 
 
@@ -172,7 +179,48 @@ window.addEventListener("load", function (){
 			}
 		})
 
+		db.ref('rundor/').on("child_changed", function(snapshot, prevChildKey){
+			let data = snapshot.val();
+			let allPrest = document.getElementsByClassName('prest');
+
+			for(let i=0;i<allPrest.length;i++){
+				if(allPrest[i].idOfRound == data.roundid){
+					updatePrest(allPrest[i],data);
+				}
+			}
+		})
+
 	}
 
 	getTracksFromUser();
 })
+
+
+
+
+// ------------------ Räknar ut hur många stjärnor som är satta -------------->>
+let countStarsOfSpan=(list)=>{
+	let stars = document.getElementsByClassName('className')
+	let count = 0;
+	for(let i=0;i<list.length; i++){
+			if(list[i].dataset.prefix=="fas"){
+			count++
+			}
+	}
+
+	currentUser.stars = count; //används vid spara till db.
+	return count;
+}
+
+// --------------------------- END -------------------------------------------//
+
+
+
+//-------------------------- Uppdatera prestation ---------------------------->>
+
+let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
+	let stars = countStars(data.rating);
+	found.getElementsByClassName('rating')[0].innerHTML = ""
+	found.getElementsByClassName('rating')[0].appendChild(stars);
+}
+//--------------------------  END --------------------------------------------//
