@@ -1,4 +1,4 @@
-//Sara
+
 //Global variable creating empty current user object
 var currentUser = {
 	name: "",
@@ -60,8 +60,6 @@ window.addEventListener('load', function(event) {
 		var btnLoginGoogle = document.getElementById('btnLoginGoogle');
 
 
-
-	  //console.log('windows is loaded');
 	  //var screenH = document.documentElement.clientHeight;
 
 	  //wrapUsersMob.style.height = screenH;
@@ -79,7 +77,13 @@ window.addEventListener('load', function(event) {
 		        //console.log('Token: ' + token);
 		        // The signed-in user info.
 		        var user = result.user;
-		        //console.log('User info: ' + user)
+		        //console.log('User info: ' + user);
+		           var user = result.user;
+		        //console.log('User info: ' + user);
+		        //console.log('User email: ' + user.email);
+		        //console.log('User name: ' + user.displayName);
+		        //console.log('User uid: ' + user.uid);
+
 
 		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
@@ -113,7 +117,11 @@ window.addEventListener('load', function(event) {
 		        //console.log('Token: ' + token);
 		        // The signed-in user info.
 		        var user = result.user;
-		        //console.log('User info: ' + user)
+		        //console.log('User info: ' + user);
+		        //console.log('User email: ' + user.email);
+		        //console.log('User name: ' + user.displayName);
+		        //console.log('User uid: ' + user.uid);
+
 
 		        //console.log('User is logged in inside load');
 		        //gotoAccountPage(user);
@@ -140,53 +148,7 @@ window.addEventListener('load', function(event) {
 	 var btnLogOut = document.getElementById('logOut');
 	 btnLogOut.addEventListener('click', function(event) {
 
-	 		firebase.auth().signOut().then(function() {
-			  // Sign-out successful.
-			  var wrapProfile = document.getElementById('containerProfil');
-				wrapProfile.style.display = 'none';
-
-				var timerPage = document.getElementsByClassName("containerTimer")[0];
-				timerPage.style.display = "none";
-
-				var containerLogin = document.getElementsByClassName("containerLogin")[0];
-
-				containerLogin.style.display = 'block';
-
-				var navContainer = document.getElementsByClassName("navContainer")[0];
-
-				navContainer.style.display = 'none';
-
-				var moreInfoProfile = document.getElementById('moreInfoProfile');
-
-
-	    	moreInfoProfile.style.display = "none";
-
-
-
-				currentUser = {
-					name: "",
-					email: "",
-					uid: "",
-					photoUrl: "",
-					age: 0,
-					city: "",
-					memberDate: "",
-					gender: "",
-					key: "",
-					totalLength: 0,
-					longestRun: 0
-				};
-
-
-			}).catch(function(error) {
-			  //console.log('Error sign out: ' + error);
-			});
-
-			var inputUserAge = document.getElementById('uAge2');
-	    	inputUserAge.placeholder = "Ålder";
-	    	var inputUserCity = document.getElementById('uCity2');
-	    	inputUserCity.placeholder = "Plats";
-
+	 		logOut();
 
 	 }) //end of btnSignOut eventlistener*/
 
@@ -369,17 +331,35 @@ function callAfter(key){
 
 //Push user object into firebase
 function pushUserIntoFirebase(userO){
+
+
+	//console.log("Logged in user: " + userO);
+	//console.log("Logged in user email: " + userO.email);
 	var displayName = userO.displayName;
 	var email = userO.email;
 	var uid = userO.uid;
 	var photoUrl = userO.photoURL;
 	var userExist = false;
+	//console.log("Email: " + email);
+
+	if(email==null){
+		logOut();
+		errorMessage = document.getElementById("errorMessage");
+		errorMessage.style.display = "block";
+	} else {
+
 	//Checks if user already exist in the DB
 	db.ref('users/').once('value', function(snapshot) {
 		let data = snapshot.val();
 		for(let child in data){
 			let r = data[child];
-			if(r.uid == userO.uid){
+			//console.log("remail: " + r.email);
+			//console.log("userO.email: " + userO.email);
+			if(r.email == userO.email){
+				//console.log("remail: " + r.email);
+				
+				//console.log("userO.email: " + userO.email);
+				//console.log('User exist is set to true');
 				userExist = true;
 				currentUser.name = r.name;
 				currentUser.email = r.email;
@@ -394,8 +374,10 @@ function pushUserIntoFirebase(userO){
 		}//end of for
 		callLater();
 	})//end of db.ref
+
+	} //end of else
 	function callLater() {
-		if (userExist != true){
+		if (userExist == false){
 			//console.log('User exist is set to false');
 			//getting current date
 			var currentDate = getCurrentDate();
@@ -424,15 +406,21 @@ function pushUserIntoFirebase(userO){
 		      //console.log("Users key recieved: " + userKey);
 		      firebase.database().ref('users/' + userKey + '/key').set(userKey);
 		      currentUser.key = userKey;
+		      var moreInfoProfile = document.getElementById('moreInfoProfile');
+	    	moreInfoProfile.style.display = "block";
+	    	var inputUserName = document.getElementById('uName');
+	 		inputUserName.placeholder = currentUser.name;
 	    }//end of if
 	    updateAccountPage();
 	    //Show additional user info window for first time user
+	    /*
 	    if (userExist != true){
 	    	var moreInfoProfile = document.getElementById('moreInfoProfile');
 	    	moreInfoProfile.style.display = "block";
 	    	var inputUserName = document.getElementById('uName');
 	 		inputUserName.placeholder = currentUser.name;
-	    }
+	    }*/
+
 	}//end of callLater
 }//end of pushUserInfoIntoFirebase
 
@@ -513,6 +501,57 @@ function updateEditAccountPage(){
 	var picUser = document.getElementById('pic2');
   	picUser.src = currentUser.photoUrl;
   	//console.log("hhhhh");
+}
+
+function logOut(){
+	firebase.auth().signOut().then(function() {
+			  // Sign-out successful.
+			  var wrapProfile = document.getElementById('containerProfil');
+				wrapProfile.style.display = 'none';
+
+				var timerPage = document.getElementsByClassName("containerTimer")[0];
+				timerPage.style.display = "none";
+
+				var containerLogin = document.getElementsByClassName("containerLogin")[0];
+
+				containerLogin.style.display = 'block';
+
+				var navContainer = document.getElementsByClassName("navContainer")[0];
+
+				navContainer.style.display = 'none';
+
+				var moreInfoProfile = document.getElementById('moreInfoProfile');
+
+
+	    	moreInfoProfile.style.display = "none";
+
+
+
+				currentUser = {
+					name: "",
+					email: "",
+					uid: "",
+					photoUrl: "",
+					age: 0,
+					city: "",
+					memberDate: "",
+					gender: "",
+					key: "",
+					totalLength: 0,
+					longestRun: 0
+				};
+
+
+			}).catch(function(error) {
+			  //console.log('Error sign out: ' + error);
+			});
+
+			var inputUserAge = document.getElementById('uAge2');
+	    	inputUserAge.placeholder = "Ålder";
+	    	var inputUserCity = document.getElementById('uCity2');
+	    	inputUserCity.placeholder = "Plats";
+
+
 }
 
 function getRunInfo(){
