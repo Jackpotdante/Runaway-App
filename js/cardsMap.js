@@ -71,10 +71,10 @@ let makeCards = (tracks,location)=>{
                         </div>
 
                         <div class="cardMain">
-                          <div class="toggle"></div>
+                          <div class="toggle"><img height="10%" width="100%" src="https://firebasestorage.googleapis.com/v0/b/runaway-project.appspot.com/o/skor.jpg?alt=media&token=fe1004a8-43b4-4ff2-9214-298ac7fd99f1" alt="skor"></div>
                           <p>${item.info}</p>
                           <div class="divForBtnInCard">
-                            <button class="btnShowInfoTrack">Show Info</button>
+                            <button class="btnShowInfoTrack">Visa Info</button>
                             <button class="btnGoToTimer">Start Run</button>
                           </div>
                         </div>
@@ -100,11 +100,11 @@ let makeCards = (tracks,location)=>{
       let slideSetup =""; //sätter upp hastighet på rezise av li elementen
 
       if(showCard){
-        event.target.innerHTML="Hide Info"
+        event.target.innerHTML="Dölj Info"
         range = "1000px";
         slideSetup = "max-height 1s cubic-bezier(0.76, 0.57, 1, 0.72)";
       }else{
-        event.target.innerHTML="Show Info"
+        event.target.innerHTML="Visa Info"
         slideSetup = "max-height 1s cubic-bezier(0.34, 0.94, 0.89, 0.54)";
         range = "0px";
       }

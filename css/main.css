@@ -1,7 +1,6 @@
 body{
   width: 100%;
-  /*background: #ffa834;*/
-  background-image: linear-gradient(to top, #ffa834, #ffab3c, #ffaf43, #ffb24a, #ffb551);
+  background: #ffa834;
   margin: 0;
   padding: 0;
   position: relative;
