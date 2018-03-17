@@ -6,10 +6,9 @@
 
 .cardHolder .cardHeader{
   display: flex;
-  position: absolute;
-  top:5px;
   width: 97%;
-  border-radius: 5px;
+  margin: 10px 0 0 0;
+  font-size: 13px;
   text-align: center;
   font-family: 'Montserrat';
 }
@@ -20,8 +19,8 @@
 
 .cardHolder .cardHeader span:nth-child(2){
   flex: 1 50%;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: bold;
 }
 .cardHolder .cardHeader span:nth-child(3){
   flex: 1 25%;
@@ -36,12 +35,11 @@
 	display: flex;
 	position: relative;
 	max-height:78%;
-	min-height: 100px;
 	margin: 10px 0 5px 0;
 	background-color: #f3f3f3;
 	border-radius: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
+
+
 	align-content: flex-start;
 	align-items: center;
 	overflow: auto;
@@ -57,11 +55,10 @@
   margin-top: 5px;
 }
 .cardHolder .cardMain{
-  min-height: 50px;
-  padding: 5px;
+  padding: 0;
 
-  margin: 20px 0px 0px 0px;
-  width: 95%;
+  margin: 0;
+  width: 100%;
 }
 
 
@@ -71,16 +68,27 @@
   justify-content: center;
 }
 .cardHolder .cardMain button{
+  font-family: 'Montserrat';
   background-color: #00ceff;
-  border-radius: 5px;
-  border-color: #00ceff;
   height: 35px;
-  width: 75px;
-  margin: 20px 20px 10px 20px;
+  width: 50%;
+  margin: 0;
   color: white;
   font-size: 13px;
 }
-
+.btnShowInfoTrack{
+  border-left: 0.2px solid white;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+}
+.btnGoToTimer{
+  border-right: 0.2px solid white;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+}
 
 .cardHolder .trackComments img,
 .cardHolder .trackResult img{
@@ -90,7 +98,13 @@
   width: 25px;
   margin-right: 10px;
 }
+.cardHolder .cardMain p{
+  margin: 15px 0 15px 0;
+  font-family: 'Montserrat';
+  font-size: 11px;
+  margin-left: 5%;
 
+}
 .cardHolder .toggle{
   width: 95%;
   max-height: 0;
@@ -141,6 +155,41 @@
 }
 
 
+
+.cardHolder .innerContainerResults h3, .cardHolder .innerContainerComments h3{
+  font-family: 'Montserrat';
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+
+.cardHolder .trackResult, .cardHolder .trackComments{
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+
+.cardHolder .trackResult, .cardHolder .trackComments p{
+  font-size: 12px;
+  font-family: 'Montserrat';
+}
+
+.cardHolder .cardHeader span:nth-child(2){
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.cardHolder .trackComments img, .cardHolder .trackResult img{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.cardHolder .trackResult p:nth-of-type(1){
+  font-size: 12px;
+  font-family: 'Montserrat';
+}
+
+
 @media screen and (min-width: 501px){
 
   .wrapper-Tracks{
@@ -149,5 +198,76 @@
   .btnGoToTimer{
     display: none;
   }
+  /*** OSKAR **/
+
+  .cardHolder .cardMain{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 0px;
+    text-align: center;
+
+  }
+
+  .cardHolder .cardHeader{
+    position: static;
+    margin: 10px 0 0 0;
+    font-size: 13px;
+  }
+  .cardHolder .cardMain p{
+    margin: 15px 0 15px 0;
+    font-family: 'Montserrat';
+    font-size: 11px;
+
+  }
+  .cardHolder .cardMain button{
+    border-radius: 0px;
+    font-family: 'Montserrat';
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .cardHolder > li{
+    min-height: none;
+    padding: 0;
+  }
+  .wrapper-Tracks{
+    margin-top: 10px;
+  }
+
+  /** DROP DOWN INFO **/
+  .cardHolder .innerContainerResults h3, .cardHolder .innerContainerComments h3{
+    font-family: 'Montserrat';
+    margin: 10px 0 0 0;
+    padding: 0;
+  }
+
+  .cardHolder .trackResult, .cardHolder .trackComments{
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
+
+  .cardHolder .trackResult, .cardHolder .trackComments p{
+    font-size: 12px;
+    font-family: 'Montserrat';
+  }
+
+  .cardHolder .cardHeader span:nth-child(2){
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .cardHolder .trackComments img, .cardHolder .trackResult img{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+  }
+
+  .cardHolder .trackResult p:nth-of-type(1){
+    font-size: 12px;
+    font-family: 'Montserrat';
+  }
+
 
 }

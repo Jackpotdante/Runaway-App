@@ -1,5 +1,3 @@
-
-
 /**** GOOGLE MAPS API ***/
 var locations = [
   ['Mossen', 57.68412409999999, 11.980051199999934, 4],
@@ -39,7 +37,7 @@ function initMap(){
         map.setZoom(14);
         curLocation = locations[i][0];
         getTracks(curLocation);
-        
+
 
 
       }
