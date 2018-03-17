@@ -266,20 +266,15 @@ window.addEventListener('load', function(event) {
 		    		currentUser.gender = value;
 		    	}
 
-
-			updateAccountPage();
-
-			var moreInfoProfile = document.getElementById('moreInfoProfile');
+		    var moreInfoProfile = document.getElementById('moreInfoProfile');
 			moreInfoProfile.style.display = "none";
 
+			updateAccountPage();
 
 	    	var innerProfil2 = document.getElementById('innerProfil2');
 	   		innerProfil2.style.display = "none";
 
-	   		
-
 			document.getElementById("contentProfil").style.display = "block";
-
 
 		    var inputUserAge = document.getElementById('uAge2');
 		    inputUserAge.placeholder = "Ålder";
@@ -583,7 +578,7 @@ function resizeDesktop(){
 	var screenWidth = document.documentElement.clientWidth;
 	var displayValue = conProfile.style.display;
 
-	 if (screenWidth > 501 && displayValue!="none") {
+	 if (screenWidth > 501 && displayValue=="flex" && currentUser.name!="") {
 	 	console.log("Desktop screen Läge");
 	 	//var routePage = document.getElementsByClassName("containerRoute")[0];
 		//routePage.style.display = "flex";
