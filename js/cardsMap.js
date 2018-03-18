@@ -123,7 +123,7 @@ let makeCards = (tracks,location)=>{
     // eventListener för knapp för att gå till timersidan
     btnGoToTimer.addEventListener('click', function(event){
       currentUser.trackid= item.trackid;
-      document.getElementsByClassName('infoTrack')[0].innerText = "Vald bana: "+ runningTracks[item.trackid].name + " Längd: "+ runningTracks[item.trackid].length+"km";
+      document.getElementsByClassName('infoTrack')[0].innerHTML = `<i class="fas fa-map-marker-alt" style="font-size: 15px; color: white; margin-right: 5px;"></i>` + runningTracks[item.trackid].name + `<i class="fas fa-flag-checkered" style="font-size: 14px; color: white; margin: 0 5px 0 15px;"></i>` + runningTracks[item.trackid].length+"km";
       document.getElementsByClassName('containerTimer')[0].style.display = "flex";
       document.getElementsByClassName('containerRoute')[0].style.display= "none";
     }) // end
