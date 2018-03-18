@@ -152,7 +152,7 @@ window.addEventListener("load", function (){
 			let trackId = data.trackid;
 
 			if(data.user == currentUser.uid){
-
+				console.log(data);
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
 					length : runningTracks[trackId].length,
