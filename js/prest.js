@@ -68,20 +68,46 @@ window.addEventListener("load", function (){
 		btnRemovePrest.idOfRound= dataForRace.roundid;
 		//btnSetStars.innerText="Rating";
 
+		let dt= new Date(dataForRace.date)
+		dt = dt.getFullYear()+"-" + (dt.getMonth()+1)+"-"+ dt.getDate();
+		let stars = countStars(dataForRace.rating);
+
+		newPlace.innerHTML = `${dataForRace.place}`
+		newLength.innerHTML = `<i class="fas fa-flag-checkered" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${dataForRace.length}km`;
+		newTime.innerHTML = `<i class="fas fa-stopwatch" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${convertToTime(dataForRace.time)}`; //convertToTime ligger i cardsMap
+		newShare.innerHTML = `<i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Share";
+		newDate.innerHTML = `<i class="far fa-calendar" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${dt}`;
+
+
+		newRating.appendChild(stars);
+
+		prestList[0].appendChild(newDiv);
+		newDiv.appendChild(headPrest);
+		newDiv.appendChild(infoPrest);
+		newDiv.appendChild(textPrest);
+		newDiv.appendChild(sharePrest);
+		headPrest.appendChild(newRating);
+		headPrest.appendChild(newPlace);
+		headPrest.appendChild(btnRemovePrest);
+		infoPrest.appendChild(newTime);
+		infoPrest.appendChild(newLength);
+		infoPrest.appendChild(newDate);
+		textPrest.appendChild(newTextarea);
+		sharePrest.appendChild(newShare);
 
 
 		//btnSetStars.className="btnStars";
 		//newDivBtn.className="divBtnPrest";
-		//newDivBtn.idOfRound = dataForRace.roundid;
-		//newDiv.idOfRound = dataForRace.roundid;
+		headPrest.idOfRound = dataForRace.roundid;
+		newDiv.idOfRound = dataForRace.roundid;
 		//newDivBtn.appendChild(btnRemovePrest);
 		//newDivBtn.appendChild(btnSetStars);
 
-/*
+
 		if(dataForRace.comment!==undefined){
 			newTextarea.value= dataForRace.comment;
 		}
-		newTextarea.className="prestInput";*/
+		newTextarea.className="prestInput";
 		//newTextarea.readOnly = "false";
 
 
@@ -109,47 +135,24 @@ window.addEventListener("load", function (){
 		});
 
 
-		newRating.addEventListener('click', function(event){  //justera rating på vald prestation
+			newRating.addEventListener('click', function(event){  //justera rating på vald prestation
 			let containerStars = document.getElementsByClassName('containerStars')[0];
 			let stars = document.getElementsByClassName('stars');
-			let grandpa = event.target.parentNode.parentNode;
-			grandpa = grandpa.getElementsByClassName('rating')[1];
-			let amount = countStarsOfSpan(grandpa.children) //räknar ut rating
-			fillStars(amount-1,stars);											// innan justering av rating sätts den till samma klickad prestation.
+			let grandpa = event.target;
+
+			grandpa = grandpa.getElementsByClassName('rating')[0];
+
+			let amount = countStarsOfSpan(grandpa.children);//räknar ut rating
+
+			fillStars(amount-1,stars);										// innan justering av rating sätts den till samma klickad prestation.
+
 			currentUser.trackid = event.target.parentNode.idOfRound;
+
 			containerStars.style.display="flex"
 		});
 
 
-		let dt= new Date(dataForRace.date)
-		dt = dt.getFullYear()+"-" + (dt.getMonth()+1)+"-"+ dt.getDate();
-		let stars = countStars(dataForRace.rating);
 
-		newPlace.innerHTML = `${dataForRace.place}`
-		newLength.innerHTML = `<i class="fas fa-flag-checkered" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${dataForRace.length}km`;
-		newTime.innerHTML = `<i class="fas fa-stopwatch" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${convertToTime(dataForRace.time)}`; //convertToTime ligger i cardsMap
-		newShare.innerHTML = `<i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Share";
-		newDate.innerHTML = `<i class="far fa-calendar" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${dt}`;
-		//newSwitchBox.classList.add("switchBox");
-		//newSwitch.classList.add("switch");
-		//newSwitchCircle.classList.add("switchCircle");
-		//newSwitchBox.innerText = "Dela: ";
-
-		newRating.appendChild(stars);
-
-		prestList[0].appendChild(newDiv);
-		newDiv.appendChild(headPrest);
-		newDiv.appendChild(infoPrest);
-		newDiv.appendChild(textPrest);
-		newDiv.appendChild(sharePrest);
-		headPrest.appendChild(newRating);
-		headPrest.appendChild(newPlace);
-		headPrest.appendChild(btnRemovePrest);
-		infoPrest.appendChild(newTime);
-		infoPrest.appendChild(newLength);
-		infoPrest.appendChild(newDate);
-		textPrest.appendChild(newTextarea);
-		sharePrest.appendChild(newShare);
 
 		/*newDiv.appendChild(newLength);
 		newDiv.appendChild(newTime);
@@ -176,8 +179,8 @@ window.addEventListener("load", function (){
 
 		sharePrest.addEventListener("click", function(){
 			let inputTextCheck = newDiv.getElementsByClassName('prestInput')[0];
-			if(inputTextCheck.value !==""){
-				console.log("Comment is not empty");
+			if(inputTextCheck.value !=="" && dataForRace.share == false){
+
 				sharePrest.style.backgroundColor = "#8ce833";
 				newShare.innerHTML = `<i class="fas fa-check" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Shared";
 				db.ref("rundor/" + dataForRace.raceId).update({
@@ -185,28 +188,34 @@ window.addEventListener("load", function (){
 					comment: inputTextCheck.value
 				})
 
+			}else if(dataForRace.share == true){
+				sharePrest.style.backgroundColor = "#00ceff";
+				newShare.innerHTML = `<i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Share";
+				db.ref("rundor/" + dataForRace.raceId).update({share: false});
 			}else{
 				let str = inputTextCheck.value
-				inputTextCheck.placeholder="Fyll i uppgifter";
+				inputTextCheck.style.border = "1px solid red";
 				db.ref("rundor/" + dataForRace.raceId).update({share: false})
 				setTimeout(function () {
-					inputTextCheck.placeholder= str;
+
 					inputTextCheck.classList.remove("fail");
-					inputTextCheck
+					inputTextCheck.style.border = "none";
 				}, 1500);
-			}
 
-
-			/*if(newSwitch.classList[1] == "active"){
-				db.ref("rundor/" + dataForRace.raceId).update({
-					share: true,
-					comment: inputTextCheck.value
-				})
 			}
-			else{
-				db.ref("rundor/" + dataForRace.raceId).update({share: false})
-			}*/
 		})
+
+
+			/*sharePrest.addEventListener("click", function(){
+				if(dataForRace.share == true){
+					sharePrest.style.backgroundColor = "#00ceff";
+					newShare.innerHTML = `<i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Share";
+					db.ref("rundor/" + dataForRace.raceId).update({share: false});
+				}else{
+					sharePrest.style.backgroundColor = "#8ce833";
+					newShare.innerHTML = `<i class="fas fa-check" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Shared";
+				}
+			});*/
 
 
 	}
@@ -240,7 +249,9 @@ window.addEventListener("load", function (){
 			let containerPrest = document.getElementsByClassName('containerPrestation')[0];
 			let allPrest = document.getElementsByClassName('prest');
 
-			for(let i=0;i<allPrest.length;i++){
+
+
+			for(let i=0;i < allPrest.length;i++){
 				if(allPrest[i].idOfRound == data.roundid){
 					containerPrest.removeChild(allPrest[i]);
 				}
@@ -260,6 +271,7 @@ window.addEventListener("load", function (){
 
 		})
 
+
 	}
 
 	getTracksFromUser();
@@ -267,10 +279,9 @@ window.addEventListener("load", function (){
 
 
 
-
 // ------------------ Räknar ut hur många stjärnor som är satta -------------->>
 let countStarsOfSpan=(list)=>{
-	let stars = document.getElementsByClassName('className')
+	let stars = document.getElementsByClassName('className');
 	let count = 0;
 	for(let i=0;i<list.length; i++){
 			if(list[i].dataset.prefix=="fas"){
