@@ -15,6 +15,7 @@
     <link href="css/users.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="./js/script.js"></script>
@@ -104,30 +105,48 @@
   </div>
 
   <div class="containerTimer">
-    <p class="infoTrack"></p>
+
     <div class="weather">
       <span id="weatherTemperature"></span>
-      <span id="weatherWindSpeed"></span>
       <div class="weatherIconDiv">
         <img id="weatherIcon"src="./img/weather10.png" alt="väder"/>
       </div>
+      <span id="weatherWindSpeed"></span>
     </div>
     <div class="menu">
+      <p class="infoTrack"></p>
       <div class= "timer">
         <span class="timeElapsedHours"></span>
         <span class="timeElapsedMinutes"></span>
         <span class="timeElapsedSecound"></span>
       </div>
       <div class="timerBtn">
-        <button id="btnClockStop">Reset</button>
-        <button id="btnClockPause">Pause</button>
-        <button id="btnShowStars">Save</button>
-        <button id="btnStartClock">Start Timer</button>
+        <button id="btnClockPause"><i class="fas fa-pause" style="font-size: 14px; margin-right: 5px"></i>Pause</button>
+        <button id="btnStartClock"><i class="fas fa-play" style="font-size: 13px; margin-right: 5px"></i>Start</button>
+        <button id="btnShowStars"><i class="fas fa-save" style="font-size: 15px; margin-right: 5px"></i>Save</button>
+        <button id="btnClockStop"><i class="fas fa-undo-alt" style="font-size: 13px; margin-right: 5px"></i>Reset</button>
       </div>
     </div>
   </div>
 
   <div class="containerPrestation">
+    <div class="prest">
+      <div class="headPrest">
+        <span class="rating">X X X X</span>
+        <p class="place">Mossen</p>
+        <button class="btnRemove">X</button>
+      </div>
+      <div class="infoPrest">
+        <p class="timePrest"><i class="fas fa-stopwatch" style="font-size: 17px; color: black; margin-right: 5px;"></i>0h0min0s</p>
+        <p class="lengthPrest"><i class="fas fa-flag-checkered" style="font-size: 17px; color: black; margin-right: 5px;"></i>5km</p>
+        <p class="datePrest"><i class="far fa-calendar" style="font-size: 17px; color: black; margin-right: 5px;"></i>2018-03-14</p>
+      </div>
+      <div class="textPrest"><textarea placeholder="Enter a comment to able to share" class="prestInput"></textarea>
+      </div>
+      <div class="sharePrest">
+        <p class="shareTextPrest"><i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>Share</p>
+      </div>
+    </div>
     <div id="profileDesktop"></div>
     <div id="totalStat">
       <span id="spanTotalLength"></span><span id="spanLongestDist"></span>

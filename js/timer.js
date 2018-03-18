@@ -8,9 +8,9 @@ window.addEventListener('load',function(event){
   let btnSaveToDb = document.getElementById('btnSaveToDb');
   let btnShowStars = document.getElementById('btnShowStars');
   let infoSelectedTrack = document.getElementsByClassName('infoTrack')[0];
-  let timeElapsedSecound = document.getElementsByClassName('timeElapsedSecound')[0].innerText="00s";
-  let timeElapsedMinutes = document.getElementsByClassName('timeElapsedMinutes')[0].innerText="0m";
-  let timeElapsedHours = document.getElementsByClassName('timeElapsedHours')[0].innerText="0h";
+  let timeElapsedSecound = document.getElementsByClassName('timeElapsedSecound')[0].innerText="00";
+  let timeElapsedMinutes = document.getElementsByClassName('timeElapsedMinutes')[0].innerText="00 :";
+  let timeElapsedHours = document.getElementsByClassName('timeElapsedHours')[0].innerText="00 :";
   let stars = document.getElementsByClassName('stars');
   let containerStars= document.getElementsByClassName('containerStars')[0];
 
@@ -27,7 +27,7 @@ window.addEventListener('load',function(event){
     btnShowStars.style.display = "inline-block";
     btnClockStop.style.display = "inline-block";
     btnStartClock.style.display = "inline-block";
-    btnStartClock.innerText = "Continue";
+    btnStartClock.innerHTML = `<i class="fas fa-play" style="font-size: 13px; margin-right: 5px"></i>` + "Continue";
     btnClockPause.style.display = "none";
     timer.pauseTimer();
   })
@@ -157,13 +157,22 @@ class Timer{
         elapsedTimeMinutes = Math.floor((elasped % (1000 * 60 * 60)) / (1000 * 60));
         elapsedTimeSecounds = Math.floor((elasped % (1000 * 60)) / 1000);
 
-        document.getElementsByClassName('timeElapsedHours')[0].innerText = elapsedTimeHours+"h";
+        document.getElementsByClassName('timeElapsedHours')[0].innerText = elapsedTimeHours+":";
         if(elapsedTimeSecounds < 10){
-          document.getElementsByClassName('timeElapsedSecound')[0].innerText = "0"+String(elapsedTimeSecounds)+"s"
+          document.getElementsByClassName('timeElapsedSecound')[0].innerText = "0"+String(elapsedTimeSecounds);
+          document.getElementsByClassName('timeElapsedMinutes')[0].innerText = "0"+String(elapsedTimeMinutes) + " :";
+          document.getElementsByClassName('timeElapsedHours')[0].innerText = "0"+String(elapsedTimeHours) + " :";
+        }else if(elapsedTimeMinutes < 10){ // MAKES THE CLOCK ALWAYS BE 6 FIGURES
+          document.getElementsByClassName('timeElapsedMinutes')[0].innerText = "0"+String(elapsedTimeMinutes) + " :";
+          document.getElementsByClassName('timeElapsedHours')[0].innerText = "0"+String(elapsedTimeHours) + " :";
+          document.getElementsByClassName('timeElapsedSecound')[0].innerText = elapsedTimeSecounds;
         }else{
-          document.getElementsByClassName('timeElapsedSecound')[0].innerText = elapsedTimeSecounds +"s"
+          document.getElementsByClassName('timeElapsedHours')[0].innerText = "0"+String(elapsedTimeHours) + " :";
+          document.getElementsByClassName('timeElapsedSecound')[0].innerText = elapsedTimeSecounds;
+          document.getElementsByClassName('timeElapsedMinutes')[0].innerText = elapsedTimeMinutes+" :";
         }
-        document.getElementsByClassName('timeElapsedMinutes')[0].innerText = elapsedTimeMinutes+"m";
+
+        //document.getElementsByClassName('timeElapsedMinutes')[0].innerText = elapsedTimeMinutes+":";
         currentUser.timeOfRun = elasped;
       }, 1000);
     }// check end
@@ -183,9 +192,9 @@ class Timer{
     this.timeRunning = false;
     this.timeoutValue= 0;
     currentUser.timeOfRun = "";
-    document.getElementsByClassName('timeElapsedHours')[0].innerText = 0+"h";
-    document.getElementsByClassName('timeElapsedMinutes')[0].innerText = "0m";
-    document.getElementsByClassName('timeElapsedSecound')[0].innerText= "00s";
+    document.getElementsByClassName('timeElapsedHours')[0].innerText = "00" +" :";
+    document.getElementsByClassName('timeElapsedMinutes')[0].innerText = "00 :";
+    document.getElementsByClassName('timeElapsedSecound')[0].innerText= "00";
   }
 }
 //----------------------- END ------------------------------------------------//
