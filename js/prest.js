@@ -2,6 +2,7 @@ window.addEventListener("load", function (){
 	let totalLength = 0;
 	let longestDistance = 0;
 
+
 	function createPrest(dataForRace){
 		let prestList = document.getElementsByClassName("containerPrestation")
 
@@ -110,6 +111,7 @@ window.addEventListener("load", function (){
 		//newTextarea.readOnly = "false";
 
 
+		/*
 		totalLength += thisDistance;
 		currentUser.totalLength = totalLength; //sparar totalsträcka till user objecktet
 	  	currentUser.longestRun = longestDistance; //sparar totalsträcka till user objecktet
@@ -122,7 +124,7 @@ window.addEventListener("load", function (){
 			spanLongestDist.innerText = `Längst sträcka: ${longestDistance}km`;
 			currentUser.longestRun = thisDistance;
 		}
-
+		*/
 
 		getRunInfo(); //används för att uppdatera profil
 
@@ -225,7 +227,7 @@ window.addEventListener("load", function (){
 			let trackId = data.trackid;
 
 			if(data.user == currentUser.uid){
-
+				console.log(data);
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
 					length : runningTracks[trackId].length,
@@ -238,7 +240,7 @@ window.addEventListener("load", function (){
 					rating: data.rating,
 					roundid: data.roundid
 				}
-				createPrest(dataForRace);
+				createPrest(dataForRace); // skapar kort för varje runda
 			}
 		})
 
@@ -254,6 +256,7 @@ window.addEventListener("load", function (){
 					containerPrest.removeChild(allPrest[i]);
 				}
 			}
+			//updateLength(data.roundid); // uppdaterar sträcka för användare
 		})
 
 		db.ref('rundor/').on("child_changed", function(snapshot, prevChildKey){
@@ -265,13 +268,14 @@ window.addEventListener("load", function (){
 					updatePrest(allPrest[i],data);
 				}
 			}
+
 		})
 
 
 	}
 
 	getTracksFromUser();
-})
+}) // End of window load
 
 
 
@@ -301,3 +305,35 @@ let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
 	found.getElementsByClassName('rating')[0].appendChild(stars);
 }
 //--------------------------  END --------------------------------------------//
+
+
+
+
+//--------------- Räknar ut längst sträcka samt totalsträcka ----------------->>
+let updateLength =(except)=>{
+	let longestRun = 0;
+	let totalLength = 0;
+	//console.log("nu körs den");
+	//console.log(allResults);
+	for(item in allResults){
+
+		if(allResults[item].user == currentUser.uid && allResults[item].roundid!=except){
+			//console.log(allResults[item]);
+			let trackid = allResults[item].trackid;
+			let track =  runningTracks[trackid]
+
+			if(longestRun<track.length){
+				longestRun=track.length
+			}
+			totalLength+=track.length;
+		}
+
+	}
+	document.getElementById("spanTotalLength").innerText="Total Längd: " +totalLength + "km";
+	document.getElementById("spanLongestDist").innerText="Längst sträcka: "+longestRun + "km";
+	currentUser.longestRun = longestRun;
+	currentUser.totalLength = totalLength;
+	// uppdatear databse med längst straäck och total distans
+}
+
+//------------------  END ----------------------------------------------------//
