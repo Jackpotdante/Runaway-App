@@ -2,56 +2,6 @@
 * {
 	box-sizing: border-box;
 }
-/*Loader style*/
-/* Center the loader */
-#loader {
-	 position: absolute;
-	 display: none;
-	 left: 50%;
-	 top: 50%;
-	 z-index: 15;
-	 margin: -50px 0 0 -50px;
-	 /*border: 16px solid #f3f3f3;*/
-	 border: 12px solid transparent;
-	 border-radius: 50%;
-	 /*border-top: 16px solid #00ceff;
-  	 border-bottom: 16px solid #00ceff;*/
-  	 border-top: 12px solid white;
-  	 border-bottom: 12px solid white;
-	 width: 70px;
-	 height: 70px;
-	 -webkit-animation: spin 2s linear infinite;
-	 animation: spin 2s linear infinite;
-}
-
-	@-webkit-keyframes spin {
-	  0% { -webkit-transform: rotate(0deg); }
-	  100% { -webkit-transform: rotate(360deg); }
-	}
-
-	@keyframes spin {
-	  0% { transform: rotate(0deg); }
-	  100% { transform: rotate(360deg); }
-	}
-
-	/* Add animation to "page content" */
-	.animate-bottom {
-	  position: relative;
-	  -webkit-animation-name: animatebottom;
-	  -webkit-animation-duration: 1s;
-	  animation-name: animatebottom;
-	  animation-duration: 1s
-	}
-
-	@-webkit-keyframes animatebottom {
-	  from { bottom:-100px; opacity:0 }
-	  to { bottom:0px; opacity:1 }
-	}
-
-	@keyframes animatebottom {
-	  from{ bottom:-100px; opacity:0 }
-	  to{ bottom:0; opacity:1 }
-	}
 /*loader2*/
 
 	.lds-spinner {
@@ -142,7 +92,7 @@
 
 /*Login page*/
 .containerLogin {
-	height: 60%;
+	height: 100%;
 	width: 100%;
 }
 
@@ -153,9 +103,7 @@
 	line-height: 30px;
 	position: relative;
 	font-size: 16px;
-	
 	width: 100%;
-
 	min-width: 250px;
 	display: flex;
 	flex-flow: column nowrap;
@@ -233,10 +181,8 @@
 
 
 .profilMobil{
-
 	height: 90%;
 	width: 100%;
-
 }
 
 
@@ -310,10 +256,8 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-
 	width: 100%;
 	height: 40%;
-
 }
 
 
@@ -324,7 +268,6 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 95%;
-
 	margin:0 0 10px 0;
 
 }
@@ -358,6 +301,9 @@
 	.form_content2 {
 		background-color: white;
 		position: relative;
+	}
+	.form_content2 .form {
+		max-width: 400px;
 	}
 
 	.picProfile {
@@ -448,7 +394,7 @@
 			 margin: 10px 0;
 			 height: 30px;
 		}
-		#form_content form {
+		#form_content .form {
 			margin-top: 10px;
 			margin-bottom: 10px;
 		}
@@ -588,8 +534,9 @@
 	#pic2 {
 		margin-left: 20px;
 	}
-	.form_content2 form {
+	.form_content2 .form {
 		margin-left: 20px;
+		margin-right: 20px;
 	}
 	.form_content2 {
 		margin-left: 20px;
