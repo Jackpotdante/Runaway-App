@@ -14,7 +14,7 @@ window.addEventListener("load", function (){
 		let sharePrest = document.createElement("div");
 
 		/** CONTENT OF CONTAINER **/
-		let newRating = document.createElement('span');
+		let newRating = document.createElement('div');
 		let newPlace = document.createElement("p");
 		let btnRemovePrest = document.createElement('button');
 
@@ -53,7 +53,7 @@ window.addEventListener("load", function (){
 
 		/** CONTENT CLASSNAMES **/
 		newPlace.className="place";
-		newRating.className="rating";
+		newRating.className="wrapper-rating";
 		newTime.className = "timePrest";
 		newDate.className = "datePrest";
 		newLength.className = "lengthPrest";
@@ -100,6 +100,7 @@ window.addEventListener("load", function (){
 		//newDivBtn.className="divBtnPrest";
 		headPrest.idOfRound = dataForRace.roundid;
 		newDiv.idOfRound = dataForRace.roundid;
+		newRating.idOfRound = dataForRace.roundid;
 		//newDivBtn.appendChild(btnRemovePrest);
 		//newDivBtn.appendChild(btnSetStars);
 
@@ -134,8 +135,29 @@ window.addEventListener("load", function (){
 			 db.ref(`/rundor/${key}`).remove();
 		});
 
+		newRating.addEventListener('click',(function(){
+			let divOfStar = newRating;
+			return function(event){
+				//console.log(divOfStar);
+				//console.log(span);
+				let containerStars = document.getElementsByClassName('containerStars')[0];
+				let stars = document.getElementsByClassName('stars');
+				//let grandpa = event.target;
 
-			newRating.addEventListener('click', function(event){  //justera rating på vald prestation
+				let grandpa = divOfStar.getElementsByClassName('rating')[0];
+
+				let amount = countStarsOfSpan(grandpa.children);//räknar ut rating
+
+				fillStars(amount-1,stars);										// innan justering av rating sätts den till samma klickad prestation. Kommer från timer.js
+
+				currentUser.trackid = divOfStar.idOfRound;
+
+				containerStars.style.display="flex"
+			}
+		})() );
+
+		/*
+		newRating.addEventListener('click', function(event){  //justera rating på vald prestation
 			let containerStars = document.getElementsByClassName('containerStars')[0];
 			let stars = document.getElementsByClassName('stars');
 			let grandpa = event.target;
@@ -150,7 +172,7 @@ window.addEventListener("load", function (){
 
 			containerStars.style.display="flex"
 		});
-
+		*/
 
 
 
@@ -227,7 +249,7 @@ window.addEventListener("load", function (){
 			let trackId = data.trackid;
 
 			if(data.user == currentUser.uid){
-				console.log(data);
+				//console.log(data);
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
 					length : runningTracks[trackId].length,
@@ -301,8 +323,8 @@ let countStarsOfSpan=(list)=>{
 
 let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
 	let stars = countStars(data.rating);
-	found.getElementsByClassName('rating')[0].innerHTML = ""
-	found.getElementsByClassName('rating')[0].appendChild(stars);
+	found.getElementsByClassName('wrapper-rating')[0].innerHTML = ""
+	found.getElementsByClassName('wrapper-rating')[0].appendChild(stars);
 }
 //--------------------------  END --------------------------------------------//
 
