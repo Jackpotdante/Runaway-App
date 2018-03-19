@@ -199,7 +199,10 @@
     display: none;
   }
   /*** OSKAR **/
-
+  #overmap{
+    height: 90%;
+    top: 50px;
+  }
   .cardHolder .cardMain{
     padding: 0;
     margin: 0;
@@ -233,7 +236,7 @@
     padding: 0;
   }
   .wrapper-Tracks{
-    margin-top: 10px;
+    margin-top: 0px;
   }
 
   /** DROP DOWN INFO **/
