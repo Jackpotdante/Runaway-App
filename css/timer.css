@@ -188,4 +188,18 @@
 }
 .containerStars ul{
   flex:1 100%;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+.containerStars .wrapper-ownLength{
+  margin-bottom: 20px;
+}
+
+.containerStars #ownLength{
+  padding: 5px;
+  border-radius: 5px;
+  width: 80px;
+  margin-top: 10px;
+  text-align: center;
+
 }

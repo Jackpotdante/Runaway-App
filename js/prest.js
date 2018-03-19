@@ -249,10 +249,16 @@ window.addEventListener("load", function (){
 			let trackId = data.trackid;
 
 			if(data.user == currentUser.uid){
-				//console.log(data);
+				let length=0;
+				if(trackId=="default"){
+					length = data.length;
+				}else{
+					length = runningTracks[trackId].length;
+				}
+
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
-					length : runningTracks[trackId].length,
+					length : length,
 					//name: runningTracks[trackId].name,
 					time : data.time,
 					date : data.date,
@@ -335,24 +341,32 @@ let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
 let updateLength =(except)=>{
 	let longestRun = 0;
 	let totalLength = 0;
-	//console.log("nu körs den");
-	//console.log(allResults);
 	for(item in allResults){
 
 		if(allResults[item].user == currentUser.uid && allResults[item].roundid!=except){
-			//console.log(allResults[item]);
 			let trackid = allResults[item].trackid;
 			let track =  runningTracks[trackid]
 
-			if(longestRun<track.length){
-				longestRun=track.length
+			let length=0;
+			if(trackid=="default"){
+				length = Number(allResults[item].length);
+			}else{
+				length = Number(track.length);
 			}
-			totalLength+=track.length;
+
+			if(longestRun<length){
+				longestRun=length
+			}
+			totalLength+=length;
 		}
 
 	}
+	longestRun =longestRun.toFixed(1);
+	totalLength = totalLength.toFixed(1);
 	document.getElementById("spanTotalLength").innerText="Total Längd: " +totalLength + "km";
 	document.getElementById("spanLongestDist").innerText="Längst sträcka: "+longestRun + "km";
+
+
 	currentUser.longestRun = longestRun;
 	currentUser.totalLength = totalLength;
 	// uppdatear databse med längst straäck och total distans

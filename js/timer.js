@@ -13,6 +13,7 @@ window.addEventListener('load',function(event){
   let timeElapsedHours = document.getElementsByClassName('timeElapsedHours')[0].innerText="00 :";
   let stars = document.getElementsByClassName('stars');
   let containerStars= document.getElementsByClassName('containerStars')[0];
+  let inputOwnLength = document.getElementById("ownLength");
 
   btnClockStop.addEventListener('click',function(event){ // Stoppa klockan
     btnClockStop.style.display = "none";
@@ -36,16 +37,22 @@ window.addEventListener('load',function(event){
     let containerPrestation = document.getElementsByClassName('containerPrestation')[0];
     let containerTimer = document.getElementsByClassName('containerTimer')[0];
 
+
     if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
-      if(currentUser.hasOwnProperty("trackid")){
+
+      if(currentUser.hasOwnProperty("trackid")){        //
         saveRoundToDbTimer();
-        containerStars.style.display="none";
-        btnStartClock.style.display = "inline-block";
-        btnStartClock.innerText = "Start Timer";
-        timer.resetTimer();
-        containerPrestation.style.display="flex";
-        containerTimer.style.display="none";
+      }else{
+        saveRoundToDbTimerWithoutTrack(inputOwnLength.value);
       }
+      containerStars.style.display="none";
+      btnStartClock.style.display = "inline-block";
+      btnStartClock.innerText = "Start Timer";
+      timer.resetTimer();
+      containerPrestation.style.display="flex";
+      containerTimer.style.display="none";
+
+
     }else{                                            // händer om prestationsida är aktiv
       saveRoundStarsToDb(currentUser.stars)
       containerStars.style.display="none";
@@ -54,13 +61,13 @@ window.addEventListener('load',function(event){
 
   })
   btnShowStars.addEventListener('click',function(){  // Rating av banan
-    if(currentUser.hasOwnProperty("trackid")){
+    //if(currentUser.hasOwnProperty("trackid")){
       btnClockStop.style.display = "none";
       btnShowStars.style.display = "none";
       btnClockPause.style.display = "none";
       btnStartClock.style.display = "none";
       containerStars.style.display="flex";
-    }
+    //}
   })
 
   btnStartClock.addEventListener('click', function(event){  // starta klockan
@@ -79,7 +86,7 @@ window.addEventListener('load',function(event){
   }
 
 
-  infoSelectedTrack.innerText = "Ingen vald bana";
+  infoSelectedTrack.innerText = "No track selected";
   let timer = new Timer();
   let weatherNow = new Weather();
   weatherNow.loadWeather();
@@ -103,7 +110,7 @@ let fillStars=(i,stars)=>{
 
 
 
-//------------------------- Sparar runda till db ----------------------------->>
+//------------------------- Sparar runda till db vid vald bana  -------------->>
 let saveRoundToDbTimer =()=>{
   let newPostKey = db.ref("rundor").push().key;
   let track = {
@@ -111,6 +118,24 @@ let saveRoundToDbTimer =()=>{
     date: new Date().getTime(),
     time: currentUser.timeOfRun,
     trackid: currentUser.trackid,
+    user: currentUser.uid,
+    rating: currentUser.stars,
+    roundid: newPostKey
+  }
+  db.ref(`/rundor/${newPostKey}`).set(track)
+}
+
+//------------------------ END -----------------------------------------------//
+
+//------------------------- Sparar runda till db vid egen vald längd  -------->>
+let saveRoundToDbTimerWithoutTrack =(length)=>{
+  let newPostKey = db.ref("rundor").push().key;
+  let track = {
+    share: false,
+    date: new Date().getTime(),
+    time: currentUser.timeOfRun,
+    trackid: "default",
+    length: length,
     user: currentUser.uid,
     rating: currentUser.stars,
     roundid: newPostKey
