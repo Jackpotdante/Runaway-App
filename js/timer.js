@@ -13,6 +13,8 @@ window.addEventListener('load',function(event){
   let timeElapsedHours = document.getElementsByClassName('timeElapsedHours')[0].innerText="00 :";
   let stars = document.getElementsByClassName('stars');
   let containerStars= document.getElementsByClassName('containerStars')[0];
+  let inputOwnLength = document.getElementById("ownLength");
+  let wrapperOwnLength = document.getElementsByClassName('wrapper-ownLength')[0];
 
   btnClockStop.addEventListener('click',function(event){ // Stoppa klockan
     btnClockStop.style.display = "none";
@@ -36,16 +38,23 @@ window.addEventListener('load',function(event){
     let containerPrestation = document.getElementsByClassName('containerPrestation')[0];
     let containerTimer = document.getElementsByClassName('containerTimer')[0];
 
+
     if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
-      if(currentUser.hasOwnProperty("trackid")){
-        saveRoundToDbTimer();
-        containerStars.style.display="none";
-        btnStartClock.style.display = "inline-block";
-        btnStartClock.innerText = "Start Timer";
-        timer.resetTimer();
-        containerPrestation.style.display="flex";
-        containerTimer.style.display="none";
+
+      if(currentUser.hasOwnProperty("trackid")){        // kontroll om vi valt bana.
+        saveRoundToDbTimer();                           // sparar resultat kopplat till en bana
+      }else{
+        saveRoundToDbTimerWithoutTrack(inputOwnLength.value); // sparar resultat kopplat till egen vald längd.
+        wrapperOwnLength.style.display="none";
       }
+      containerStars.style.display="none";
+      btnStartClock.style.display = "inline-block";
+      btnStartClock.innerText = "Start Timer";
+      timer.resetTimer();
+      containerPrestation.style.display="flex";
+      containerTimer.style.display="none";
+
+
     }else{                                            // händer om prestationsida är aktiv
       saveRoundStarsToDb(currentUser.stars)
       containerStars.style.display="none";
@@ -54,13 +63,14 @@ window.addEventListener('load',function(event){
 
   })
   btnShowStars.addEventListener('click',function(){  // Rating av banan
-    if(currentUser.hasOwnProperty("trackid")){
+    //if(currentUser.hasOwnProperty("trackid")){
       btnClockStop.style.display = "none";
       btnShowStars.style.display = "none";
       btnClockPause.style.display = "none";
       btnStartClock.style.display = "none";
       containerStars.style.display="flex";
-    }
+      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="flex":"";
+    //}
   })
 
   btnStartClock.addEventListener('click', function(event){  // starta klockan
@@ -79,7 +89,7 @@ window.addEventListener('load',function(event){
   }
 
 
-  infoSelectedTrack.innerText = "Ingen vald bana";
+  infoSelectedTrack.innerText = "No track selected";
   let timer = new Timer();
   let weatherNow = new Weather();
   weatherNow.loadWeather();
@@ -103,7 +113,7 @@ let fillStars=(i,stars)=>{
 
 
 
-//------------------------- Sparar runda till db ----------------------------->>
+//------------------------- Sparar runda till db vid vald bana  -------------->>
 let saveRoundToDbTimer =()=>{
   let newPostKey = db.ref("rundor").push().key;
   let track = {
@@ -111,6 +121,24 @@ let saveRoundToDbTimer =()=>{
     date: new Date().getTime(),
     time: currentUser.timeOfRun,
     trackid: currentUser.trackid,
+    user: currentUser.uid,
+    rating: currentUser.stars,
+    roundid: newPostKey
+  }
+  db.ref(`/rundor/${newPostKey}`).set(track)
+}
+
+//------------------------ END -----------------------------------------------//
+
+//------------------------- Sparar runda till db vid egen vald längd  -------->>
+let saveRoundToDbTimerWithoutTrack =(length)=>{
+  let newPostKey = db.ref("rundor").push().key;
+  let track = {
+    share: false,
+    date: new Date().getTime(),
+    time: currentUser.timeOfRun,
+    trackid: "default",
+    length: length,
     user: currentUser.uid,
     rating: currentUser.stars,
     roundid: newPostKey
@@ -233,6 +261,7 @@ class Weather{
     document.getElementById('weatherIcon')
 
     let symbolNb = this.category;
+
     if(symbolNb){
       let y = 0
       while(symbolNb>5){
@@ -241,22 +270,22 @@ class Weather{
       }
 
       let x = symbolNb
-      let xcord= 10;
+      let xcord= 4;
       switch(x){
         case 1:
-          xcord=10;
+          xcord=4;
           break;
         case 2:
-          xcord=-72;
+          xcord=-57;
           break;
         case 3:
-          xcord= -155;
+          xcord= -121;
           break;
         case 4:
-          xcord= -242;
+          xcord= -185;
           break;
         case 5:
-          xcord= -322;
+          xcord= -246;
           break;
         default:
           console.log("default");
@@ -264,7 +293,7 @@ class Weather{
 
 
       //let xcord = x * -80+10;
-      let ycord = y * -86
+      let ycord = y * -65 + 4
       //console.log("x är: ", x,":",xcord," y är:",y,":",ycord);
       document.getElementById("weatherIcon").style.left = xcord+"px";
       document.getElementById("weatherIcon").style.top = ycord+"px";
