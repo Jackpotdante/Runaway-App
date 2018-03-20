@@ -249,6 +249,7 @@ window.addEventListener("load", function (){
 			let trackId = data.trackid;
 
 			if(data.user == currentUser.uid){
+				//console.log(data);
 				let length=0;
 				if(trackId=="default"){
 					length = data.length;
