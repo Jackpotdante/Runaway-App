@@ -131,18 +131,17 @@
 
 }
 .containerTimer .weatherIconDiv{
-  width: 45px;
+  width: 56px;
   height: 50px;
-  margin: 5px 0 0 0;
+  margin: 5px 0 0 7px;
+  position: relative;
   overflow: hidden;
-
 }
 .containerTimer .weather img{
   width: 300px;
-
-
-
+  position: absolute;
 }
+
 .containerTimer .weather #weatherTemperature{
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -193,6 +192,7 @@
 }
 .containerStars .wrapper-ownLength{
   margin-bottom: 20px;
+  display: none;
 }
 
 .containerStars #ownLength{

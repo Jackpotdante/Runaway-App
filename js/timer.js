@@ -14,6 +14,7 @@ window.addEventListener('load',function(event){
   let stars = document.getElementsByClassName('stars');
   let containerStars= document.getElementsByClassName('containerStars')[0];
   let inputOwnLength = document.getElementById("ownLength");
+  let wrapperOwnLength = document.getElementsByClassName('wrapper-ownLength')[0];
 
   btnClockStop.addEventListener('click',function(event){ // Stoppa klockan
     btnClockStop.style.display = "none";
@@ -40,10 +41,11 @@ window.addEventListener('load',function(event){
 
     if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
 
-      if(currentUser.hasOwnProperty("trackid")){        //
-        saveRoundToDbTimer();
+      if(currentUser.hasOwnProperty("trackid")){        // kontroll om vi valt bana.
+        saveRoundToDbTimer();                           // sparar resultat kopplat till en bana
       }else{
-        saveRoundToDbTimerWithoutTrack(inputOwnLength.value);
+        saveRoundToDbTimerWithoutTrack(inputOwnLength.value); // sparar resultat kopplat till egen vald längd.
+        wrapperOwnLength.style.display="none";
       }
       containerStars.style.display="none";
       btnStartClock.style.display = "inline-block";
@@ -67,6 +69,7 @@ window.addEventListener('load',function(event){
       btnClockPause.style.display = "none";
       btnStartClock.style.display = "none";
       containerStars.style.display="flex";
+      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="flex":"";
     //}
   })
 
@@ -258,6 +261,7 @@ class Weather{
     document.getElementById('weatherIcon')
 
     let symbolNb = this.category;
+
     if(symbolNb){
       let y = 0
       while(symbolNb>5){
@@ -266,22 +270,22 @@ class Weather{
       }
 
       let x = symbolNb
-      let xcord= 10;
+      let xcord= 4;
       switch(x){
         case 1:
-          xcord=10;
+          xcord=4;
           break;
         case 2:
-          xcord=-72;
+          xcord=-57;
           break;
         case 3:
-          xcord= -155;
+          xcord= -121;
           break;
         case 4:
-          xcord= -242;
+          xcord= -185;
           break;
         case 5:
-          xcord= -322;
+          xcord= -246;
           break;
         default:
           console.log("default");
@@ -289,7 +293,7 @@ class Weather{
 
 
       //let xcord = x * -80+10;
-      let ycord = y * -86
+      let ycord = y * -65 + 4
       //console.log("x är: ", x,":",xcord," y är:",y,":",ycord);
       document.getElementById("weatherIcon").style.left = xcord+"px";
       document.getElementById("weatherIcon").style.top = ycord+"px";
