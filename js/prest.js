@@ -14,7 +14,7 @@ window.addEventListener("load", function (){
 		let sharePrest = document.createElement("div");
 
 		/** CONTENT OF CONTAINER **/
-		let newRating = document.createElement('span');
+		let newRating = document.createElement('div');
 		let newPlace = document.createElement("p");
 		let btnRemovePrest = document.createElement('button');
 
@@ -53,7 +53,7 @@ window.addEventListener("load", function (){
 
 		/** CONTENT CLASSNAMES **/
 		newPlace.className="place";
-		newRating.className="rating";
+		newRating.className="wrapper-rating";
 		newTime.className = "timePrest";
 		newDate.className = "datePrest";
 		newLength.className = "lengthPrest";
@@ -100,6 +100,7 @@ window.addEventListener("load", function (){
 		//newDivBtn.className="divBtnPrest";
 		headPrest.idOfRound = dataForRace.roundid;
 		newDiv.idOfRound = dataForRace.roundid;
+		newRating.idOfRound = dataForRace.roundid;
 		//newDivBtn.appendChild(btnRemovePrest);
 		//newDivBtn.appendChild(btnSetStars);
 
@@ -134,8 +135,29 @@ window.addEventListener("load", function (){
 			 db.ref(`/rundor/${key}`).remove();
 		});
 
+		newRating.addEventListener('click',(function(){
+			let divOfStar = newRating;
+			return function(event){
+				//console.log(divOfStar);
+				//console.log(span);
+				let containerStars = document.getElementsByClassName('containerStars')[0];
+				let stars = document.getElementsByClassName('stars');
+				//let grandpa = event.target;
 
-			newRating.addEventListener('click', function(event){  //justera rating på vald prestation
+				let grandpa = divOfStar.getElementsByClassName('rating')[0];
+
+				let amount = countStarsOfSpan(grandpa.children);//räknar ut rating
+
+				fillStars(amount-1,stars);										// innan justering av rating sätts den till samma klickad prestation. Kommer från timer.js
+
+				currentUser.trackid = divOfStar.idOfRound;
+
+				containerStars.style.display="flex"
+			}
+		})() );
+
+		/*
+		newRating.addEventListener('click', function(event){  //justera rating på vald prestation
 			let containerStars = document.getElementsByClassName('containerStars')[0];
 			let stars = document.getElementsByClassName('stars');
 			let grandpa = event.target;
@@ -150,7 +172,7 @@ window.addEventListener("load", function (){
 
 			containerStars.style.display="flex"
 		});
-
+		*/
 
 
 
@@ -227,10 +249,17 @@ window.addEventListener("load", function (){
 			let trackId = data.trackid;
 
 			if(data.user == currentUser.uid){
-				console.log(data);
+				let length=0;
+				if(trackId=="default"){
+					length = data.length;
+				}else{
+					length = runningTracks[trackId].length;
+				}
+				updateLengthNew(length);
+
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
-					length : runningTracks[trackId].length,
+					length : length,
 					//name: runningTracks[trackId].name,
 					time : data.time,
 					date : data.date,
@@ -238,9 +267,18 @@ window.addEventListener("load", function (){
 					share : data.share,
 					comment : data.comment,
 					rating: data.rating,
-					roundid: data.roundid
+					roundid: data.roundid,
+					trackid: data.trackid
 				}
 				createPrest(dataForRace); // skapar kort för varje runda
+			}
+		})
+
+
+		db.ref("rundor/").limitToLast(1).on("child_added",function(snapshot){
+			if(true){
+				let data = snapshot.val();
+				updateUserLengthDb();
 			}
 		})
 
@@ -250,12 +288,25 @@ window.addEventListener("load", function (){
 			let allPrest = document.getElementsByClassName('prest');
 
 
-
-			for(let i=0;i < allPrest.length;i++){
-				if(allPrest[i].idOfRound == data.roundid){
-					containerPrest.removeChild(allPrest[i]);
+			if(data.user==currentUser.uid){
+				let length=0;
+				if(data.trackid=="default"){
+					length -= data.length;
+				}else{
+					length -= runningTracks[data.trackid].length;
 				}
+				updateLengthNew(length)
+
+
+				for(let i=0;i < allPrest.length;i++){ //tar bort kort i html
+					if(allPrest[i].idOfRound == data.roundid){
+						containerPrest.removeChild(allPrest[i]);
+					}
+				}
+				updateUserLengthDb();// sparar ner ny längd till db
+
 			}
+
 			//updateLength(data.roundid); // uppdaterar sträcka för användare
 		})
 
@@ -263,10 +314,13 @@ window.addEventListener("load", function (){
 			let data = snapshot.val();
 			let allPrest = document.getElementsByClassName('prest');
 
-			for(let i=0;i<allPrest.length;i++){
-				if(allPrest[i].idOfRound == data.roundid){
-					updatePrest(allPrest[i],data);
+			if(data.user==currentUser.uid){
+				for(let i=0;i<allPrest.length;i++){
+					if(allPrest[i].idOfRound == data.roundid){
+						updatePrest(allPrest[i],data);
+					}
 				}
+				updateUserLengthDb();
 			}
 
 		})
@@ -275,6 +329,7 @@ window.addEventListener("load", function (){
 	}
 
 	getTracksFromUser();
+
 }) // End of window load
 
 
@@ -301,39 +356,54 @@ let countStarsOfSpan=(list)=>{
 
 let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
 	let stars = countStars(data.rating);
-	found.getElementsByClassName('rating')[0].innerHTML = ""
-	found.getElementsByClassName('rating')[0].appendChild(stars);
+	found.getElementsByClassName('wrapper-rating')[0].innerHTML = ""
+	found.getElementsByClassName('wrapper-rating')[0].appendChild(stars);
 }
 //--------------------------  END --------------------------------------------//
 
 
 
+// ------------------- New version of update length ------------------------------>>
+let totalLengthNew=0;
+let longestRunNew=[];
+let updateLengthNew=(newLength)=>{
+	let longestDist = 0;
+	totalLengthNew+= Number(newLength);
+	totalLengthNew = Math.round(totalLengthNew*100)/100;
 
-//--------------- Räknar ut längst sträcka samt totalsträcka ----------------->>
-let updateLength =(except)=>{
-	let longestRun = 0;
-	let totalLength = 0;
-	//console.log("nu körs den");
-	//console.log(allResults);
-	for(item in allResults){
-
-		if(allResults[item].user == currentUser.uid && allResults[item].roundid!=except){
-			//console.log(allResults[item]);
-			let trackid = allResults[item].trackid;
-			let track =  runningTracks[trackid]
-
-			if(longestRun<track.length){
-				longestRun=track.length
-			}
-			totalLength+=track.length;
+	if(newLength<0 && longestRunNew.length<2){ // kontroll om det användren tagit bort alla rundor
+		longestRunNew= [];
+		let longestDist = 0;
+	}else{
+		if(Number(newLength)<0){
+			let number = longestRunNew.indexOf(Math.abs(Number(newLength)));
+			longestRunNew.splice(number,1);
+		}else{
+			longestRunNew.push(Math.round(Number(newLength)*100)/100);
 		}
+		longestRunNew.sort();
+		longestDist = longestRunNew[longestRunNew.length-1]
 
 	}
-	document.getElementById("spanTotalLength").innerText="Total Längd: " +totalLength + "km";
-	document.getElementById("spanLongestDist").innerText="Längst sträcka: "+longestRun + "km";
-	currentUser.longestRun = longestRun;
-	currentUser.totalLength = totalLength;
-	// uppdatear databse med längst straäck och total distans
+
+	document.getElementById("spanTotalLength").innerText="Total Längd: " + totalLengthNew + "km";
+	document.getElementById("spanLongestDist").innerText="Längst sträcka: "+longestDist + "km";
+	currentUser.longestRun = longestDist;
+	currentUser.totalLength = totalLengthNew;
+
 }
 
 //------------------  END ----------------------------------------------------//
+
+
+
+
+//----------------- Save longest run and totalLength to db ------------------->>
+
+let updateUserLengthDb=()=>{
+	let totalLength = currentUser.totalLength;
+	let longestRun = currentUser.longestRun;
+	db.ref(`/users/${currentUser.key}/stats/`).set({longestRun,totalLength});
+}
+
+//-----------------  END -----------------------------------------------------//
