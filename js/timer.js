@@ -15,6 +15,7 @@ window.addEventListener('load',function(event){
   let containerStars= document.getElementsByClassName('containerStars')[0];
   let inputOwnLength = document.getElementById("ownLength");
   let wrapperOwnLength = document.getElementsByClassName('wrapper-ownLength')[0];
+  let btnCancel = document.getElementById('btnCancel');
 
   btnClockStop.addEventListener('click',function(event){ // Stoppa klockan
     btnClockStop.style.display = "none";
@@ -42,12 +43,16 @@ window.addEventListener('load',function(event){
     if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
 
       if(currentUser.hasOwnProperty("trackid")){        // kontroll om vi valt bana.
+
         saveRoundToDbTimer();                           // sparar resultat kopplat till en bana
       }else{
-        saveRoundToDbTimerWithoutTrack(inputOwnLength.value); // sparar resultat kopplat till egen vald längd.
-        wrapperOwnLength.style.display="none";
-        inputOwnLength.value="";
+          saveRoundToDbTimerWithoutTrack(inputOwnLength.value); // sparar resultat kopplat till egen vald längd.
+          wrapperOwnLength.style.display="none";
+          inputOwnLength.value="";
+
       }
+      btnClockStop.style.display = "none";
+      btnShowStars.style.display = "none";
       containerStars.style.display="none";
       btnStartClock.style.display = "inline-block";
       btnStartClock.innerText = "Start Timer";
@@ -60,19 +65,17 @@ window.addEventListener('load',function(event){
       saveRoundStarsToDb(currentUser.stars)
       containerStars.style.display="none";
     }
-
-
   })
+
+  btnCancel.addEventListener('click', function(event){  // cansel Rating av banan
+    containerStars.style.display="none";
+  })
+
   btnShowStars.addEventListener('click',function(){  // Rating av banan
-    //if(currentUser.hasOwnProperty("trackid")){
-      btnClockStop.style.display = "none";
-      btnShowStars.style.display = "none";
-      btnClockPause.style.display = "none";
-      btnStartClock.style.display = "none";
-      containerStars.style.display="flex";
+        containerStars.style.display="flex";
       (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":"";
-    //}
   })
+
 
   btnStartClock.addEventListener('click', function(event){  // starta klockan
     btnClockPause.style.display = "block";
@@ -88,6 +91,7 @@ window.addEventListener('load',function(event){
       fillStars(i,stars);
     })
   }
+
 
 
   infoSelectedTrack.innerText = "No track selected";
@@ -127,6 +131,8 @@ let saveRoundToDbTimer =()=>{
     roundid: newPostKey
   }
   db.ref(`/rundor/${newPostKey}`).set(track)
+  delete currentUser.trackid;
+  document.getElementsByClassName("infoTrack")[0].innerText ="No track selected";
 }
 
 //------------------------ END -----------------------------------------------//
