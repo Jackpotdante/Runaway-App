@@ -255,6 +255,7 @@ window.addEventListener("load", function (){
 				}else{
 					length = runningTracks[trackId].length;
 				}
+				updateLengthNew(length);
 
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
@@ -266,9 +267,18 @@ window.addEventListener("load", function (){
 					share : data.share,
 					comment : data.comment,
 					rating: data.rating,
-					roundid: data.roundid
+					roundid: data.roundid,
+					trackid: data.trackid
 				}
 				createPrest(dataForRace); // skapar kort för varje runda
+			}
+		})
+
+
+		db.ref("rundor/").limitToLast(1).on("child_added",function(snapshot){
+			if(true){
+				let data = snapshot.val();
+				updateUserLengthDb();
 			}
 		})
 
@@ -278,12 +288,25 @@ window.addEventListener("load", function (){
 			let allPrest = document.getElementsByClassName('prest');
 
 
-
-			for(let i=0;i < allPrest.length;i++){
-				if(allPrest[i].idOfRound == data.roundid){
-					containerPrest.removeChild(allPrest[i]);
+			if(data.user==currentUser.uid){
+				let length=0;
+				if(data.trackid=="default"){
+					length -= data.length;
+				}else{
+					length -= runningTracks[data.trackid].length;
 				}
+				updateLengthNew(length)
+
+
+				for(let i=0;i < allPrest.length;i++){ //tar bort kort i html
+					if(allPrest[i].idOfRound == data.roundid){
+						containerPrest.removeChild(allPrest[i]);
+					}
+				}
+				updateUserLengthDb();// sparar ner ny längd till db
+
 			}
+
 			//updateLength(data.roundid); // uppdaterar sträcka för användare
 		})
 
@@ -291,10 +314,13 @@ window.addEventListener("load", function (){
 			let data = snapshot.val();
 			let allPrest = document.getElementsByClassName('prest');
 
-			for(let i=0;i<allPrest.length;i++){
-				if(allPrest[i].idOfRound == data.roundid){
-					updatePrest(allPrest[i],data);
+			if(data.user==currentUser.uid){
+				for(let i=0;i<allPrest.length;i++){
+					if(allPrest[i].idOfRound == data.roundid){
+						updatePrest(allPrest[i],data);
+					}
 				}
+				updateUserLengthDb();
 			}
 
 		})
@@ -303,6 +329,7 @@ window.addEventListener("load", function (){
 	}
 
 	getTracksFromUser();
+
 }) // End of window load
 
 
@@ -336,40 +363,47 @@ let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
 
 
 
+// ------------------- New version of update length ------------------------------>>
+let totalLengthNew=0;
+let longestRunNew=[];
+let updateLengthNew=(newLength)=>{
+	let longestDist = 0;
+	totalLengthNew+= Number(newLength);
+	totalLengthNew = Math.round(totalLengthNew*100)/100;
 
-//--------------- Räknar ut längst sträcka samt totalsträcka ----------------->>
-let updateLength =(except)=>{
-	let longestRun = 0;
-	let totalLength = 0;
-	for(item in allResults){
-
-		if(allResults[item].user == currentUser.uid && allResults[item].roundid!=except){
-			let trackid = allResults[item].trackid;
-			let track =  runningTracks[trackid]
-
-			let length=0;
-			if(trackid=="default"){
-				length = Number(allResults[item].length);
-			}else{
-				length = Number(track.length);
-			}
-
-			if(longestRun<length){
-				longestRun=length
-			}
-			totalLength+=length;
+	if(newLength<0 && longestRunNew.length<2){ // kontroll om det användren tagit bort alla rundor
+		longestRunNew= [];
+		let longestDist = 0;
+	}else{
+		if(Number(newLength)<0){
+			let number = longestRunNew.indexOf(Math.abs(Number(newLength)));
+			longestRunNew.splice(number,1);
+		}else{
+			longestRunNew.push(Math.round(Number(newLength)*100)/100);
 		}
+		longestRunNew.sort();
+		longestDist = longestRunNew[longestRunNew.length-1]
 
 	}
-	longestRun =longestRun.toFixed(1);
-	totalLength = totalLength.toFixed(1);
-	document.getElementById("spanTotalLength").innerText="Total Längd: " +totalLength + "km";
-	document.getElementById("spanLongestDist").innerText="Längst sträcka: "+longestRun + "km";
 
+	document.getElementById("spanTotalLength").innerText="Total Längd: " + totalLengthNew + "km";
+	document.getElementById("spanLongestDist").innerText="Längst sträcka: "+longestDist + "km";
+	currentUser.longestRun = longestDist;
+	currentUser.totalLength = totalLengthNew;
 
-	currentUser.longestRun = longestRun;
-	currentUser.totalLength = totalLength;
-	// uppdatear databse med längst straäck och total distans
 }
 
 //------------------  END ----------------------------------------------------//
+
+
+
+
+//----------------- Save longest run and totalLength to db ------------------->>
+
+let updateUserLengthDb=()=>{
+	let totalLength = currentUser.totalLength;
+	let longestRun = currentUser.longestRun;
+	db.ref(`/users/${currentUser.key}/stats/`).set({longestRun,totalLength});
+}
+
+//-----------------  END -----------------------------------------------------//

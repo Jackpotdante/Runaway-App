@@ -46,6 +46,7 @@ window.addEventListener('load',function(event){
       }else{
         saveRoundToDbTimerWithoutTrack(inputOwnLength.value); // sparar resultat kopplat till egen vald längd.
         wrapperOwnLength.style.display="none";
+        inputOwnLength.value="";
       }
       containerStars.style.display="none";
       btnStartClock.style.display = "inline-block";
@@ -69,7 +70,7 @@ window.addEventListener('load',function(event){
       btnClockPause.style.display = "none";
       btnStartClock.style.display = "none";
       containerStars.style.display="flex";
-      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="flex":"";
+      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":"";
     //}
   })
 
