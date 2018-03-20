@@ -26,12 +26,10 @@ db.ref("/rundor").on("value",function(snapshot){
 
   allResults = snapshot.val();
   if(currentLocation!=""){ //nuvarande sökning.. om något ändras körs getTracks för att uppdatera kort
-    //console.log("update");
     document.getElementsByClassName('wrapper-Tracks')[0].innerText="";
     getTracks(currentLocation);
   }
-  //console.log("test av logg");
-  updateLength(); // uppdaterar sträcka för användare
+
 });
 //----------------------------END --------------------------------------------//
 
