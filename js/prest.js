@@ -129,7 +129,7 @@ window.addEventListener("load", function (){
 		getRunInfo(); //används för att uppdatera profil
 
 
-		btnRemovePrest.addEventListener('click', function(event){  // tar bort vald prestation
+		document.getElementsByClassName("rating")[0].addEventListener('click', function(event){  // tar bort vald prestation
 			let key = event.target.idOfRound;
 			 db.ref(`/rundor/${key}`).remove();
 		});
@@ -227,7 +227,7 @@ window.addEventListener("load", function (){
 			let trackId = data.trackid;
 
 			if(data.user == currentUser.uid){
-				console.log(data);
+
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
 					length : runningTracks[trackId].length,
@@ -302,7 +302,7 @@ let countStarsOfSpan=(list)=>{
 let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
 	let stars = countStars(data.rating);
 	found.getElementsByClassName('rating')[0].innerHTML = ""
-	found.getElementsByClassName('rating')[0].appendChild(stars);
+	//found.getElementsByClassName('rating')[0].appendChild(stars);
 }
 //--------------------------  END --------------------------------------------//
 
