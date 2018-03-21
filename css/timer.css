@@ -250,12 +250,12 @@
   font-size: 14px;
   text-align: center;
   color: white;
-  background-color: red;
   border: 1px #ffffff7a solid;
   border-radius: 5px;
   padding: 7px;
   display: none;
   right: 10px;
   z-index: 1000;
+  min-width: 100px;
   font-family: 'Montserrat', sans-serif;
 }
