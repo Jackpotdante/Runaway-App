@@ -120,7 +120,7 @@ let fillStars=(i,stars)=>{
 
 //------------------------- Sparar runda till db vid vald bana  -------------->>
 let saveRoundToDbTimer =()=>{
-  let newPostKey = db.ref("rundor").push().key;
+  let newPostKey = db.ref("rundor/").push().key;
   let track = {
     share: false,
     date: new Date().getTime(),
