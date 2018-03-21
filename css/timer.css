@@ -232,10 +232,30 @@
 .containerStars #ownLength{
 
   padding: 5px;
-  border-radius: 5px;
-  width: 80px;
+  border-radius: 10px;
+  width: 69px;
   margin-top: 10px;
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
+  color: white;
+  background-color: #8ce833;
+  border: none;
 
+}
+
+
+.msgToUser{
+  position: absolute;
+  top: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: white;
+  background-color: red;
+  border: 1px #ffffff7a solid;
+  border-radius: 5px;
+  padding: 7px;
+  display: none;
+  right: 10px;
+  z-index: 1000;
+  font-family: 'Montserrat', sans-serif;
 }

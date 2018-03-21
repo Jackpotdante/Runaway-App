@@ -448,7 +448,9 @@ let updateLengthNew=(newLength)=>{
 let updateUserLengthDb=()=>{
 	let totalLength = currentUser.totalLength;
 	let longestRun = currentUser.longestRun;
-	db.ref(`/users/${currentUser.key}/stats/`).set({longestRun,totalLength});
+	if(currentUser.key!=""){
+		db.ref(`/users/${currentUser.key}/stats/`).set({longestRun,totalLength});
+	}
 }
 
 //-----------------  END -----------------------------------------------------//
