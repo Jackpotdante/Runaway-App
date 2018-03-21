@@ -241,8 +241,10 @@
 
 	#totalStat{
 		position: relative;
-		top: 65px;
+		top: 128px;
 		background-color: #ffa834;
+		min-width: 275px;
+
 	}
 
 }
