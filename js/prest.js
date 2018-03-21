@@ -276,7 +276,7 @@ window.addEventListener("load", function (){
 				}else{
 					length = runningTracks[trackId].length;
 				}
-				updateLengthNew(length);
+				updateLengthNew(length); //updaterar localt
 
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
@@ -299,8 +299,9 @@ window.addEventListener("load", function (){
 
 		db.ref("rundor/").limitToLast(1).on("child_added",function(snapshot){
 			if(true){
+				console.log("child added id 2");
 				let data = snapshot.val();
-				updateUserLengthDb();
+				updateUserLengthDb(); // uppdaterar i databasen
 			}
 		})
 
@@ -317,7 +318,7 @@ window.addEventListener("load", function (){
 				}else{
 					length -= runningTracks[data.trackid].length;
 				}
-				updateLengthNew(length)
+				updateLengthNew(length) // updaterar localt
 
 
 				for(let i=0;i < allPrest.length;i++){ //tar bort kort i html
@@ -325,6 +326,7 @@ window.addEventListener("load", function (){
 						containerPrest.removeChild(allPrest[i]);
 					}
 				}
+				console.log("child removed");
 				updateUserLengthDb();// sparar ner ny längd till db
 
 			}
@@ -335,6 +337,7 @@ window.addEventListener("load", function (){
 		db.ref('rundor/').on("child_changed", function(snapshot, prevChildKey){
 			let data = snapshot.val();
 			let allPrest = document.getElementsByClassName('prest');
+			console.log("child changed");
 
 			if(data.share == true){
 				for(let i=0;i<allPrest.length;i++){
@@ -421,7 +424,7 @@ let updateLengthNew=(newLength)=>{
 		}else{
 			longestRunNew.push(Math.round(Number(newLength)*100)/100);
 		}
-		longestRunNew.sort();
+		longestRunNew.sort((a,b)=>a-b);
 		longestDist = longestRunNew[longestRunNew.length-1]
 
 	}
@@ -441,11 +444,14 @@ let updateLengthNew=(newLength)=>{
 //----------------- Save longest run and totalLength to db ------------------->>
 
 let updateUserLengthDb=()=>{
+
+	//console.log("uppdaterear db" , currentUser);
 	let totalLength = currentUser.totalLength;
 	let longestRun = currentUser.longestRun;
 	if(currentUser.key!=""){
 		db.ref(`/users/${currentUser.key}/stats/`).set({longestRun,totalLength});
 	}
+
 }
 
 //-----------------  END -----------------------------------------------------//
