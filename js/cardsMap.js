@@ -158,6 +158,7 @@ let saveTrackToDb =()=>{
 //----------------------- END ------------------------------------------------//
 
 // ------------------- SPARA Runda TILL DATABAS ------------------------------->>
+/*
 let saveRoundToDb =()=>{
   //let newPostKey = db.ref("rundor").push().key;
   let track = {
@@ -173,6 +174,7 @@ let saveRoundToDb =()=>{
   }
   db.ref(`/rundor/`).push(track)
 }
+*/
 //----------------------- END ------------------------------------------------//
 
 

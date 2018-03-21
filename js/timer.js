@@ -38,32 +38,43 @@ window.addEventListener('load',function(event){
   btnSaveToDb.addEventListener('click',function(){ // spara runda/rating till databas.
     let containerPrestation = document.getElementsByClassName('containerPrestation')[0];
     let containerTimer = document.getElementsByClassName('containerTimer')[0];
-
+    let update = false;
 
     if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
 
       if(currentUser.hasOwnProperty("trackid")){        // kontroll om vi valt bana.
-
+        showMsgToUser("Saved");
         saveRoundToDbTimer();                           // sparar resultat kopplat till en bana
+        update=true;
       }else{
-          saveRoundToDbTimerWithoutTrack(inputOwnLength.value); // sparar resultat kopplat till egen vald längd.
-          wrapperOwnLength.style.display="none";
-          inputOwnLength.value="";
+          if(inputOwnLength.value>0){
+            showMsgToUser("Saved");
+            saveRoundToDbTimerWithoutTrack(Number(inputOwnLength.value)); // sparar resultat kopplat till egen vald längd.
+            update=true;
+          }else{
+            showMsgToUser("Please enter a valid number","red");
 
+          }
       }
-      btnClockStop.style.display = "none";
-      btnShowStars.style.display = "none";
-      containerStars.style.display="none";
-      btnStartClock.style.display = "inline-block";
-      btnStartClock.innerText = "Start Timer";
-      timer.resetTimer();
-      containerPrestation.style.display="flex";
-      containerTimer.style.display="none";
+
+      if(update){
+        btnClockStop.style.display = "none";
+        btnShowStars.style.display = "none";
+        containerStars.style.display="none";
+        btnStartClock.style.display = "inline-block";
+        btnStartClock.innerText = "Start Timer";
+        timer.resetTimer();
+        containerPrestation.style.display="flex";
+        containerTimer.style.display="none";
+      }
 
 
     }else{                                            // händer om prestationsida är aktiv
       saveRoundStarsToDb(currentUser.stars)
+      showMsgToUser("Saved");
       containerStars.style.display="none";
+      wrapperOwnLength.style.display="none";
+      inputOwnLength.value="";
     }
   })
 
@@ -73,7 +84,7 @@ window.addEventListener('load',function(event){
 
   btnShowStars.addEventListener('click',function(){  // Rating av banan
         containerStars.style.display="flex";
-      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":"";
+      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":wrapperOwnLength.style.display="none";
   })
 
 
@@ -120,7 +131,7 @@ let fillStars=(i,stars)=>{
 
 //------------------------- Sparar runda till db vid vald bana  -------------->>
 let saveRoundToDbTimer =()=>{
-  let newPostKey = db.ref("rundor").push().key;
+  let newPostKey = db.ref("rundor/").push().key;
   let track = {
     share: false,
     date: new Date().getTime(),
@@ -160,7 +171,7 @@ let saveRoundToDbTimerWithoutTrack =(length)=>{
 
 //-----------------------  Spara Rating till databas ------------------------->>
 let saveRoundStarsToDb=(nb)=>{
-  db.ref(`/rundor/${currentUser.trackid}/rating`).set(nb)
+  db.ref(`/rundor/${currentUser.idForStarUpdate}/rating`).set(nb)
 }
 
 //----------------------- END ------------------------------------------------//
@@ -319,3 +330,30 @@ class Weather{
 
 }
 //----------------------- END ------------------------------------------------//
+
+
+
+// ------------------------ Msg to user -------------------------------------->>
+
+let showMsgToUser=(str,color)=>{
+  let msgToUser = document.getElementsByClassName('msgToUser')[0]
+
+  if(color=="red"){
+    msgToUser.style.backgroundColor ="red";
+  }else{
+    msgToUser.style.backgroundColor ="#8ce833";
+  }
+
+  let sec = 2000;
+  msgToUser.innerHTML = `<i class="fas fa-info-circle"></i> ${str}`
+  msgToUser.style.display="inline-block";
+  clearInterval(time)
+  var time = setInterval(function(){
+    msgToUser.innerText="";
+    msgToUser.style.display="none";
+    clearInterval(time)
+  },sec)
+}
+
+
+// ------------------------- END ---------------------------------------------//
