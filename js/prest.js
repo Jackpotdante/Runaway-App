@@ -132,26 +132,23 @@ window.addEventListener("load", function (){
 
 		btnRemovePrest.addEventListener('click', function(event){  // tar bort vald prestation
 			let key = event.target.idOfRound;
+			  showMsgToUser("Removed","red");
 			 db.ref(`/rundor/${key}`).remove();
 		});
 
 		newRating.addEventListener('click',(function(){
 			let divOfStar = newRating;
+
 			return function(event){
-				//console.log(divOfStar);
-				//console.log(span);
 				let containerStars = document.getElementsByClassName('containerStars')[0];
 				let stars = document.getElementsByClassName('stars');
-				//let grandpa = event.target;
-
 				let grandpa = divOfStar.getElementsByClassName('rating')[0];
-
 				let amount = countStarsOfSpan(grandpa.children);//räknar ut rating
-
 				fillStars(amount-1,stars);										// innan justering av rating sätts den till samma klickad prestation. Kommer från timer.js
 
-				currentUser.trackid = divOfStar.idOfRound;
+				currentUser.idForStarUpdate = divOfStar.idOfRound;
 
+				document.getElementsByClassName('wrapper-ownLength')[0].style.display="none";
 				containerStars.style.display="flex"
 			}
 		})() );
@@ -342,7 +339,6 @@ window.addEventListener("load", function (){
 			if(data.share == true){
 				for(let i=0;i<allPrest.length;i++){
 					if(allPrest[i].idOfRound == data.roundid){
-						console.log("true");
 						allPrest[i].getElementsByClassName('sharePrest')[0].style.backgroundColor = "#8ce833";
 						allPrest[i].getElementsByClassName('shareTextPrest')[0].innerHTML = `<i class="fas fa-check" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Shared";
 					}
@@ -350,7 +346,6 @@ window.addEventListener("load", function (){
 			}else{
 				for(let i=0;i<allPrest.length;i++){
 					if(allPrest[i].idOfRound == data.roundid){
-						console.log("false");
 						allPrest[i].getElementsByClassName('sharePrest')[0].style.backgroundColor = "#00ceff";
 						allPrest[i].getElementsByClassName('shareTextPrest')[0].innerHTML = `<i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Share";
 					}
