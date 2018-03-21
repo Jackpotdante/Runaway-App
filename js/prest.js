@@ -272,31 +272,31 @@ window.addEventListener("load", function (){
 
 
 			if(data.user == currentUser.uid){
-							let length=0;
-							if(trackId=="default"){
-								length = data.length;
-							}else{
-								length = runningTracks[trackId].length;
-							}
-							updateLengthNew(length);
+				//console.log(data);
+				let length=0;
+				if(trackId=="default"){
+					length = data.length;
+				}else{
+					length = runningTracks[trackId].length;
+				}
+				updateLengthNew(length);
 
-							let dataForRace = {
-								place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
-								length : length,
-								//name: runningTracks[trackId].name,
-								time : data.time,
-								date : data.date,
-								raceId : route,
-								share : data.share,
-								comment : data.comment,
-								rating: data.rating,
-								roundid: data.roundid,
-								trackid: data.trackid
-							}
-							createPrest(dataForRace); // skapar kort för varje runda
-						}
-
-					})
+				let dataForRace = {
+					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
+					length : length,
+					//name: runningTracks[trackId].name,
+					time : data.time,
+					date : data.date,
+					raceId : route,
+					share : data.share,
+					comment : data.comment,
+					rating: data.rating,
+					roundid: data.roundid,
+					trackid: data.trackid
+				}
+				createPrest(dataForRace); // skapar kort för varje runda
+			}
+		})
 
 
 
