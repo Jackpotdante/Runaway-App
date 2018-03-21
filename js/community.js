@@ -35,10 +35,18 @@ window.addEventListener('load', function(event){
 /** SENDS MESSAGE **/
 
   let sendBtn = document.getElementById("sendBtn");
-
+  let sendInput = document.getElementById("inputMessage");
   sendBtn.addEventListener('click', function(event){
     sendMessage();
     console.log("Message sent");
+  });
+
+  sendInput.addEventListener('keypress', function (e) {
+      var key = e.which || e.keyCode;
+      if (key === 13) { // 13 is enter
+        sendMessage();
+        console.log("Message sent");
+      }
   });
 
 /*** KEEPS CHATT SCROLL AT BOTTOM AS STANDARD ***/
@@ -106,8 +114,8 @@ let getMembers = function(){
     let nameCard = users[i].name;
     let ageCard = users[i].age;
     let locationCard = users[i].city;
-    let distance = "25";
-    let run = "10";
+    let distance = users[i].stats.totalLength;
+    let run = users[i].stats.longestRun;
     let photoCard = users[i].photoUrl;
     createMembers(nameCard, ageCard, photoCard, locationCard, distance, run);
 
