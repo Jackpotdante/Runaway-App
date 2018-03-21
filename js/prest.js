@@ -429,8 +429,9 @@ let updateLengthNew=(newLength)=>{
 
 	}
 
-	document.getElementById("spanTotalLength").innerText="Total Längd: " + totalLengthNew + "km";
-	document.getElementById("spanLongestDist").innerText="Längst sträcka: "+longestDist + "km";
+
+	document.getElementById("spanTotalLength").innerText="Total distance: " + totalLengthNew + "km";
+	document.getElementById("spanLongestDist").innerText="Farthest run: "+longestDist + "km";
 	currentUser.longestRun = longestDist;
 	currentUser.totalLength = totalLengthNew;
 

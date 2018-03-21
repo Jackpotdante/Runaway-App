@@ -209,10 +209,9 @@ window.addEventListener('load', function(event) {
 	 }) //end of btnEdit eventlistener
 
 
-	var btnCancel = document.getElementById('btnCancel');
+	var btnCancel = document.getElementById('btnCancelP');
 	 btnCancel.addEventListener('click', function(event) {
 
-	 	//var innerProfil1 = document.getElementById('innerProfil1');
 	    document.getElementById("contentProfil").style.display = "block";
 
 	    var innerProfil2 = document.getElementById('innerProfil2');
