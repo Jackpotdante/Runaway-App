@@ -91,7 +91,8 @@
 
 
 .containerPrestation > div > span{
-	flex: 1 25%;
+	margin: 0 11px;
+	font-size: 11px;
 }
 
 
