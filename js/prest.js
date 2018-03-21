@@ -130,7 +130,7 @@ window.addEventListener("load", function (){
 		getRunInfo(); //används för att uppdatera profil
 
 
-		document.getElementsByClassName("rating")[0].addEventListener('click', function(event){  // tar bort vald prestation
+		btnRemovePrest.addEventListener('click', function(event){  // tar bort vald prestation
 			let key = event.target.idOfRound;
 			 db.ref(`/rundor/${key}`).remove();
 		});
@@ -198,9 +198,30 @@ window.addEventListener("load", function (){
 
 		/*if(dataForRace.share == true)newSwitch.classList.add("active");*/
 
-
 		sharePrest.addEventListener("click", function(){
+
 			let inputTextCheck = newDiv.getElementsByClassName('prestInput')[0];
+			if(inputTextCheck.value !=="" && sharePrest.style.backgroundColor == "rgb(0, 206, 255)"){
+				db.ref("rundor/" + dataForRace.raceId).update({
+					share: true,
+					comment: inputTextCheck.value
+				})
+
+			}else if(sharePrest.style.backgroundColor == "rgb(140, 232, 51)"){
+				sharePrest.style.backgroundColor = "#00ceff";
+				db.ref("rundor/" + dataForRace.raceId).update({share: false});
+			}
+			else{
+				let str = inputTextCheck.value
+				inputTextCheck.style.border = "1px solid red";
+				db.ref("rundor/" + dataForRace.raceId).update({share: false})
+				setTimeout(function () {
+
+					inputTextCheck.classList.remove("fail");
+					inputTextCheck.style.border = "none";
+				}, 1500);
+			}
+			/*let inputTextCheck = newDiv.getElementsByClassName('prestInput')[0];
 			if(inputTextCheck.value !=="" && dataForRace.share == false){
 
 				sharePrest.style.backgroundColor = "#8ce833";
@@ -224,7 +245,7 @@ window.addEventListener("load", function (){
 					inputTextCheck.style.border = "none";
 				}, 1500);
 
-			}
+			}*/
 		})
 
 
@@ -243,38 +264,40 @@ window.addEventListener("load", function (){
 	}
 
 	let getTracksFromUser=()=>{
+
 		db.ref("rundor/").on("child_added", function(snapshot, prevChildKey){
 			let data = snapshot.val();
 			let route = snapshot.key;
 			let trackId = data.trackid;
 
-			if(data.user == currentUser.uid){
-				let length=0;
-				if(trackId=="default"){
-					length = data.length;
-				}else{
-					length = runningTracks[trackId].length;
-				}
-				
-				updateLengthNew(length);
-			if(data.user == currentUser.uid){
 
-				let dataForRace = {
-					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
-					length : length,
-					//name: runningTracks[trackId].name,
-					time : data.time,
-					date : data.date,
-					raceId : route,
-					share : data.share,
-					comment : data.comment,
-					rating: data.rating,
-					roundid: data.roundid,
-					trackid: data.trackid
-				}
-				createPrest(dataForRace); // skapar kort för varje runda
-			}
-		})
+			if(data.user == currentUser.uid){
+							let length=0;
+							if(trackId=="default"){
+								length = data.length;
+							}else{
+								length = runningTracks[trackId].length;
+							}
+							updateLengthNew(length);
+
+							let dataForRace = {
+								place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
+								length : length,
+								//name: runningTracks[trackId].name,
+								time : data.time,
+								date : data.date,
+								raceId : route,
+								share : data.share,
+								comment : data.comment,
+								rating: data.rating,
+								roundid: data.roundid,
+								trackid: data.trackid
+							}
+							createPrest(dataForRace); // skapar kort för varje runda
+						}
+
+					})
+
 
 
 		db.ref("rundor/").limitToLast(1).on("child_added",function(snapshot){
@@ -315,6 +338,24 @@ window.addEventListener("load", function (){
 		db.ref('rundor/').on("child_changed", function(snapshot, prevChildKey){
 			let data = snapshot.val();
 			let allPrest = document.getElementsByClassName('prest');
+
+			if(data.share == true){
+				for(let i=0;i<allPrest.length;i++){
+					if(allPrest[i].idOfRound == data.roundid){
+						console.log("true");
+						allPrest[i].getElementsByClassName('sharePrest')[0].style.backgroundColor = "#8ce833";
+						allPrest[i].getElementsByClassName('shareTextPrest')[0].innerHTML = `<i class="fas fa-check" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Shared";
+					}
+				}
+			}else{
+				for(let i=0;i<allPrest.length;i++){
+					if(allPrest[i].idOfRound == data.roundid){
+						console.log("false");
+						allPrest[i].getElementsByClassName('sharePrest')[0].style.backgroundColor = "#00ceff";
+						allPrest[i].getElementsByClassName('shareTextPrest')[0].innerHTML = `<i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Share";
+					}
+				}
+			}
 
 			if(data.user==currentUser.uid){
 				for(let i=0;i<allPrest.length;i++){
@@ -358,13 +399,10 @@ let countStarsOfSpan=(list)=>{
 
 let updatePrest = (found,data)=>{  //uppdaterar endast stjärnor än så länge
 	let stars = countStars(data.rating);
-<<<<<<< HEAD
-	found.getElementsByClassName('rating')[0].innerHTML = ""
-	//found.getElementsByClassName('rating')[0].appendChild(stars);
-=======
+
 	found.getElementsByClassName('wrapper-rating')[0].innerHTML = ""
 	found.getElementsByClassName('wrapper-rating')[0].appendChild(stars);
->>>>>>> 5f06b8d911f14c4681eb5bc3610c69e7246afa90
+
 }
 //--------------------------  END --------------------------------------------//
 
