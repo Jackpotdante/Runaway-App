@@ -42,30 +42,30 @@
 
        <!-- <div id="innerMoreInfo">-->
 
-            <p>Vill du tilläga mer information till din profil?</p>
+            <p>Do you want to add more information to your profile?</p>
 
             <div class="formProfil">
                 <div id="form_content">
                       <div class="form">
-                        <label for="userName">Display namn</label>
-                        <input type = "text" name="userName" id = "uName" placeholder="Namn" />
-                        <label for="userAge">Ålder</label>
-                        <input type = "text" name="userAge" id = "uAge" placeholder="Ålder" />
-                        <label for="userCity">Stad</label>
-                        <input type = "text" name="userCity" id = "uCity" placeholder="Plats" />
-                        <label for="userGender">Kön</label>
+                        <label for="userName">Display name</label>
+                        <input type = "text" name="userName" id = "uName" placeholder="Name" />
+                        <label for="userAge">Age</label>
+                        <input type = "text" name="userAge" id = "uAge" placeholder="Age" />
+                        <label for="userCity">Place</label>
+                        <input type = "text" name="userCity" id = "uCity" placeholder="Place" />
+                        <label for="userGender">Gender</label>
                         <select id="selectGender" name="userGender">
                               <option value="">Select ...</option>
-                              <option value="Man">Man</option>
-                              <option value="Kvinna">Kvinna</option>
-                              <option value="Annan">Annan</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                              <option value="Other">Other</option>
                         </select>
                       </div><!--end of form div-->
                 </div><!--formContent-->
             </div>
             <div class="btnProfil">
-                    <button id="btnAdd" class="btnsProfil">Lägg till</button>
-                    <button id="btnSenare" class="btnsProfil">Senare</button>
+                    <button id="btnAdd" class="btnsProfil">Add</button>
+                    <button id="btnSenare" class="btnsProfil">Later</button>
             </div><!--btnProfil-->
 
        <!-- </div><!innerMoreInfo-->
@@ -119,7 +119,7 @@
     <div class="weather">
       <span id="weatherTemperature"></span>
       <div class="weatherIconDiv">
-        <img id="weatherIcon"src="./img/weather10.png" alt="väder"/>
+        <img id="weatherIcon" src="./img/weather10.png" alt="väder"/>
       </div>
       <span id="weatherWindSpeed"></span>
     </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="chatt"></div>
         <div class="send">
-          <input id="inputMessage" type="serach" placeholder="Message"></input>
+          <input id="inputMessage" type="search" placeholder="Message"></input>
           <button id="sendBtn"><i class="fas fa-angle-right" id="iconSend"></i></button>
         </div>
         <div class="containerMembers">
@@ -185,7 +185,7 @@
           <div id="contentProfil" class="profilMobil">
             <div class="headProfil">
               <div id="settings"><i class="fas fa-cog"></i></div>
-              <img id="profilePicture"></img>
+              <img id="profilePicture" src="img/run.jpg" alt="User"></img>
               <div class="profileInfo">
                 <p class="profileName"></p>
                 <p class="profileLocation"><i class="fas fa-map-marker-alt" id="markerLocation"></i><span id="locationCity"></span></p>
@@ -212,26 +212,28 @@
 
       <div id="innerProfil2">
 
-               <div id="form_content" class="form_content2">
-                   <img id="pic2" class="picProfile" src="img/run.jpg" alt="User">
-                   <button id="logOut"><img id="signOutPic" src="img/signOut.png" alt="User"></button>
+               <div id="form_content2" class="form_content2">
+                   <div class="top_form">
+                      <img id="pic2" class="picProfile" src="img/run.jpg" alt="User">
+                      <button id="logOut"><i class="fas fa-sign-out-alt"></i></button>
+                   </div>
                    <div class="form">
-                       <label for="userName2">Display namn</label>
-                       <input type = "text" name="userName2" id = "uName2" placeholder="Namn" />
-                       <label for="userAge2">Ålder</label>
-                       <input type = "text" name="userAge2" id = "uAge2" placeholder="Ålder" />
-                       <label for="userCity2">Stad</label>
-                       <input type = "text" name="userCity2" id = "uCity2" placeholder="Plats" />
-                       <label for="userGender2">Kön</label>
+                       <label for="userName2">Display name</label>
+                       <input type = "text" name="userName2" id = "uName2" placeholder="Name" />
+                       <label for="userAge2">Age</label>
+                       <input type = "text" name="userAge2" id = "uAge2" placeholder="Age" />
+                       <label for="userCity2">Place</label>
+                       <input type = "text" name="userCity2" id = "uCity2" placeholder="Place" />
+                       <label for="userGender2">Gender</label>
                        <select id="selectGender2" name="userGender2">
                              <option value="">Select ...</option>
-                             <option value="Man">Man</option>
-                             <option value="Kvinna">Kvinna</option>
-                             <option value="Annan">Annan</option>
+                             <option value="Male">Male</option>
+                             <option value="Female">Female</option>
+                             <option value="Other">Other</option>
                        </select>
                        <div class="btnProfil">
-                         <button id="btnCancel" class="btnsProfil">Avbryta</button>
-                         <button id="btnSave" class="btnsProfil">Spara</button>
+                         <button id="btnCancel" class="btnsProfil">Cancel</button>
+                         <button id="btnSave" class="btnsProfil">Save</button>
                     </div><!--btnProfil-->
                    </div>
 
@@ -264,7 +266,7 @@
         </li>
         <li>
           <button id="comBtn">
-          <i class="fas fa-clipboard"style="font-size: 25px; color: white;"></i>
+          <i class="fas fa-clipboard" style="font-size: 25px; color: white;"></i>
           </button>
         </li>
         <li>
@@ -276,9 +278,8 @@
       <ul id="navDesktop">
         <li id="mapDesktop" class="listItems"><a href="#">MAP</a></li>
         <li id="achDesktop" class="listItems"><a href="#">ACHIEVMENTS</a></li>
-        <li id="communityDesktop"class="listItems"><a href="#">COMMUNITY</a></li>
+        <li id="communityDesktop" class="listItems"><a href="#">COMMUNITY</a></li>
         <li id="nameDesktopNav"><p id="nameDesktop"></p></li>
-
         <li><img id="imgDesktopNav"></img></li>
       </ul>
 

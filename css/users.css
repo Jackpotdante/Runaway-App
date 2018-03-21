@@ -299,12 +299,37 @@
 	min-width: 250px;
 }
 	.form_content2 {
-		background-color: white;
 		position: relative;
+		display: flex;
+		flex-flow: column wrap;
+		justify-content: space-around;
 	}
 	.form_content2 .form {
 		max-width: 400px;
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
+	#form_content2 {
+			padding: 5px;
+		}
+	.top_form {
+		margin-bottom: 15px;
+	}
+
+		#form_content2 input {
+			 outline: none;
+			 transition: .2s all linear;
+			 display: flex;
+			 padding: 8px;
+			 width: 100%;
+			 margin: 10px 0;
+			 height: 30px;
+			 border: 2px solid white;
+		}
+		#form_content2 label {
+			color: white;
+			font-size: 1.1rem;
+		}
 
 	.picProfile {
 		max-width: 250px;
@@ -313,12 +338,24 @@
 	    height:auto;
 	    min-width: 150px;
 	    flex: 0 0 auto;
+	    border-radius: 50%;
+	    /*
+	    background-color: grey;
+		border-radius: 50%;
+		margin: 40px 0 0 0;
+		-webkit-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.3);
+		-moz-box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.3);
+		box-shadow: -1px 4px 28px -1px rgba(0,0,0,0.3);*/
 	}
 	#logOut {
 		position: relative;
 		float: right;
 		background-color: transparent;
 		border: none;
+	}
+	#logOut .fa-sign-out-alt {
+		font-size: 36px;
+		color: white;
 	}
 		#signOutPic {
 			height: 50px;
@@ -327,7 +364,7 @@
 
 	.btnProfil {
 		width: 100%;
-		background-color: white;
+		background-color: transparent;
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content: space-between;
@@ -336,7 +373,7 @@
 
 		.btnProfil .btnsProfil {
 			width: 170px;
-			border: 2px solid white;
+			border: 2px solid #ffa834;
 			border-radius: 5px;
 			padding-top: 10px;
 			padding-bottom: 10px;
@@ -350,6 +387,12 @@
 			margin-bottom: 5px;
 			margin-top: 10px;
 			text-align: center;
+		}
+
+		#selectGender2 {
+			margin-top: 15px;
+			margin-bottom: 10px;
+			margin-left: 10px;
 		}
 
 /*Redigera profil vid första inloggning*/
@@ -408,6 +451,12 @@
 		}
 
 /*Media queries*/
+@media (max-width: 800px) {
+	.picProfile {
+		max-width: 200px;
+		max-height: 200px;
+	}
+}
 @media (max-width: 700px) {
 	.lds-spinner {
 		left: 45%;
