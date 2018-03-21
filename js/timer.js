@@ -50,8 +50,6 @@ window.addEventListener('load',function(event){
           if(inputOwnLength.value>0){
             showMsgToUser("Saved");
             saveRoundToDbTimerWithoutTrack(Number(inputOwnLength.value)); // sparar resultat kopplat till egen vald längd.
-            wrapperOwnLength.style.display="none";
-            inputOwnLength.value="";
             update=true;
           }else{
             showMsgToUser("Please enter a valid number","red");
@@ -73,7 +71,10 @@ window.addEventListener('load',function(event){
 
     }else{                                            // händer om prestationsida är aktiv
       saveRoundStarsToDb(currentUser.stars)
+      showMsgToUser("Saved");
       containerStars.style.display="none";
+      wrapperOwnLength.style.display="none";
+      inputOwnLength.value="";
     }
   })
 
@@ -83,7 +84,7 @@ window.addEventListener('load',function(event){
 
   btnShowStars.addEventListener('click',function(){  // Rating av banan
         containerStars.style.display="flex";
-      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":"";
+      (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":wrapperOwnLength.style.display="none";
   })
 
 
@@ -170,7 +171,7 @@ let saveRoundToDbTimerWithoutTrack =(length)=>{
 
 //-----------------------  Spara Rating till databas ------------------------->>
 let saveRoundStarsToDb=(nb)=>{
-  db.ref(`/rundor/${currentUser.trackid}/rating`).set(nb)
+  db.ref(`/rundor/${currentUser.idForStarUpdate}/rating`).set(nb)
 }
 
 //----------------------- END ------------------------------------------------//
