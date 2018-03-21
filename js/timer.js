@@ -43,6 +43,7 @@ window.addEventListener('load',function(event){
     if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
 
       if(currentUser.hasOwnProperty("trackid")){        // kontroll om vi valt bana.
+        showMsgToUser("Saved");
         saveRoundToDbTimer();                           // sparar resultat kopplat till en bana
         update=true;
       }else{
