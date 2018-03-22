@@ -36,16 +36,26 @@ window.addEventListener('load', function(event){
 
   let sendBtn = document.getElementById("sendBtn");
   let sendInput = document.getElementById("inputMessage");
+
   sendBtn.addEventListener('click', function(event){
-    sendMessage();
-    console.log("Message sent");
+    if(sendInput.value == ""){
+      console.log("Empty input");
+    }else{
+      sendMessage();
+      console.log("Message sent");
+    }
+
   });
 
   sendInput.addEventListener('keypress', function (e) {
       var key = e.which || e.keyCode;
       if (key === 13) { // 13 is enter
-        sendMessage();
-        console.log("Message sent");
+        if(sendInput.value == ""){
+          console.log("Empty input");
+        }else{
+          sendMessage();
+          console.log("Message sent");
+        }
       }
   });
 
@@ -122,7 +132,7 @@ let getMembers = function(){
   }
 }
 let inputSearch = document.getElementById('searchMembers');
-
+/***FEL KOLLA ***/
 inputSearch.addEventListener('keyup', function(event){
   containerCards.innerHTML = " ";
   var keyword = inputSearch.value.toUpperCase();

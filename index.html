@@ -47,13 +47,13 @@
             <div class="formProfil">
                 <div id="form_content">
                       <div class="form">
-                        <label for="userName">Display name</label>
+                        <label for="uName">Display name</label>
                         <input type = "text" name="userName" id = "uName" placeholder="Name" />
-                        <label for="userAge">Age</label>
+                        <label for="uAge">Age</label>
                         <input type = "text" name="userAge" id = "uAge" placeholder="Age" />
-                        <label for="userCity">Place</label>
+                        <label for="uCity">Place</label>
                         <input type = "text" name="userCity" id = "uCity" placeholder="Place" />
-                        <label for="userGender">Gender</label>
+                        <label for="selectGender">Gender</label>
                         <select id="selectGender" name="userGender">
                               <option value="">Select ...</option>
                               <option value="Male">Male</option>
@@ -112,7 +112,7 @@
         </div>
         <div class="wrapper-btn">
           <button id="btnSaveToDb"><i class="fas fa-save" style="font-size: 15px; margin-right: 5px"></i>Save</button>
-          <button id="btnCancel"><i class="fas fa-undo-alt" style="font-size: 13px; margin-right: 5px"></i>Cancel</button>
+          <button id="btnCancel">Cancel</button>
         </div>
 
       </div>
@@ -170,12 +170,12 @@
       </div>
       <div class="chatt"></div>
         <div class="send">
-          <input id="inputMessage"  placeholder="Message"></input>
+          <input id="inputMessage"  placeholder="Message"/>
           <button id="sendBtn"><i class="fas fa-angle-right" id="iconSend"></i></button>
         </div>
         <div class="containerMembers">
           <div class="searchDiv">
-            <input id="searchMembers" placeholder="Search"></input>
+            <input id="searchMembers" placeholder="Search"/>
           </diV>
           <div class="containerCards">
           </div>
@@ -191,7 +191,7 @@
           <div id="contentProfil" class="profilMobil">
             <div class="headProfil">
               <div id="settings"><i class="fas fa-cog"></i></div>
-              <img id="profilePicture" src="img/run.jpg" alt="User"></img>
+              <img id="profilePicture" src="img/run.jpg" alt="User"/>
               <div class="profileInfo">
                 <p class="profileName"></p>
                 <p class="profileLocation"><i class="fas fa-map-marker-alt" id="markerLocation"></i><span id="locationCity"></span></p>
@@ -224,13 +224,13 @@
                       <button id="logOut"><i class="fas fa-sign-out-alt"></i></button>
                    </div>
                    <div class="form">
-                       <label for="userName2">Display name</label>
-                       <input type = "text" name="userName2" id = "uName2" placeholder="Name" />
-                       <label for="userAge2">Age</label>
-                       <input type = "text" name="userAge2" id = "uAge2" placeholder="Age" />
-                       <label for="userCity2">Place</label>
-                       <input type = "text" name="userCity2" id = "uCity2" placeholder="Place" />
-                       <label for="userGender2">Gender</label>
+                       <label for="uName2">Display name</label>
+                       <input type = "text" name="userName2" id="uName2" placeholder="Name" />
+                       <label for="uAge2">Age</label>
+                       <input type = "text" name="userAge2" id="uAge2" placeholder="Age" />
+                       <label for="uCity2">Place</label>
+                       <input type = "text" name="userCity2" id="uCity2" placeholder="Place" />
+                       <label for="selectGender2">Gender</label>
                        <select id="selectGender2" name="userGender2">
                              <option value="">Select ...</option>
                              <option value="Male">Male</option>
@@ -283,10 +283,10 @@
       </ul>
       <ul id="navDesktop">
         <li id="mapDesktop" class="listItems"><a href="#">MAP</a></li>
-        <li id="achDesktop" class="listItems"><a href="#">ACHIEVMENTS</a></li>
+        <li id="achDesktop" class="listItems"><a href="#">PROFILE</a></li>
         <li id="communityDesktop" class="listItems"><a href="#">COMMUNITY</a></li>
         <li id="nameDesktopNav"><p id="nameDesktop"></p></li>
-        <li><img id="imgDesktopNav"></img></li>
+        <li><img id="imgDesktopNav" src="img/run.jpg" alt="profilePicture"/></li>
       </ul>
 
 
