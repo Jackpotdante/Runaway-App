@@ -148,6 +148,7 @@
 
 .containerTimer .weather{
   height: 7%;
+  position: relative;
   width: 60%;
   margin: 5px 0 0 0;
   display: flex;

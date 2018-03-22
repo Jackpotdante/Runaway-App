@@ -80,10 +80,10 @@ let makeCards = (tracks,location)=>{
                           </div>
                         </div>
                         <div class="innerContainerResults toggle">
-                          <h3>Resultat</h3>
+                          <h3>Leaderboard</h3>
                         </div>
                         <div class="innerContainerComments toggle">
-                          <h3>Kommentarer</h3>
+                          <h3>Comments</h3>
                         </div>
 
                        `;

@@ -230,7 +230,10 @@ function createMembers(name, age, img, location, distance, run){
    getMembers();
    updateScroll();
  });
-
+let commuBtn = document.getElementById("comBtn");
+commuBtn.addEventListener('click', function(event){
+  updateScroll();
+});
 
 
 /**WINDOW LOAD**/
