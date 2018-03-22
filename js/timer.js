@@ -351,7 +351,7 @@ let showMsgToUser=(str,color)=>{
   let msgToUser = document.getElementsByClassName('msgToUser')[0]
 
   if(color=="red"){
-    msgToUser.style.backgroundColor ="red";
+    msgToUser.style.backgroundColor ="#ff3232c9";
   }else{
     msgToUser.style.backgroundColor ="#8ce833";
   }
