@@ -213,9 +213,10 @@ let findCommentsOfTrack=(trackid)=>{
     liComment.innerHTML=`<div class="commentOfTrack">
                           <img src=${user.photoUrl}>
                           <p>${user.name}</p><span class="userRating"></span>
-                          <p>${track.comment}</p>
+                          <p class="commentFromUser"></p>
                         </div>`
     liComment.getElementsByClassName("userRating")[0].appendChild(starsSpan);
+    liComment.getElementsByClassName("commentFromUser")[0].innerText= track.comment;
     ulComment.appendChild(liComment);
 
   })
