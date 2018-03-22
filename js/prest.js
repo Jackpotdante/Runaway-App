@@ -136,7 +136,7 @@ window.addEventListener("load", function (){
 			 db.ref(`/rundor/${key}`).remove();
 		});
 
-		newRating.addEventListener('click',(function(){
+		newRating.addEventListener('click',(function(){  // för att sätta ny rating på runda
 			let divOfStar = newRating;
 
 			return function(event){
@@ -299,7 +299,7 @@ window.addEventListener("load", function (){
 
 		db.ref("rundor/").limitToLast(1).on("child_added",function(snapshot){
 			if(true){
-				console.log("child added id 2");
+				//console.log("child added id 2");
 				let data = snapshot.val();
 				updateUserLengthDb(); // uppdaterar i databasen
 			}
@@ -326,7 +326,7 @@ window.addEventListener("load", function (){
 						containerPrest.removeChild(allPrest[i]);
 					}
 				}
-				console.log("child removed");
+				//console.log("child removed");
 				updateUserLengthDb();// sparar ner ny längd till db
 
 			}
@@ -337,7 +337,7 @@ window.addEventListener("load", function (){
 		db.ref('rundor/').on("child_changed", function(snapshot, prevChildKey){
 			let data = snapshot.val();
 			let allPrest = document.getElementsByClassName('prest');
-			console.log("child changed");
+			//console.log("child changed");
 
 			if(data.share == true){
 				for(let i=0;i<allPrest.length;i++){
