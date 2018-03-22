@@ -325,7 +325,6 @@
 			 margin: 10px 0;
 			 height: 30px;
 			 border: 2px solid white;
-			 color: grey;
 		}
 		#form_content2 label {
 			color: white;
@@ -458,8 +457,6 @@
 			margin-top: 15px;
 		}
 
-
-
 /*Media queries*/
 @media (max-width: 800px) {
 	.picProfile {
@@ -528,7 +525,7 @@
 }
 
 
-@media screen and (min-width: 601px){
+@media screen and (min-width: 501px){
 	.headProfil{
 		margin-top: 55px;
 	}
@@ -611,7 +608,6 @@
 		left: 44%;
 	}
 }
-
 @media screen and (min-width: 900px){
 	.lds-spinner {
 		left: 46%;

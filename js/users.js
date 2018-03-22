@@ -430,7 +430,7 @@ function gotoTimerPage(){
 
 	 var screenWidth = document.documentElement.clientWidth;
 
-	 if (screenWidth > 601) {
+	 if (screenWidth > 501) {
 	 	var routePage = document.getElementsByClassName("containerRoute")[0];
 		routePage.style.display = "flex";
 	 } else {
@@ -582,7 +582,7 @@ function resizeDesktop(){
 	var screenWidth = document.documentElement.clientWidth;
 	var displayValue = conProfile.style.display;
 
-	 if (screenWidth > 601 && displayValue=="flex" && currentUser.name!=="") {
+	 if (screenWidth > 501 && displayValue=="flex" && currentUser.name!=="") {
 	 	//console.log("Desktop screen Läge");
 	 	//var routePage = document.getElementsByClassName("containerRoute")[0];
 		//routePage.style.display = "flex";
