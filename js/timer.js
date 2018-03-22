@@ -83,6 +83,8 @@ window.addEventListener('load',function(event){
   })
 
   btnShowStars.addEventListener('click',function(){  // Rating av banan
+        fillStars(-1,stars); // stätter antal stjärnor till 0 på rating innan den laddas.
+        inputOwnLength.value="";
         containerStars.style.display="flex";
       (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":wrapperOwnLength.style.display="none";
   })
