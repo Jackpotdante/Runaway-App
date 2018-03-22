@@ -136,7 +136,7 @@ window.addEventListener("load", function (){
 			 db.ref(`/rundor/${key}`).remove();
 		});
 
-		newRating.addEventListener('click',(function(){
+		newRating.addEventListener('click',(function(){  // för att sätta ny rating på runda
 			let divOfStar = newRating;
 
 			return function(event){
