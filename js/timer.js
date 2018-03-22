@@ -43,17 +43,26 @@ window.addEventListener('load',function(event){
     if (containerTimer.style.display=="flex"){          // händer om timersida är aktiv
 
       if(currentUser.hasOwnProperty("trackid")){        // kontroll om vi valt bana.
-        showMsgToUser("Saved");
-        saveRoundToDbTimer();                           // sparar resultat kopplat till en bana
-        update=true;
+
+        if(currentUser.stars == 0){                     // kontrollerar så att användre satt rating innan spara
+          showMsgToUser("Please set rating before save","red");
+        }else{
+          showMsgToUser("Saved");
+          saveRoundToDbTimer();                         // sparar resultat kopplat till en bana
+          update=true;
+        }
+
       }else{
           if(inputOwnLength.value>0){
-            showMsgToUser("Saved");
-            saveRoundToDbTimerWithoutTrack(Number(inputOwnLength.value)); // sparar resultat kopplat till egen vald längd.
-            update=true;
+            if(currentUser.stars == 0){   // kontrollerar så att användre satt rating innan spara
+              showMsgToUser("Please set rating before save","red");
+            }else{
+              showMsgToUser("Saved");
+              saveRoundToDbTimerWithoutTrack(Number(inputOwnLength.value)); // sparar resultat kopplat till egen vald längd.
+              update=true;
+            }
           }else{
             showMsgToUser("Please enter a valid number","red");
-
           }
       }
 
@@ -84,6 +93,7 @@ window.addEventListener('load',function(event){
 
   btnShowStars.addEventListener('click',function(){  // Rating av banan
         fillStars(-1,stars); // stätter antal stjärnor till 0 på rating innan den laddas.
+        currentUser.stars = 0;
         inputOwnLength.value="";
         containerStars.style.display="flex";
       (!currentUser.hasOwnProperty("trackid")) ? wrapperOwnLength.style.display="block":wrapperOwnLength.style.display="none";
