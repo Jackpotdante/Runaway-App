@@ -208,12 +208,16 @@ let findCommentsOfTrack=(trackid)=>{
     let liComment = document.createElement("li");
 
     let user = findUser(track.user);
-    liComment.innerHTML=`<div>
+    let starsSpan = countStars(track.rating);
+    console.log(starsSpan);
+    liComment.innerHTML=`<div class="commentOfTrack">
                           <img src=${user.photoUrl}>
-                          <p>${user.name} #${track.rating}</p>
+                          <p>${user.name}</p><span class="userRating"></span>
                           <p>${track.comment}</p>
                         </div>`
+    liComment.getElementsByClassName("userRating")[0].appendChild(starsSpan);
     ulComment.appendChild(liComment);
+
   })
 
   return ulComment
