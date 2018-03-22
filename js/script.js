@@ -58,6 +58,8 @@ presBtn.addEventListener('click', function(event){
 });
 
 routeBtn.addEventListener('click', function(event){
+  document.getElementsByClassName('wrapper-Tracks')[0].innerText="";  // Uppdaterar karta med senaste prestationer
+  getTracks(currentLocation);
   conLogin.style.display = "none";
   conTimer.style.display = "none";
   conPres.style.display = "none"
@@ -92,6 +94,8 @@ let achDesktop = document.getElementById("achDesktop");
 let communityDesktop = document.getElementById("communityDesktop");
 
 mapDesktop.addEventListener('click', function(event){
+  document.getElementsByClassName('wrapper-Tracks')[0].innerText="";  // Uppdaterar karta med senaste prestationer
+  getTracks(currentLocation);
   conLogin.style.display = "none";
   conTimer.style.display = "none";
   conPres.style.display = "none"
