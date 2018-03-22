@@ -79,9 +79,9 @@ function createMessage(name, message , time, photo){
   const messageM = document.createElement("p");
   const timeM = document.createElement("p");
 
-  nameM.innerHTML = name;
-  messageM.innerHTML = message;
-  timeM.innerHTML = time;
+  nameM.innerText = name;
+  messageM.innerText = message;
+  timeM.innerText = time;
   imageM.src = photo;
 
   conTime.className = "containerTime";
@@ -140,13 +140,13 @@ inputSearch.addEventListener('keyup', function(event){
       return item.name.toUpperCase().includes(keyword);
     });
     function newSearch(){
-        for(let i = 0; i < 5 ; i++){
+        for(let i = 0; i < users.length ; i++){
           if(filtered_data[i] != undefined){
             let nameCard = filtered_data[i].name;
             let ageCard = filtered_data[i].age;
             let locationCard = filtered_data[i].city;
-            let distance = "25";
-            let run = "10";
+            let distance = filtered_data[i].stats.totalLength;
+            let run = filtered_data[i].stats.longestRun;
             let photoCard = filtered_data[i].photoUrl;
             createMembers(nameCard, ageCard, photoCard, locationCard, distance, run);
           }
@@ -174,10 +174,10 @@ function createMembers(name, age, img, location, distance, run){
    const totalDistance = document.createElement("p");
    const longestRun = document.createElement("p");
 
-   nameCard.innerHTML = name + " , " + age;
+   nameCard.innerText = name + " , " + age;
    locationCard.innerHTML = `<i class="fas fa-map-marker-alt" id="iconLocation"></i>` + location;
-   totalDistance.innerHTML = "Total distance: " + distance + "km";
-   longestRun.innerHTML = "Longest run: " + run + "km";
+   totalDistance.innerText = "Total distance: " + distance + "km";
+   longestRun.innerText = "Longest run: " + run + "km";
    imgCard.src = img;
 
 
