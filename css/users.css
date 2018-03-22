@@ -409,14 +409,18 @@
   	margin-right: auto;
 	background-color: white;
 	top: 20%;
-	border: 2px solid #ffa834;
+	border: 2px solid #f3f3f3;
 	padding: 10px;
 	display: none;
-	background-color: #ffa834;
+	background-color: #f3f3f3;
 }
 
+	#btnAdd, #btnSenare {
+		border: 2px solid #f3f3f3;
+	}
+
 	#moreInfoProfile p {
-		color: white;
+		color: #2f2f2f;
 		font-size: 1.1rem;
 	}
 
@@ -437,14 +441,14 @@
 			 width: 100%;
 			 margin: 10px 0;
 			 height: 30px;
-			 border: 2px solid white;
+			 border: 2px solid #DCDCDC;
 		}
 		#form_content .form {
 			margin-top: 10px;
 			margin-bottom: 10px;
 		}
 		#form_content label {
-			color: white;
+			color: #2f2f2f;
 			font-size: 1.1rem;
 		}
 		#selectGender {
@@ -599,6 +603,20 @@
 	#logOut {
 		margin-top: 10px;
 		margin-right: 10px;
+	}
+	.lds-spinner {
+		left: 44%;
+	}
+}
+@media screen and (min-width: 900px){
+	.lds-spinner {
+		left: 46%;
+	}
+}
+
+@media screen and (min-width: 1000px){
+	.lds-spinner {
+		left: 47%;
 	}
 }
 

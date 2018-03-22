@@ -189,6 +189,14 @@
   font-family: 'Montserrat';
 }
 
+.wrapper-Tracks .commentOfTrack{
+  position: relative;
+}
+.wrapper-Tracks .userRating{
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
 
 @media screen and (min-width: 501px){
 
