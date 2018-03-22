@@ -25,10 +25,12 @@ db.ref("/rundor").on("value",function(snapshot){
 
 
   allResults = snapshot.val();
+  /*
   if(currentLocation!=""){ //nuvarande sökning.. om något ändras körs getTracks för att uppdatera kort
     document.getElementsByClassName('wrapper-Tracks')[0].innerText="";
     getTracks(currentLocation);
   }
+  */
 
 });
 //----------------------------END --------------------------------------------//

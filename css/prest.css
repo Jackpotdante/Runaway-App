@@ -94,7 +94,7 @@
 
 
 .containerPrestation > div > span{
-	font-size: 14px;
+  font-size: 14px;
 	color: white;
 }
 
@@ -253,7 +253,6 @@
 	}
 	.containerPrestation > div > span{
 		font-size: 16px;
-
 	}
 
 }
