@@ -500,7 +500,7 @@ function updateAccountPage(){
 	}
 	if(currentUser.city != ""){
 
-		locationCity.innerHTML = currentUser.city;
+		locationCity.innerText = currentUser.city;
 
 		var markerLocation = document.getElementById('markerLocation');
 	    markerLocation.style.display = "block";
@@ -582,8 +582,8 @@ function resizeDesktop(){
 	var screenWidth = document.documentElement.clientWidth;
 	var displayValue = conProfile.style.display;
 
-	 if (screenWidth > 501 && displayValue!="none") {
-	 	console.log("Desktop screen Läge");
+	 if (screenWidth > 501 && displayValue=="flex" && currentUser.name!=="") {
+	 	//console.log("Desktop screen Läge");
 	 	//var routePage = document.getElementsByClassName("containerRoute")[0];
 		//routePage.style.display = "flex";
 
