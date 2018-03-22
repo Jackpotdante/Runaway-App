@@ -581,8 +581,9 @@ function resizeDesktop(){
 
 	var screenWidth = document.documentElement.clientWidth;
 	var displayValue = conProfile.style.display;
+	var displayValuePres = conPres.style.display;
 
-	 if (screenWidth > 501 && displayValue=="flex" && currentUser.name!=="") {
+	 if (screenWidth > 501 && displayValuePres=="flex" && currentUser.name!="") {
 	 	//console.log("Desktop screen Läge");
 	 	//var routePage = document.getElementsByClassName("containerRoute")[0];
 		//routePage.style.display = "flex";
@@ -595,6 +596,32 @@ function resizeDesktop(){
 		conProfile.style.display = "flex";
 	 } 
 
+	 if (screenWidth > 501 && displayValue=="flex" && currentUser.name!="") {
+	 	//console.log("Desktop screen Läge");
+	 	//var routePage = document.getElementsByClassName("containerRoute")[0];
+		//routePage.style.display = "flex";
+
+		conLogin.style.display = "none";
+		conTimer.style.display = "none";
+		conPres.style.display = "flex"
+		conRoute.style.display = "none";
+		conCom.style.display = "none";
+		conProfile.style.display = "flex";
+	 } 
+
+	 
+	 if (screenWidth <= 501 && displayValuePres=="flex") {
+	 	//console.log("Desktop screen Läge");
+	 	//var routePage = document.getElementsByClassName("containerRoute")[0];
+		//routePage.style.display = "flex";
+
+		conLogin.style.display = "none";
+		conTimer.style.display = "none";
+		conPres.style.display = "flex"
+		conRoute.style.display = "none";
+		conCom.style.display = "none";
+		conProfile.style.display = "none";
+	 } 
 }
 
 function getRunInfo(){
