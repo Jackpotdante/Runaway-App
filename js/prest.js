@@ -72,7 +72,7 @@ window.addEventListener("load", function (){
 		dt = dt.getFullYear()+"-" + (dt.getMonth()+1)+"-"+ dt.getDate();
 		let stars = countStars(dataForRace.rating);
 
-		newPlace.innerHTML = `${dataForRace.place}`
+		newPlace.innerHTML = `${dataForRace.name}`
 		newLength.innerHTML = `<i class="fas fa-flag-checkered" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${dataForRace.length}km`;
 		newTime.innerHTML = `<i class="fas fa-stopwatch" style="font-size: 17px; color: black; margin-right: 5px;"></i> ${convertToTime(dataForRace.time)}`; //convertToTime ligger i cardsMap
 		newShare.innerHTML = `<i class="fas fa-share-alt" style="font-size: 17px; color: white; margin-right: 5px;"></i>` + "Share";
@@ -281,7 +281,7 @@ window.addEventListener("load", function (){
 				let dataForRace = {
 					place : runningTracks[trackId].place, //runningTracks kommer från cardsMap
 					length : length,
-					//name: runningTracks[trackId].name,
+					name: runningTracks[trackId].name,
 					time : data.time,
 					date : data.date,
 					raceId : route,

@@ -21,7 +21,7 @@ window.addEventListener('load',function(event){
     btnClockStop.style.display = "none";
     btnShowStars.style.display = "none";
     btnClockPause.style.display = "none";
-    btnStartClock.innerText = "Start Timer";
+    btnStartClock.innerHTML = `<i class="fas fa-play" style="font-size: 13px; margin-right: 5px"></i>` + "Start";
     timer.stopTimer();
     timer.resetTimer();
   })
@@ -62,7 +62,7 @@ window.addEventListener('load',function(event){
         btnShowStars.style.display = "none";
         containerStars.style.display="none";
         btnStartClock.style.display = "inline-block";
-        btnStartClock.innerText = "Start Timer";
+        btnStartClock.innerHTML = `<i class="fas fa-play" style="font-size: 13px; margin-right: 5px"></i>` + "Start";
         timer.resetTimer();
         containerPrestation.style.display="flex";
         containerTimer.style.display="none";
